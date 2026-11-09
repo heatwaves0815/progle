@@ -1,0 +1,60 @@
+{
+  "id": "m3-l04",
+  "typ": "lektion",
+  "titel": "String-Methoden",
+  "lernziele": [
+    "Die wichtigsten String-Methoden kennen",
+    "Texte vergleichen mit equals",
+    "Texte zusammensetzen und durchsuchen"
+  ],
+  "erklaerung": "## Strings können mehr als ausgeben\nEin String bietet fertige Methoden (wir rufen sie mit `.` auf):\n```java\nString name = \"Java lernen\";\n\nname.length()          // 11 – Anzahl Zeichen\nname.toUpperCase()     // JAVA LERNEN\nname.toLowerCase()     // java lernen\nname.charAt(0)         // 'J' – erstes Zeichen\nname.contains(\"ler\")   // true\nname.substring(5)      // \"lernen\" – ab Position 5\nname.substring(0, 4)   // \"Java\" – Position 0 bis 3\nname.trim()            // entfernt Leerzeichen an den Enden\n```\n## Vergleichen – niemals mit ==\n`==` vergleicht Speicherplätze, nicht Text. Richtig ist:\n```java\nif (eingabe.equals(\"ja\")) { ... }\nif (eingabe.equalsIgnoreCase(\"ja\")) { ... }   // ignoriert Groß-/Kleinschreibung\n```\n## Strings sind unveränderlich\nMethoden ändern den Original-String nie – sie liefern einen **neuen** zurück. `name.toUpperCase();` allein ändert nichts! Zuweisen: `name = name.toUpperCase();`",
+  "beispiel-code": "public class Namensschild {\n\n    public static void main(String[] args) {\n        String name = \"  lisa Mustermann \";\n\n        String sauber = name.trim();\n        String gross = sauber.toUpperCase();\n        String anrede = \"Frau \" + gross.charAt(0) + \".\";\n\n        System.out.println(\"Sauber: \" + sauber);\n        System.out.println(\"Gross: \" + gross);\n        System.out.println(\"Anrede: \" + anrede);\n        System.out.println(\"Zeichenanzahl: \" + sauber.length());\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Passwortregeln: Das Passwort 'Geheim123' wird geprüft. Gib drei Zeilen aus: 'Länge: 9' (mit length()), 'Enthält Zahlen: true' (mit contains(\"123\")), 'Groß: GEHEIM123' (mit toUpperCase()).",
+      "start-code": "public class Passwortregeln {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "String passwort = \"Geheim123\";",
+        "Länge: passwort.length() – Ergebnis direkt in den Text einbauen.",
+        "contains(\"123\") ergibt true; toUpperCase() den Großbuchstaben-Text."
+      ],
+      "loesung": "public class Passwortregeln {\n\n    public static void main(String[] args) {\n        String passwort = \"Geheim123\";\n\n        System.out.println(\"Länge: \" + passwort.length());\n        System.out.println(\"Enthält Zahlen: \" + passwort.contains(\"123\"));\n        System.out.println(\"Groß: \" + passwort.toUpperCase());\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Länge: 9\nEnthält Zahlen: true\nGroß: GEHEIM123" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Teilstueck: Der String satz = 'Java macht Spass'. Gib aus: 'Erstes Wort: Java' (substring(0, 4)), 'Rest: macht Spass' (substring(5)) und 'Zeichen 5: m' (charAt(5)).",
+      "start-code": "public class Teilstueck {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "substring(0, 4) liefert die Zeichen an Position 0-3 (Endposition exklusiv!).",
+        "substring(5) liefert alles ab Position 5.",
+        "charAt(5) liefert das Zeichen an Position 5: 'm'."
+      ],
+      "loesung": "public class Teilstueck {\n\n    public static void main(String[] args) {\n        String satz = \"Java macht Spass\";\n\n        System.out.println(\"Erstes Wort: \" + satz.substring(0, 4));\n        System.out.println(\"Rest: \" + satz.substring(5));\n        System.out.println(\"Zeichen 5: \" + satz.charAt(5));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Erstes Wort: Java\nRest: macht Spass\nZeichen 5: m" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie vergleichst du zwei Strings inhaltlich?",
+      "optionen": ["a == b", "a.equals(b)", "a.compare(b)", "a = b"],
+      "richtig": 1,
+      "erklaerung": "equals() vergleicht den Inhalt; == vergleicht Speicherplätze."
+    },
+    {
+      "frage": "Was liefert \"Robotik\".substring(1, 4)?",
+      "optionen": ["Robo", "obot", "obo", "ot"],
+      "richtig": 2,
+      "erklaerung": "Position 1 bis 3 (Ende exklusiv): 'o', 'b', 'o' → obo."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "toUpperCase ohne Zuweisung",
+      "erklaerung": "text.toUpperCase(); ändert nichts! Strings sind unveränderlich: text = text.toUpperCase();"
+    },
+    {
+      "fehler": "charAt-Index außerhalb",
+      "erklaerung": "charAt(10) bei 8 Zeichen → StringIndexOutOfBoundsException. Erlaubt sind 0 bis length() - 1."
+    }
+  ]
+}

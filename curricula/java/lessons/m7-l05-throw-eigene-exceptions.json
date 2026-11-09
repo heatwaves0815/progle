@@ -1,0 +1,49 @@
+﻿{
+  "id": "m7-l05",
+  "typ": "lektion",
+  "titel": "Throw und eigene Exceptions",
+  "lernziele": [
+    "Mit throw aktiv einen Fehler auslösen",
+    "Eigene Exception-Klassen schreiben",
+    "checked vs. unchecked Exceptions einordnen"
+  ],
+  "erklaerung": "## Selbst Alarm schlagen\nMit `throw` wirfst du selbst eine Exception, wenn ein Zustand nicht passt:\n```java\npublic static void auszahlen(double stand, double betrag) {\n    if (betrag > stand) {\n        throw new IllegalArgumentException(\"Zu wenig Guthaben!\");\n    }\n}\n```\nDer Aufrufer muss reagieren - oder bekommt den Absturz.\n## Eigene Exceptions\nEigene Fehler-Typen machen Abstürze verständlich:\n```java\nclass KontoLeerException extends Exception {\n    KontoLeerException(String meldung) {\n        super(meldung);\n    }\n}\n```\n- **unchecked** (RuntimeException): Programmierfehler - keine Pflicht zum Fangen.\n- **checked** (extends Exception): Erwartbare Probleme - der Aufrufer MUSS try/catch oder throws verwenden.\n```java\npublic static void abheben(double stand, double betrag) throws KontoLeerException {\n    if (betrag > stand) {\n        throw new KontoLeerException(\"Fehlt: \" + (betrag - stand));\n    }\n}\n```",
+  "beispiel-code": "public class Alterscheck {\n\n    public static void pruefeAlter(int alter) {\n        if (alter < 0) {\n            throw new IllegalArgumentException(\"Alter kann nicht negativ sein: \" + alter);\n        }\n        System.out.println(\"Alter ok: \" + alter);\n    }\n\n    public static void main(String[] args) {\n        try {\n            pruefeAlter(30);\n            pruefeAlter(-5);\n        } catch (IllegalArgumentException e) {\n            System.out.println(\"Abgefangen: \" + e.getMessage());\n        }\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Temperaturcheck: Methode 'static void pruefe(double celsius)' wirft eine IllegalArgumentException mit der Meldung 'Zu kalt für Labortest' bei Werten unter -273.15, sonst gibt sie 'Messung ok: <wert>' aus. main ruft pruefe(20.0) und pruefe(-300) in try/catch auf. Ausgabe: 'Messung ok: 20.0' und 'Abgefangen: Zu kalt für Labortest'.",
+      "start-code": "public class Temperaturcheck {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "In pruefe: if (celsius < -273.15) { throw new IllegalArgumentException(\"Zu kalt für Labortest\"); }",
+        "Im try-Block zwei Aufrufe; der zweite wirft.",
+        "catch (IllegalArgumentException e) gibt \"Abgefangen: \" + e.getMessage() aus."
+      ],
+      "loesung": "public class Temperaturcheck {\n\n    public static void pruefe(double celsius) {\n        if (celsius < -273.15) {\n            throw new IllegalArgumentException(\"Zu kalt für Labortest\");\n        }\n        System.out.println(\"Messung ok: \" + celsius);\n    }\n\n    public static void main(String[] args) {\n        try {\n            pruefe(20.0);\n            pruefe(-300);\n        } catch (IllegalArgumentException e) {\n            System.out.println(\"Abgefangen: \" + e.getMessage());\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Messung ok: 20.0\nAbgefangen: Zu kalt für Labortest" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wann nutzt man throw?",
+      "optionen": ["Um Fehler abzufangen", "Um aktiv eine Exception auszulösen", "Um Schleifen zu verlassen", "Um zu importieren"],
+      "richtig": 1,
+      "erklaerung": "throw wirft einen Vorfall; try/catch fängt ihn."
+    },
+    {
+      "frage": "Eine eigene checked Exception erbt von...?",
+      "optionen": ["RuntimeException", "Exception", "Object", "Error"],
+      "richtig": 1,
+      "erklaerung": "extends Exception = checked; extends RuntimeException = unchecked."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "throws vergessen bei checked",
+      "erklaerung": "Ohne 'throws KontoLeerException' im Methodenkopf oder try/catch am Aufruf: 'unhandled exception'."
+    },
+    {
+      "fehler": "throw new verwechselt",
+      "erklaerung": "throw allein braucht ein Exception-Objekt: throw new IllegalArgumentException(...). 'throw new' gehört zusammen."
+    }
+  ]
+}

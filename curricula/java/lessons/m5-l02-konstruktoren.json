@@ -1,0 +1,60 @@
+{
+  "id": "m5-l02",
+  "typ": "lektion",
+  "titel": "Konstruktoren",
+  "lernziele": [
+    "Einen Konstruktor schreiben",
+    "Objekte direkt mit Startwerten erzeugen",
+    "Mehrere Konstruktoren überladen"
+  ],
+  "erklaerung": "## Der Empfang für neue Objekte\nEin **Konstruktor** läuft automatisch beim `new` - ideal, um Startwerte zu setzen:\n```java\nclass Konto {\n    String inhaber;\n    double stand;\n\n    Konto(String inhaber, double stand) {     // Konstruktor\n        this.inhaber = inhaber;\n        this.stand = stand;\n    }\n}\n\nKonto k = new Konto(\"Anna\", 100.0);   // Werte gleich beim Bauen\n```\n- Konstruktor heißt **exakt wie die Klasse** und hat **keinen Rückgabetyp** (nicht mal void).\n- Ohne eigenen Konstruktor gibt Java einen leeren Standardkonstruktor gratis dazu. Schreibst du einen eigenen mit Parametern, ist der Gratis-Konstruktor weg - `new Konto()` geht dann nicht mehr, außer du definierst ihn zusätzlich (Überladung erlaubt!).",
+  "beispiel-code": "public class Pizzabaeckerei {\n\n    public static void main(String[] args) {\n        Pizza margherita = new Pizza(\"Margherita\", 8.5);\n        Pizza salami = new Pizza(\"Salami\", 9.9);\n        System.out.println(margherita.name + \": \" + margherita.preis + \" Euro\");\n        System.out.println(salami.name + \": \" + salami.preis + \" Euro\");\n    }\n}\n\nclass Pizza {\n    String name;\n    double preis;\n\n    Pizza(String name, double preis) {\n        this.name = name;\n        this.preis = preis;\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Spielerprofil: Klasse Spieler (ohne public) mit Attributen name (String) und level (int) und einem Konstruktor für beide. main erzeugt 'Lena' mit Level 3 und gibt 'Lena (Level 3)' aus.",
+      "start-code": "public class Spielerprofil {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Konstruktor: Spieler(String name, int level) { this.name = name; this.level = level; }",
+        "In main: Spieler s = new Spieler(\"Lena\", 3);",
+        "Ausgabe: s.name + \" (Level \" + s.level + \")\""
+      ],
+      "loesung": "public class Spielerprofil {\n\n    public static void main(String[] args) {\n        Spieler s = new Spieler(\"Lena\", 3);\n        System.out.println(s.name + \" (Level \" + s.level + \")\");\n    }\n}\n\nclass Spieler {\n    String name;\n    int level;\n\n    Spieler(String name, int level) {\n        this.name = name;\n        this.level = level;\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Lena (Level 3)" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Haushaltsbuch nutzt Überladung: Klasse Buch mit zwei Konstruktoren - einer mit Titel + Seiten, einer NUR mit Titel (Seiten dann 0). main erzeugt 'Java ABC' mit 200 Seiten und 'Notizbuch' ohne Seiten. Ausgabe: 'Java ABC: 200 Seiten' und 'Notizbuch: 0 Seiten'.",
+      "start-code": "public class Haushaltsbuch {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Zwei Konstruktoren: Buch(String titel, int seiten) und Buch(String titel).",
+        "Im Ein-Parameter-Konstruktor: this.titel = titel; this.seiten = 0;",
+        "Welcher Konstruktor läuft, entscheidet sich an der Argumentanzahl beim new."
+      ],
+      "loesung": "public class Haushaltsbuch {\n\n    public static void main(String[] args) {\n        Buch b1 = new Buch(\"Java ABC\", 200);\n        Buch b2 = new Buch(\"Notizbuch\");\n        System.out.println(b1.titel + \": \" + b1.seiten + \" Seiten\");\n        System.out.println(b2.titel + \": \" + b2.seiten + \" Seiten\");\n    }\n}\n\nclass Buch {\n    String titel;\n    int seiten;\n\n    Buch(String titel, int seiten) {\n        this.titel = titel;\n        this.seiten = seiten;\n    }\n\n    Buch(String titel) {\n        this.titel = titel;\n        this.seiten = 0;\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Java ABC: 200 Seiten\nNotizbuch: 0 Seiten" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie heißt ein Konstruktor?",
+      "optionen": ["Beliebig", "Wie die Klasse, ohne Rückgabetyp", "Immer new", "Wie die main-Methode"],
+      "richtig": 1,
+      "erklaerung": "Konstruktorname = Klassenname, kein Rückgabetyp."
+    },
+    {
+      "frage": "Wann läuft der Konstruktor?",
+      "optionen": ["Beim Start des Programms", "Automatisch bei jedem new", "Bei jedem Methodenaufruf", "Niemals"],
+      "richtig": 1,
+      "erklaerung": "Der Konstruktor bereitet jedes frische Objekt vor."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Rückgabetyp beim Konstruktor",
+      "erklaerung": "void Konto() {...} ist KEIN Konstruktor, sondern eine normale Methode. Konstruktoren haben keinen Rückgabetyp."
+    },
+    {
+      "fehler": "Standardkonstruktor erwartet",
+      "erklaerung": "Hast du einen Konstruktor mit Parametern geschrieben, existiert new Konto() nicht mehr - außer du definierst ihn zusätzlich."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+﻿{
+  "id": "m4-q",
+  "typ": "modul-quiz",
+  "titel": "Modul-Quiz: Methoden",
+  "lernziele": [
+    "Methoden-Konzepte sicher kombinieren",
+    "Wissenslücken finden",
+    "Einen Währungsrechner als Abschluss bauen"
+  ],
+  "erklaerung": "## Methoden-Meisterin, Methoden-Meister?\nFünf Fragen zu Definition, Parametern, Rückgabewerten und Rekursion. In der **Abschlussaufgabe** baust du einen kleinen Währungsrechner mit zwei Hilfsmethoden.",
+  "beispiel-code": "public class MusterMethoden {\n\n    public static double halbieren(double wert) {\n        return wert / 2;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(halbieren(9.0));\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Abschlussaufgabe 'Währungsrechner': Die Klasse Waehrungsrechner hat zwei Methoden:\n1) static double euroInDollar(double euro) → euro * 1.5\n2) static double dollarInEuro(double dollar) → dollar / 1.5\nmain gibt aus:\n100.0 Euro = 150.0 Dollar\n50.0 Euro = 50.0 Dollar\n(Rechnung: dollarInEuro(75.0) = 75.0 / 1.5 = 50.0)",
+      "start-code": "public class Waehrungsrechner {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Zwei Methoden mit double-Rückgabetyp definieren.",
+        "Erster Aufruf: euroInDollar(100.0) liefert 150.0.",
+        "Ausgabe-Texte mit + verbinden, z. B. euro + \" Euro = \" + euroInDollar(euro) + \" Dollar\"."
+      ],
+      "loesung": "public class Waehrungsrechner {\n\n    public static double euroInDollar(double euro) {\n        return euro * 1.5;\n    }\n\n    public static double dollarInEuro(double dollar) {\n        return dollar / 1.5;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"100.0 Euro = \" + euroInDollar(100.0) + \" Dollar\");\n        System.out.println(dollarInEuro(75.0) + \" Euro = 50.0 Dollar\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "100.0 Euro = 150.0 Dollar\n50.0 Euro = 50.0 Dollar" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Welcher Methodenkopf gibt einen Text zurück?",
+      "optionen": ["public static void name()", "public static String name()", "public static name(String)", "void String name()"],
+      "richtig": 1,
+      "erklaerung": "String als Rückgabetyp vor dem Namen."
+    },
+    {
+      "frage": "Was ist Überladung?",
+      "optionen": ["Zu viele Methoden", "Gleicher Name, verschiedene Parameterlisten", "Gleicher Name, gleiche Parameter", "Eine Methode ruft sich selbst"],
+      "richtig": 1,
+      "erklaerung": "Overloading = mehrere Varianten desselben Namens mit unterschiedlichen Parametern."
+    },
+    {
+      "frage": "Was braucht jede Rekursion zwingend?",
+      "optionen": ["Eine Schleife", "Einen Basisfall", "Einen Parameter vom Typ int", "static"],
+      "richtig": 1,
+      "erklaerung": "Ohne Basisfall endet die Selbstaufruf-Kette nie (StackOverflowError)."
+    },
+    {
+      "frage": "Was ist ein Parameter?",
+      "optionen": ["Der Rückgabewert", "Eine Variable in der Methodendefinition", "Ein Kommentar", "Ein Import"],
+      "richtig": 1,
+      "erklaerung": "Parameter sind die 'Zutaten' in der Definition; Argumente werden beim Aufruf übergeben."
+    },
+    {
+      "frage": "Wann endet eine Methode mit return wert; sofort?",
+      "optionen": ["Nie", "Sofort nach dem return", "Am Ende der Klasse", "Wenn void davor steht"],
+      "richtig": 1,
+      "erklaerung": "return beendet die Methode an dieser Stelle - Code danach wird nicht mehr ausgeführt."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Methoden ineinander verschachtelt",
+      "erklaerung": "Alle Methoden liegen nebeneinander auf Klassenebene - main darf keine andere Methode enthalten."
+    },
+    {
+      "fehler": "Aufruf ohne Klammern",
+      "erklaerung": "rechnen; ruft nichts auf - es braucht runde Klammern: rechnen();"
+    }
+  ]
+}

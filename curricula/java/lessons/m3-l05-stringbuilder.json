@@ -1,0 +1,60 @@
+{
+  "id": "m3-l05",
+  "typ": "lektion",
+  "titel": "StringBuilder",
+  "lernziele": [
+    "Verstehen, warum StringBuilder beim Häufigen Verketten effizienter ist",
+    "append, insert und toString nutzen",
+    "Einen Text rückwärts bauen"
+  ],
+  "erklaerung": "## Warum überhaupt ein StringBuilder?\nStrings sind **unveränderlich**. Jedes `text = text + \"x\"` erzeugt intern einen komplett neuen String – bei tausend Verkettungen wird das langsamer und speicherhungrig.\nDer **StringBuilder** ist ein veränderliches Text-Baukasten: Er ergänzt intern ohne Neubau.\n```java\nStringBuilder sb = new StringBuilder();\nsb.append(\"Hallo\");\nsb.append(\" \");\nsb.append(\"Welt\");\nSystem.out.println(sb.toString());   // Hallo Welt\n```\n## Die wichtigsten Methoden\n- `append(...)` – Text anhängen\n- `insert(position, ...)` – mittendrin einfügen\n- `reverse()` – Text umdrehen\n- `length()` – aktuelle Länge\n- `toString()` – am Ende als normalen String holen\n`reverse()` ist der Klassiker für Palindrom-Checks!",
+  "beispiel-code": "public class Einladung {\n\n    public static void main(String[] args) {\n        StringBuilder karte = new StringBuilder();\n\n        for (int gast = 1; gast <= 3; gast++) {\n            karte.append(\"Gast \").append(gast).append(\": Willkommen\\n\");\n        }\n        karte.insert(0, \"=== Party ===\\n\");\n\n        System.out.print(karte.toString());\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Gebaeude baut mit einem StringBuilder einen Turm: In einer for-Schleife von 1 bis 3 hängt sie pro Etage 'Etage <n> fertig\n' an (jeweils mit Zeilenumbruch). Am Ende wird alles mit println(...) ausgegeben.",
+      "start-code": "public class Gebaeude {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "StringBuilder turm = new StringBuilder();",
+        "Im Schleifenkörper: turm.append(\"Etage \").append(etage).append(\" fertig\\n\");",
+        "Ausgabe: System.out.println(turm.toString()); – das \n sorgt für die Zeilenumbrüche."
+      ],
+      "loesung": "public class Gebaeude {\n\n    public static void main(String[] args) {\n        StringBuilder turm = new StringBuilder();\n\n        for (int etage = 1; etage <= 3; etage++) {\n            turm.append(\"Etage \").append(etage).append(\" fertig\\n\");\n        }\n        System.out.println(turm.toString());\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Etage 1 fertig\nEtage 2 fertig\nEtage 3 fertig\n" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Rueckwaerts dreht das Wort 'Programmieren' mit StringBuilder.reverse() um und gibt das Ergebnis aus. Außerdem gib das Original-Wort zuerst aus.",
+      "start-code": "public class Rueckwaerts {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "StringBuilder sb = new StringBuilder(\"Programmieren\");",
+        "sb.reverse() dreht in der gleichen StringBuilder-Instanz.",
+        "Ergebnis: 'nereimmargorP' (n kommt zuerst, das P ans Ende)."
+      ],
+      "loesung": "public class Rueckwaerts {\n\n    public static void main(String[] args) {\n        System.out.println(\"Programmieren\");\n\n        StringBuilder sb = new StringBuilder(\"Programmieren\");\n        sb.reverse();\n        System.out.println(sb.toString());\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Programmieren\nnereimmargorP" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Warum StringBuilder statt text = text + \"x\" in Schleifen?",
+      "optionen": ["Kürzer zu tippen", "Kein ständiges Neuanlegen des Strings", "StringBuilder kann mehr Zeichen", "Weil + nicht funktioniert"],
+      "richtig": 1,
+      "erklaerung": "+ erzeugt bei jedem Schritt einen neuen String; StringBuilder baut intern effizient an."
+    },
+    {
+      "frage": "Wie bekommst du aus dem StringBuilder einen normalen String?",
+      "optionen": ["(String) sb", "sb.toString()", "sb.string()", "sb.getText()"],
+      "richtig": 1,
+      "erklaerung": "toString() liefert den fertigen String."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "println(sb) mit den Klammern vergessen",
+      "erklaerung": "System.out.println(sb) funktioniert zwar (Java ruft intern toString auf), aber explizit sb.toString() ist klarer und sicherer."
+    },
+    {
+      "fehler": "reverse() auf einem String erwartet",
+      "erklaerung": "String hat KEINE reverse()-Methode. Nur StringBuilder/Buffer haben sie – deshalb erst einpacken."
+    }
+  ]
+}

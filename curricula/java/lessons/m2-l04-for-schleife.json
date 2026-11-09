@@ -1,0 +1,60 @@
+{
+  "id": "m2-l04",
+  "typ": "lektion",
+  "titel": "Die for-Schleife",
+  "lernziele": [
+    "Den Aufbau einer for-Schleife erklären können",
+    "Zählschleifen von 1 bis n schreiben",
+    "Mit dem Schleifenzähler rechnen"
+  ],
+  "erklaerung": "## Nie wieder hundertmal tippen\nEine Schleife wiederholt Anweisungen. Die **for-Schleife** ist perfekt, wenn du weißt, wie oft:\n```java\nfor (int i = 1; i <= 5; i++) {\n    System.out.println(\"Runde \" + i);\n}\n```\nDie Klammer hat drei Teile (mit `;` getrennt):\n1. `int i = 1` – Start: Zählvariable anlegen\n2. `i <= 5` – Bedingung: läuft, solange sie stimmt\n3. `i++` – Schritt: nach jedem Durchlauf\nAblauf: Start prüfen → Körper ausführen → Schritt → prüfen → Körper → ...\n## Häufige Muster\n```java\nfor (int i = 0; i < 10; i++) { ... }    // 10 Durchläufe: 0..9\nfor (int i = 10; i >= 1; i--) { ... }   // rückwärts\n```\nAchtung Off-by-one: `i <= 5` sind 5 Durchläufe (1..5), `i < 5` sind 5 Durchläufe (0..4). Nach dem Schleifenende ist `i` nicht mehr verfügbar.",
+  "beispiel-code": "public class Treppenlauf {\n\n    public static void main(String[] args) {\n        for (int stufe = 1; stufe <= 4; stufe++) {\n            System.out.println(\"Stufe \" + stufe + \" erklommen\");\n        }\n        System.out.println(\"Oben angekommen!\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Lagerfeuer zählt von 1 bis 5 aufwärts und gibt jede Zahl als 'Feuer ' + zahl aus (z. B. 'Feuer 1').",
+      "start-code": "public class Lagerfeuer {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "for (int i = 1; i <= 5; i++) { ... }",
+        "Im Körper: System.out.println(\"Feuer \" + i);",
+        "i++ erhöht nach jedem Durchlauf."
+      ],
+      "loesung": "public class Lagerfeuer {\n\n    public static void main(String[] args) {\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(\"Feuer \" + i);\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Feuer 1\nFeuer 2\nFeuer 3\nFeuer 4\nFeuer 5" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Raketenstart zählt von 5 rückwärts bis 1 und gibt dann 'Start!'. Jede Zahl in einer eigenen Zeile.",
+      "start-code": "public class Raketenstart {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Rückwärts: Start bei 5, Bedingung i >= 1, Schritt i--.",
+        "Nach der Schleife (außerhalb!) die Start-Ausgabe.",
+        "Achtung: Die Start-Ausgabe muss NACH der Schleife stehen."
+      ],
+      "loesung": "public class Raketenstart {\n\n    public static void main(String[] args) {\n        for (int i = 5; i >= 1; i--) {\n            System.out.println(i);\n        }\n        System.out.println(\"Start!\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "5\n4\n3\n2\n1\nStart!" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie oft läuft dieser Code?\nfor (int i = 0; i < 3; i++) { ... }",
+      "optionen": ["2 Mal", "3 Mal", "4 Mal", "Unendlich"],
+      "richtig": 1,
+      "erklaerung": "i = 0, 1, 2 – drei Durchläufe, weil i < 3."
+    },
+    {
+      "frage": "Was passiert, wenn der dritte Teil (i++) vergessen wird?",
+      "optionen": ["Nichts", "Die Schleife läuft ein Mal", "Endlosschleife", "Kompilierfehler"],
+      "richtig": 2,
+      "erklaerung": "Ohne Schritt bleibt i gleich – die Bedingung bleibt immer wahr: Endlosschleife."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Off-by-one-Fehler",
+      "erklaerung": "i <= 10 läuft 10x bei Start 1, aber 11x bei Start 0. Vorher genau überlegen, welcher Bereich gemeint ist."
+    },
+    {
+      "fehler": "Endlosschleife gebaut",
+      "erklaerung": "Progle bricht dein Programm nach 10 Sekunden ab. Prüfe Start, Bedingung und Schritt – alle drei müssen zusammenpassen."
+    }
+  ]
+}

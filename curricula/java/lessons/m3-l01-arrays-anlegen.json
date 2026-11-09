@@ -1,0 +1,60 @@
+{
+  "id": "m3-l01",
+  "typ": "lektion",
+  "titel": "Arrays anlegen und nutzen",
+  "lernziele": [
+    "Ein Array anlegen und Werte speichern",
+    "Mit dem Index auf einzelne Plätze zugreifen",
+    "Die Länge mit length abfragen"
+  ],
+  "erklaerung": "## Viele Boxen in einem Fach\nEin **Array** ist eine Reihe von Boxen desselben Typs, unter einem Namen:\n```java\nint[] punkte = new int[3];      // 3 Plätze, alle 0\npunkte[0] = 90;                 // erster Platz: Index 0!\npunkte[1] = 75;\npunkte[2] = 88;\nSystem.out.println(punkte[1]);  // 75\n```\n## Der Index beginnt bei 0\nEin Array mit 3 Plätzen hat die Indizes **0, 1, 2**. Der letzte Platz ist also `punkte[punkte.length - 1]`.\n`punkte.length` liefert die Größe – ohne Klammern!\n## Direkt füllen\n```java\nString[] namen = {\"Anna\", \"Ben\", \"Cem\"};\n```\nGröße wird automatisch gezählt.\n## Achtung\nEin Zugriff auf `punkte[3]` bei Länge 3 wirft eine **ArrayIndexOutOfBoundsException** – der Platz existiert nicht.",
+  "beispiel-code": "public class Obskorb {\n\n    public static void main(String[] args) {\n        String[] obst = {\"Apfel\", \"Banane\", \"Kirsche\"};\n\n        System.out.println(\"Erster Eintrag: \" + obst[0]);\n        System.out.println(\"Letzter Eintrag: \" + obst[obst.length - 1]);\n        System.out.println(\"Anzahl: \" + obst.length);\n\n        obst[1] = \"Birne\";\n        System.out.println(\"Jetzt in der Mitte: \" + obst[1]);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Farbeimer legt ein String-Array 'farben' mit den Werten Rot, Grün, Blau an und gibt den ERSTEN und den LETZTEN Wert aus: 'Erste Farbe: Rot' und 'Letzte Farbe: Blau'. Für den letzten Zugriff nutze length!",
+      "start-code": "public class Farbeimer {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "String[] farben = {\"Rot\", \"Grün\", \"Blau\"};",
+        "Erster Wert: farben[0]",
+        "Letzter Wert: farben[farben.length - 1]"
+      ],
+      "loesung": "public class Farbeimer {\n\n    public static void main(String[] args) {\n        String[] farben = {\"Rot\", \"Grün\", \"Blau\"};\n\n        System.out.println(\"Erste Farbe: \" + farben[0]);\n        System.out.println(\"Letzte Farbe: \" + farben[farben.length - 1]);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Erste Farbe: Rot\nLetzte Farbe: Blau" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Notenspeicher: Lege ein int-Array 'noten' mit 3 Plätzen an (new int[3]), fülle die Plätze mit 2, 1 und 3 und gib alle drei in Reihenfolge aus, je Zeile 'Note <i>: <wert>' mit i = 1, 2, 3.",
+      "start-code": "public class Notenspeicher {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "int[] noten = new int[3]; dann noten[0] = 2; noten[1] = 1; noten[2] = 3;",
+        "Ausgabezeile: System.out.println(\"Note 1: \" + noten[0]);",
+        "Der erste Index ist 0, aber die Anzeige beginnt bei 1 – zwei verschiedene Dinge!"
+      ],
+      "loesung": "public class Notenspeicher {\n\n    public static void main(String[] args) {\n        int[] noten = new int[3];\n        noten[0] = 2;\n        noten[1] = 1;\n        noten[2] = 3;\n\n        System.out.println(\"Note 1: \" + noten[0]);\n        System.out.println(\"Note 2: \" + noten[1]);\n        System.out.println(\"Note 3: \" + noten[2]);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Note 1: 2\nNote 2: 1\nNote 3: 3" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie heißt der erste Platz eines Arrays?",
+      "optionen": ["Index 1", "Index 0", "Index -1", "Place 1"],
+      "richtig": 1,
+      "erklaerung": "Arrays zählen ab 0!"
+    },
+    {
+      "frage": "Wie bekommt man die Größe eines Arrays namens daten?",
+      "optionen": ["daten.length()", "daten.size", "daten.length", "length(daten)"],
+      "richtig": 2,
+      "erklaerung": "Bei Arrays ist length ein Feld ohne Klammern. (Methoden wie size() kommen später bei Collections.)"
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Index außerhalb des Arrays",
+      "erklaerung": "punkte[3] bei Länge 3 → ArrayIndexOutOfBoundsException. Der letzte Index ist length - 1."
+    },
+    {
+      "fehler": "length() mit Klammern",
+      "erklaerung": "Arrays haben length OHNE Klammern. length() gehört zu Strings – beliebte Verwechslung."
+    }
+  ]
+}

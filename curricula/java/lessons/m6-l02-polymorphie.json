@@ -1,0 +1,49 @@
+{
+  "id": "m6-l02",
+  "typ": "lektion",
+  "titel": "Polymorphie",
+  "lernziele": [
+    "Verstehen, dass ein Objekt viele Formen haben kann",
+    "Überschriebene Methoden dynamisch aufgerufen werden",
+    "Eltern-Typen als Container für Kinder nutzen"
+  ],
+  "erklaerung": "## Viele Gestalten, eine Anweisung\n**Polymorphie** = viele Gestalten. Eine Variable vom Eltern-Typ darf ein Kind-Objekt halten:\n```java\nTier t = new Hund();     // Hund IST ein Tier\nt.gibLaut();             // ruft die Hund-Version auf!\n```\nWelche Methode wirklich läuft, entscheidet sich zur **Laufzeit** nach dem echten Objekt - nicht nach dem Variablen-Typ. Das nennt man dynamisches Binden.\n## Der große Nutzen\nEIN Array/Liste für viele Arten:\n```java\nTier[] gehege = {new Hund(), new Katze(), new Hund()};\nfor (Tier tier : gehege) {\n    tier.gibLaut();      // jedes Tier macht sein eigenes Ding\n}\n```\nDu schreibst den Code einmal, und jedes Objekt verhält sich richtig. Das ist einer der größten Vorteile der OOP.",
+  "beispiel-code": "public class Tierpflege {\n\n    public static void main(String[] args) {\n        Tier[] gehege = {new Hund(), new Katze()};\n        for (Tier tier : gehege) {\n            tier.gibLaut();\n        }\n    }\n}\n\nclass Tier {\n    void gibLaut() {\n        System.out.println(\"...stille...\");\n    }\n}\n\nclass Hund extends Tier {\n    void gibLaut() {\n        System.out.println(\"Wuff\");\n    }\n}\n\nclass Katze extends Tier {\n    void gibLaut() {\n        System.out.println(\"Miau\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Musikschule: Basisklasse Instrument mit Methode spiele() (gibt '...'), Kindklassen Gitarre ('Klimper') und Trommel ('Boom'). Ein Instrument[] mit einer Gitarre und zwei Trommeln wird in einer Schleife bespielt. Ausgabe: Klimper, Boom, Boom.",
+      "start-code": "public class Musikschule {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Instrument[] reihe = {new Gitarre(), new Trommel(), new Trommel()};",
+        "For-each über das Array, aufrufen: instrument.spiele();",
+        "Die Kind-Klassen überschreiben spiele() mit ihrer eigenen Ausgabe."
+      ],
+      "loesung": "public class Musikschule {\n\n    public static void main(String[] args) {\n        Instrument[] reihe = {new Gitarre(), new Trommel(), new Trommel()};\n        for (Instrument instrument : reihe) {\n            instrument.spiele();\n        }\n    }\n}\n\nclass Instrument {\n    void spiele() {\n        System.out.println(\"...\");\n    }\n}\n\nclass Gitarre extends Instrument {\n    void spiele() {\n        System.out.println(\"Klimper\");\n    }\n}\n\nclass Trommel extends Instrument {\n    void spiele() {\n        System.out.println(\"Boom\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Klimper\nBoom\nBoom" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Welche Methode läuft bei: Tier t = new Hund(); t.gibLaut();?",
+      "optionen": ["Die von Tier", "Die von Hund", "Beide nacheinander", "Keine"],
+      "richtig": 1,
+      "erklaerung": "Zählt das echte Objekt: Hund.gibLaut() läuft (dynamisches Binden)."
+    },
+    {
+      "frage": "Darf ein Tier[] verschiedene Tierarten enthalten?",
+      "optionen": ["Nein, nur exakt Tier", "Ja - jedes Kind-Objekt IST ein Tier", "Nur mit cast", "Nur Strings"],
+      "richtig": 1,
+      "erklaerung": "Der Eltern-Typ verträgt alle Kind-Objekte - das ist der Polymorphie-Trick."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Überschreiben mit anderem Namen",
+      "erklaerung": "gibLautLaut() überschreibt nichts. Der Methodenkopf muss exakt gleich sein (oder Annotation @Override nutzen)."
+    },
+    {
+      "fehler": "Kind-Methoden aufrufen über Eltern-Variable",
+      "erklaerung": "t.belle(); geht nicht, wenn Tier belle() nicht kennt. Der Eltern-Typ bestimmt die sichtbaren Methoden."
+    }
+  ]
+}

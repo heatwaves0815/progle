@@ -1,0 +1,66 @@
+{
+  "id": "m5-q",
+  "typ": "modul-quiz",
+  "titel": "Modul-Quiz: Klassen und Objekte",
+  "lernziele": [
+    "OOP-Grundlagen prüfen",
+    "Einen Bank-Automaten als Abschluss bauen"
+  ],
+  "erklaerung": "## OOP-Grundlagen im Test\nFünf Fragen zu Klassen, Konstruktoren, Kapselung und static. In der **Abschlussaufgabe** baust du ein Bankkonto mit geschütztem Guthaben und Einzahl-Methode.",
+  "beispiel-code": "public class MusterOop {\n\n    public static void main(String[] args) {\n        KontoDemo k = new KontoDemo(\"Alex\");\n        System.out.println(k.inhaber);\n    }\n}\n\nclass KontoDemo {\n    String inhaber;\n\n    KontoDemo(String inhaber) {\n        this.inhaber = inhaber;\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Abschlussaufgabe 'Bankkonto': Klasse Konto (ohne public) mit privatem double guthaben, Konstruktor für den Startbetrag (nur >= 0 übernehmen), Methode einzahlen(double) (nur positive Beträge) und Getter getGuthaben(). main: erzeugt Konto mit 100, zahlt 50 ein, versucht -20 einzuzahlen. Ausgabe: 'Guthaben: 150.0'.",
+      "start-code": "public class Bankautomat {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Konstruktor mit Prüfung: if (startbetrag >= 0) { this.guthaben = startbetrag; }",
+        "einzahlen: if (betrag > 0) { this.guthaben += betrag; }",
+        "In main dreimal die Methoden aufrufen, dann über den Getter ausgeben."
+      ],
+      "loesung": "public class Bankautomat {\n\n    public static void main(String[] args) {\n        Konto k = new Konto(100);\n        k.einzahlen(50);\n        k.einzahlen(-20);\n        System.out.println(\"Guthaben: \" + k.getGuthaben());\n    }\n}\n\nclass Konto {\n    private double guthaben;\n\n    Konto(double startbetrag) {\n        if (startbetrag >= 0) {\n            this.guthaben = startbetrag;\n        }\n    }\n\n    void einzahlen(double betrag) {\n        if (betrag > 0) {\n            this.guthaben += betrag;\n        }\n    }\n\n    public double getGuthaben() {\n        return guthaben;\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Guthaben: 150.0" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was erzeugt ein Objekt?",
+      "optionen": ["class", "new", "this", "static"],
+      "richtig": 1,
+      "erklaerung": "new baut ein Objekt nach dem Klassen-Bauplan."
+    },
+    {
+      "frage": "Woran erkennst du einen Konstruktor?",
+      "optionen": ["Er heißt wie die Klasse und hat keinen Rückgabetyp", "Er heißt main", "Er hat immer void", "Er steht in einer anderen Datei"],
+      "richtig": 0,
+      "erklaerung": "Klassenname, keine Rückgabetyp-Angabe."
+    },
+    {
+      "frage": "Welches Attribut ist richtig gekapselt?",
+      "optionen": ["public double stand;", "double stand;", "private double stand;", "static double stand;"],
+      "richtig": 2,
+      "erklaerung": "private versteckt das Attribut; Zugriff über Methoden."
+    },
+    {
+      "frage": "this.name = name; - was ist was?",
+      "optionen": ["Links Parameter, rechts Attribut", "Links Attribut, rechts Parameter", "Beides Attribute", "Beides Parameter"],
+      "richtig": 1,
+      "erklaerung": "this.name ist das Attribut des Objekts, name der Konstruktor-Parameter."
+    },
+    {
+      "frage": "Wie oft existiert static int zaehler in der Klasse Ding?",
+      "optionen": ["Einmal pro Objekt", "Genau einmal für alle", "Einmal pro Methode", "Zweimal"],
+      "richtig": 1,
+      "erklaerung": "Static-Attribute gehören der Klasse und existieren genau einmal."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Getter statt direkter Attribute nutzen vergessen",
+      "erklaerung": "Nach private führt der Weg nur über Methoden - t.guthaben kompiliert nicht mehr."
+    },
+    {
+      "fehler": "Validierung im falschen Ort",
+      "erklaerung": "Prüfungen gehören in Konstruktor und Setter - nicht in die Ausgabemethode."
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "m4-l05",
+  "typ": "lektion",
+  "titel": "Rekursion",
+  "lernziele": [
+    "Verstehen, was Selbstaufruf bedeutet",
+    "Eine Abbruchbedingung (Basisfall) setzen",
+    "Den Ablauf einer Rekursion nachverfolgen"
+  ],
+  "erklaerung": "## Eine Methode, die sich selbst ruft\n**Rekursion** heißt: Eine Methode ruft sich selbst auf – wie zwei Spiegel gegenüber. Damit das endet, braucht sie einen **Basisfall** (Abbruchbedingung):\n```java\npublic static void countdown(int n) {\n    if (n == 0) {\n        System.out.println(\"Los!\");\n        return;             // Basisfall: hier endet die Rekursion\n    }\n    System.out.println(n);\n    countdown(n - 1);       // Selbstaufruf mit kleinerem Wert\n}\n```\ncountdown(3) → gibt 3, dann ruft es countdown(2) → 2, countdown(1) → 1, countdown(0) → Los!\n## Der berühmte Klassiker: Fakultät\n```java\npublic static int fakultaet(int n) {\n    if (n <= 1) {\n        return 1;           // 0! = 1! = 1\n    }\n    return n * fakultaet(n - 1);   // 5! = 5 * 4! = ...\n}\n```\nfakultaet(5) = 5 * 4 * 3 * 2 * 1 = 120.\n## Wichtig\nOhne Basisfall oder wenn der Basisfall nie erreicht wird: **StackOverflowError** – der Speicher für die Aufrufe ist voll.",
+  "beispiel-code": "public class Treppenrechner {\n\n    public static void absteigen(int stufe) {\n        if (stufe == 0) {\n            System.out.println(\"Unten angekommen\");\n            return;\n        }\n        System.out.println(\"Stufe \" + stufe);\n        absteigen(stufe - 1);\n    }\n\n    public static void main(String[] args) {\n        absteigen(3);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Summenrechner hat eine rekursive Methode 'static int summeBis(int n)', die 1+2+...+n berechnet (summeBis(1) = 1, sonst n + summeBis(n - 1)). main gibt aus: 'Summe bis 4: 10'.",
+      "start-code": "public class Summenrechner {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Basisfall: if (n == 1) return 1;",
+        "Rekursionsschritt: return n + summeBis(n - 1);",
+        "summeBis(4) = 4 + summeBis(3) = 4 + 3 + 2 + 1 = 10."
+      ],
+      "loesung": "public class Summenrechner {\n\n    public static int summeBis(int n) {\n        if (n == 1) {\n            return 1;\n        }\n        return n + summeBis(n - 1);\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"Summe bis 4: \" + summeBis(4));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Summe bis 4: 10" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was passiert ohne Basisfall?",
+      "optionen": ["Der Compiler warnt", "Endlosschleife mit StackOverflowError", "Nichts", "Die Methode gibt 0 zurück"],
+      "richtig": 1,
+      "erklaerung": "Ohne Abbruch stapeln sich die Aufrufe bis zum StackOverflowError."
+    },
+    {
+      "frage": "Was ist der Basisfall bei fakultaet(n)?",
+      "optionen": ["n == 0 oder n <= 1 liefert 1", "n == 100", "Es gibt keinen", "return n;"],
+      "richtig": 0,
+      "erklaerung": "Fakultät von 0 und 1 ist 1 - dort stoppt die Rekursion."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Rekursionsschritt geht falsche Richtung",
+      "erklaerung": "fakultaet(n - 1) statt n + 1 - sonst läuft die Rekursion von der Basisfall-Bedingung weg."
+    },
+    {
+      "fehler": "Zu große Eingabe",
+      "erklaerung": "summeBis(100000) sprengt den Stack. Rekursion ist elegant, aber nicht für riesige Werte."
+    }
+  ]
+}

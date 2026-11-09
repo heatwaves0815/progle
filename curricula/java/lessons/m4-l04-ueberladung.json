@@ -1,0 +1,60 @@
+{
+  "id": "m4-l04",
+  "typ": "lektion",
+  "titel": "Überladung",
+  "lernziele": [
+    "Methoden mit gleichem Namen aber unterschiedlichen Parametern anlegen",
+    "Verstehen, wie Java die richtige Variante wählt",
+    "Überladung sinnvoll einsetzen"
+  ],
+  "erklaerung": "## Gleicher Name, verschiedene Zutaten\n**Überladung (Overloading)**: Mehrere Methoden dürfen denselben Namen haben, wenn ihre **Parameterliste** sich unterscheidet (Anzahl oder Typen):\n```java\npublic static int max(int a, int b) {\n    return a > b ? a : b;\n}\n\npublic static double max(double a, double b) {\n    return a > b ? a : b;\n}\n\npublic static int max(int a, int b, int c) {\n    return max(max(a, b), c);\n}\n```\nJava sucht beim Aufruf die **passendste Variante**: `max(3, 7)` → int-Version, `max(2.5, 1.1)` → double-Version.\nWichtig: Nur der Rückgabetyp allein reicht NICHT für Überladung – die Parameterliste muss sich unterscheiden.\nDer name-drei-Zahlen-Aufruf zeigt auch: Überladene Methoden können sich gegenseitig aufrufen.",
+  "beispiel-code": "public class Grusszentrale {\n\n    public static void gruss() {\n        System.out.println(\"Hallo, Gast!\");\n    }\n\n    public static void gruss(String name) {\n        System.out.println(\"Hallo, \" + name + \"!\");\n    }\n\n    public static void gruss(String name, String anrede) {\n        System.out.println(\"Hallo, \" + anrede + \" \" + name + \"!\");\n    }\n\n    public static void main(String[] args) {\n        gruss();\n        gruss(\"Alex\");\n        gruss(\"Weber\", \"Herr\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Rechenwerk hat zwei überladene Methoden 'vervielfache': Eine für int (verdoppelt den Wert: return zahl * 2) und eine für double (verdoppelt ebenfalls). main gibt aus: 'int: 14' (vervielfache(7)) und 'double: 7.0' (vervielfache(3.5)).",
+      "start-code": "public class Rechenwerk {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Zwei Methoden gleichen Namens: public static int vervielfache(int zahl) und public static double vervielfache(double zahl).",
+        "Beide geben nur zahl * 2 zurück.",
+        "Der Aufruf vervielfache(7) wählt automatisch die int-Version."
+      ],
+      "loesung": "public class Rechenwerk {\n\n    public static int vervielfache(int zahl) {\n        return zahl * 2;\n    }\n\n    public static double vervielfache(double zahl) {\n        return zahl * 2;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"int: \" + vervielfache(7));\n        System.out.println(\"double: \" + vervielfache(3.5));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "int: 14\ndouble: 7.0" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Ticketzentrale hat: 'buchen(String event)' (gibt 'Buchung für <event>' aus) und 'buchen(String event, int plaetze)' (gibt '<plaetze> Plätze für <event>' aus). main ruft: buchen(\"Konzert\") und buchen(\"Konzert\", 3).",
+      "start-code": "public class Ticketzentrale {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Beide Methoden heißen buchen, unterscheiden sich aber in der Parameteranzahl.",
+        "Erste Variante: nur Text mit Event-Namen ausgeben.",
+        "Zweite Variante: plaetze und event kombinieren."
+      ],
+      "loesung": "public class Ticketzentrale {\n\n    public static void buchen(String event) {\n        System.out.println(\"Buchung für \" + event);\n    }\n\n    public static void buchen(String event, int plaetze) {\n        System.out.println(plaetze + \" Plätze für \" + event);\n    }\n\n    public static void main(String[] args) {\n        buchen(\"Konzert\");\n        buchen(\"Konzert\", 3);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Buchung für Konzert\n3 Plätze für Konzert" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wann sind zwei Methoden gültig überladen?",
+      "optionen": ["Immer bei gleichem Namen", "Wenn sich die Parameterliste unterscheidet", "Wenn der Rückgabetyp anders ist", "Niemals"],
+      "richtig": 1,
+      "erklaerung": "Entscheidend ist die Parameterliste - Anzahl oder Typen müssen sich unterscheiden."
+    },
+    {
+      "frage": "Java ruft bei max(2.5, 1.1) welche Variante auf?",
+      "optionen": ["max(int, int)", "max(double, double)", "Beide", "Keine - Fehler"],
+      "richtig": 1,
+      "erklaerung": "Java wählt die Variante, deren Parametertypen am besten passen."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Nur Rückgabetyp geändert",
+      "erklaerung": "int rechne(...) und double rechne(...) mit GLEICHER Parameterliste → 'method already defined'. Die Parameter müssen sich unterscheiden."
+    },
+    {
+      "fehler": "Verwirrung durch zu viele Varianten",
+      "erklaerung": "Überlade nur, wenn es wirklich sinnvoll ist - sonst wird der Code schwer lesbar."
+    }
+  ]
+}

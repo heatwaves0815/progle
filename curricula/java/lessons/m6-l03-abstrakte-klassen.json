@@ -1,0 +1,49 @@
+{
+  "id": "m6-l03",
+  "typ": "lektion",
+  "titel": "Abstrakte Klassen",
+  "lernziele": [
+    "Abstrakte Klassen und Methoden verstehen",
+    "Verstehen, warum man sie nicht direkt instanziieren kann",
+    "Zwangsweise sinnvolle Kind-Klassen bauen"
+  ],
+  "erklaerung": "## Bauplan ohne Bauvorlage\nManchmal macht die Elternklasse selbst keinen Sinn als Objekt: Es gibt 'ein Tier' nicht - nur konkrete Hunde, Katzen, Vögel.\n```java\nabstract class Form {\n    String name;\n\n    Form(String name) {\n        this.name = name;\n    }\n\n    abstract double flaeche();     // KEIN Körper - Kinder MÜSSEN liefern\n\n    void beschreibe() {\n        System.out.println(name + \" hat Fläche \" + flaeche());\n    }\n}\n```\n- `abstract class` → kein `new Form(...)` möglich.\n- `abstract` Methoden haben keinen Körper; jede konkrete Kindklasse **muss** sie überschreiben.\n- Normale Methoden (wie beschreibe) dürfen trotzdem existieren und geerbt werden.\nSo zwingst du alle Entwickler, die Pflichtmethoden zu implementieren - die Elternklasse kann sie aber schon benutzen.",
+  "beispiel-code": "public class Zeichenblatt {\n\n    public static void main(String[] args) {\n        Form[] zeichnungen = {new Rechteck(2, 3), new Kreis(1)};\n        for (Form form : zeichnungen) {\n            form.beschreibe();\n        }\n    }\n}\n\nabstract class Form {\n    String name;\n\n    Form(String name) {\n        this.name = name;\n    }\n\n    abstract double flaeche();\n\n    void beschreibe() {\n        System.out.println(name + \" hat Flaeche \" + flaeche());\n    }\n}\n\nclass Rechteck extends Form {\n    double breite, hoehe;\n\n    Rechteck(double breite, double hoehe) {\n        super(\"Rechteck\");\n        this.breite = breite;\n        this.hoehe = hoehe;\n    }\n\n    double flaeche() {\n        return breite * hoehe;\n    }\n}\n\nclass Kreis extends Form {\n    double radius;\n\n    Kreis(double radius) {\n        super(\"Kreis\");\n        this.radius = radius;\n    }\n\n    double flaeche() {\n        return radius * radius * 3.14;\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Formeldemo: Abstract class Figur mit abstrakter Methode 'double umfang()'. Kindklasse Quadrat (Attribut seite) liefert seite * 4. main: neues Quadrat(2.5), Ausgabe 'Umfang: 10.0'.",
+      "start-code": "public class Formeldemo {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "abstract class Figur { abstract double umfang(); }",
+        "class Quadrat extends Figur { double seite; ... double umfang() { return seite * 4; } }",
+        "2.5 * 4 = 10.0"
+      ],
+      "loesung": "public class Formeldemo {\n\n    public static void main(String[] args) {\n        Quadrat q = new Quadrat(2.5);\n        System.out.println(\"Umfang: \" + q.umfang());\n    }\n}\n\nabstract class Figur {\n    abstract double umfang();\n}\n\nclass Quadrat extends Figur {\n    double seite;\n\n    Quadrat(double seite) {\n        this.seite = seite;\n    }\n\n    double umfang() {\n        return seite * 4;\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Umfang: 10.0" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Kannst du new Form(...) bei abstract class Form schreiben?",
+      "optionen": ["Ja", "Nein - abstrakte Klassen können nicht instanziiert werden", "Nur in main", "Nur einmal"],
+      "richtig": 1,
+      "erklaerung": "Abstrakte Klassen sind Baupläne ohne Bauvorlage - nur konkrete Kindklassen werden erzeugt."
+    },
+    {
+      "frage": "Was müssen konkrete Kindklassen mit abstrakten Methoden machen?",
+      "optionen": ["Ignorieren", "Alle überschreiben (implementieren)", "Als static markieren", "Löschen"],
+      "richtig": 1,
+      "erklaerung": "Sonst wäre die Kindklasse selbst wieder abstract - der Compiler verlangt die Implementierung."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Abstrakte Methode mit Körper",
+      "erklaerung": "abstract double flaeche() { return 0; } geht nicht - abstract heißt: kein Körper."
+    },
+    {
+      "fehler": "Kind überschreibt nicht",
+      "erklaerung": "Dann muss auch das Kind abstract sein, sonst Kompilierfehler."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "apiKey": "HIER_DEINEN_OPENROUTER_API_KEY_EINTRAGEN",
+  "model": "deepseek/deepseek-v4-flash-0731:free",
+  "baseUrl": "https://openrouter.ai/api/v1"
+}

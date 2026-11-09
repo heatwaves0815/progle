@@ -1,0 +1,63 @@
+{
+  "id": "m1-q",
+  "typ": "modul-quiz",
+  "titel": "Modul-Quiz: Grundlagen",
+  "lernziele": [
+    "Dein Grundlagen-Wissen prüfen",
+    "Lücken erkennen und gezielt nachfragen",
+    "Eine erste eigene Mini-Anwendung bauen"
+  ],
+  "erklaerung": "## Zeit für die Zwischenprüfung!\nBeantworte die Fragen – bei jeder richtigen Antwort leuchtet sie grün auf. Danach wartet die **praktische Abschlussaufgabe** auf dich: ein kleiner Kassenzettel-Drucker.\nDas Modul-Quiz ist bestanden, wenn alle Fragen richtig sind **und** die Aufgabe läuft.",
+  "beispiel-code": "public class Muster {\n\n    public static void main(String[] args) {\n        System.out.println(\"So sieht ein fertiger Kassenzettel-Code aus:\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Abschlussaufgabe 'Kassenzettel': Die Klasse Kassenzettel druckt eine Rechnung. Nutze Variablen und Rechnung: artikel = \"Buch\" (String), preis = 12.5 (double), menge = 3 (int). Ausgabe genau:\nKasse der Buchhandlung\nBuch: 3 x 12.5\nSumme: 37.5\nVielen Dank!",
+      "start-code": "public class Kassenzettel {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Zuerst die drei Variablen anlegen, dann vier println-Anweisungen.",
+        "Summe als double: double summe = preis * menge; (12.5 * 3 = 37.5)",
+        "Erste und letzte Zeile sind reiner Text in Anführungszeichen."
+      ],
+      "loesung": "public class Kassenzettel {\n\n    public static void main(String[] args) {\n        String artikel = \"Buch\";\n        double preis = 12.5;\n        int menge = 3;\n        double summe = preis * menge;\n\n        System.out.println(\"Kasse der Buchhandlung\");\n        System.out.println(artikel + \": \" + menge + \" x \" + preis);\n        System.out.println(\"Summe: \" + summe);\n        System.out.println(\"Vielen Dank!\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Kasse der Buchhandlung\nBuch: 3 x 12.5\nSumme: 37.5\nVielen Dank!" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Welcher Befehl gibt Text MIT Zeilenumbruch aus?",
+      "optionen": ["System.out.print()", "System.out.println()", "System.write()", "console.log()"],
+      "richtig": 1,
+      "erklaerung": "println = print line: danach kommt ein Zeilenumbruch."
+    },
+    {
+      "frage": "int a = 7; a += 3; – welchen Wert hat a?",
+      "optionen": ["3", "7", "10", "73"],
+      "richtig": 2,
+      "erklaerung": "+= 3 bedeutet a = a + 3, also 7 + 3 = 10."
+    },
+    {
+      "frage": "Welcher Datentyp passt für 'true' und 'false'?",
+      "optionen": ["int", "char", "boolean", "String"],
+      "richtig": 2,
+      "erklaerung": "boolean speichert Wahrheitswerte."
+    },
+    {
+      "frage": "Was ergibt 15 % 4?",
+      "optionen": ["3", "3.75", "11", "4"],
+      "richtig": 0,
+      "erklaerung": "15 / 4 = 3 Rest 3 – der Restoperator % liefert die 3."
+    },
+    {
+      "frage": "Was liest scanner.nextDouble()?",
+      "optionen": ["Einen Text", "Eine Kommazahl", "Ein einzelnes Zeichen", "Nichts"],
+      "richtig": 1,
+      "erklaerung": "nextDouble() liest eine Kommazahl wie 3.5."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Aufgabentext statt Code lesen",
+      "erklaerung": "Lies die Aufgabe zweimal und schreibe die erwartete Ausgabe zuerst auf Papier – dann weißt du genau, was dein Code tun muss."
+    }
+  ]
+}

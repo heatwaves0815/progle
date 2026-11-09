@@ -1,0 +1,60 @@
+{
+  "id": "m3-l03",
+  "typ": "lektion",
+  "titel": "Mehrdimensionale Arrays",
+  "lernziele": [
+    "Ein Array von Arrays anlegen",
+    "Zeilen und Spalten getrennt adressieren",
+    "Verschachtelte Schleifen über 2D-Arrays laufen lassen"
+  ],
+  "erklaerung": "## Ein Schachbrett aus Boxen\nEin **2D-Array** ist ein Array aus Arrays – wie ein Spielfeld mit Zeilen und Spalten:\n```java\nint[][] feld = {\n    {1, 2, 3},\n    {4, 5, 6}\n};\nSystem.out.println(feld[1][2]);   // Zeile 1, Spalte 2 -> 6\n```\nErster Index = Zeile, zweiter = Spalte. Auch hier zählt alles ab 0.\n## Durchlaufen mit zwei Schleifen\n```java\nfor (int zeile = 0; zeile < feld.length; zeile++) {\n    for (int spalte = 0; spalte < feld[zeile].length; spalte++) {\n        System.out.print(feld[zeile][spalte] + \" \");\n    }\n    System.out.println();   // Zeilenumbruch nach jeder Zeile\n}\n```\n`feld.length` = Anzahl Zeilen, `feld[zeile].length` = Anzahl Spalten dieser Zeile.\nAnwendung: Spielfelder, Tabellen, Sitzpläne, Bilder (Pixel).",
+  "beispiel-code": "public class Spielfeld {\n\n    public static void main(String[] args) {\n        int[][] punkte = {\n            {10, 20, 30},\n            {40, 50, 60}\n        };\n\n        int summe = 0;\n        for (int zeile = 0; zeile < punkte.length; zeile++) {\n            for (int spalte = 0; spalte < punkte[zeile].length; spalte++) {\n                summe += punkte[zeile][spalte];\n            }\n        }\n        System.out.println(\"Summe aller Punkte: \" + summe);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Sitzplan2d legt folgendes 2D-Array an: {{1, 2}, {3, 4}} und gibt es zeilenweise aus:\n1 2\n3 4\n(Hinweis: Zwischen den Zahlen jeweils ein Leerzeichen, nach jeder Zeile ein println.)",
+      "start-code": "public class Sitzplan2d {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "int[][] sitz = {{1, 2}, {3, 4}};",
+        "Äußere Schleife über zeile, innere über spalte.",
+        "In der inneren Schleife print(sitz[zeile][spalte] + \" \") – ohne ln. Nach der inneren Schleife ein leeres println()."
+      ],
+      "loesung": "public class Sitzplan2d {\n\n    public static void main(String[] args) {\n        int[][] sitz = {{1, 2}, {3, 4}};\n\n        for (int zeile = 0; zeile < sitz.length; zeile++) {\n            for (int spalte = 0; spalte < sitz[zeile].length; spalte++) {\n                System.out.print(sitz[zeile][spalte] + \" \");\n            }\n            System.out.println();\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "1 2 \n3 4 " }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Regentage: Das Array regen = {{5, 0, 2}, {1, 8, 3}} enthält Liter pro Tag für zwei Wochen. Berechne die Summe je Woche und gib 'Woche 1: 7 Liter' und 'Woche 2: 12 Liter' aus.",
+      "start-code": "public class Regentage {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Für jede Woche (Zeile): Summe der Zeile berechnen und direkt danach ausgeben.",
+        "Summe vor der inneren Schleife auf 0 setzen (sonst zählt sie weiter!).",
+        "Struktur: for über zeilen { int summe = 0; for über spalten { summe += ...; } println(\"Woche \" + (zeile + 1) + \": \" + summe + \" Liter\"); }"
+      ],
+      "loesung": "public class Regentage {\n\n    public static void main(String[] args) {\n        int[][] regen = {{5, 0, 2}, {1, 8, 3}};\n\n        for (int zeile = 0; zeile < regen.length; zeile++) {\n            int summe = 0;\n            for (int spalte = 0; spalte < regen[zeile].length; spalte++) {\n                summe += regen[zeile][spalte];\n            }\n            System.out.println(\"Woche \" + (zeile + 1) + \": \" + summe + \" Liter\");\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Woche 1: 7 Liter\nWoche 2: 12 Liter" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was liefert feld[0][1] bei {{10, 20, 30}, {40, 50, 60}}?",
+      "optionen": ["10", "20", "40", "50"],
+      "richtig": 1,
+      "erklaerung": "Zeile 0, Spalte 1 = 20."
+    },
+    {
+      "frage": "Wie bekommst du die Anzahl der ZEILEN eines 2D-Arrays feld?",
+      "optionen": ["feld.length", "feld[0].length", "feld.size()", "feld.rows"],
+      "richtig": 0,
+      "erklaerung": "feld.length zählt die Zeilen (Arrays), feld[0].length die Spalten der ersten Zeile."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Indices vertauscht",
+      "erklaerung": "feld[spalte][zeile] liest das Spielfeld gedreht. Erster Index = Zeile!"
+    },
+    {
+      "fehler": "Summe außerhalb der Zeile deklariert",
+      "erklaerung": "Soll jede Zeile eine eigene Summe bekommen, muss int summe = 0; INNERHALB der äußeren Schleife stehen."
+    }
+  ]
+}

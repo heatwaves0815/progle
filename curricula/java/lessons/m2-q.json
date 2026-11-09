@@ -1,0 +1,67 @@
+{
+  "id": "m2-q",
+  "typ": "modul-quiz",
+  "titel": "Modul-Quiz: Kontrollfluss",
+  "lernziele": [
+    "Entscheidungen und Schleifen sicher kombinieren",
+    "Wissenslücken im Kontrollfluss finden",
+    "Ein kleiner Zinsrechner als Abschluss"
+  ],
+  "erklaerung": "## Kontrollfluss im Griff?\nFünf Fragen zu if, switch und Schleifen – danach baust du in der **Abschlussaufgabe** einen Sparkassen-Zinsrechner.\nDas Modul ist bestanden, wenn alle Fragen richtig sind und dein Programm die erwartete Ausgabe liefert.",
+  "beispiel-code": "public class MusterKontrollfluss {\n\n    public static void main(String[] args) {\n        for (int i = 1; i <= 3; i++) {\n            if (i == 2) {\n                System.out.println(\"Mitte\");\n            } else {\n                System.out.println(\"Runde \" + i);\n            }\n        }\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Abschlussaufgabe 'Zinsrechner': Die Klasse Zinsrechner liest mit dem Scanner ein Startkapital (int, nextInt) und rechnet 3 Jahre lang mit 5 % Zinsen (kapital *= 1.05 als double). Gib nach JEDEM Jahr eine Zeile 'Nach Jahr <n>: <kapital>' aus. Kapital = 100 ergibt:\nStartkapital? Nach Jahr 1: 105.0\nNach Jahr 2: 110.25\nNach Jahr 3: 115.7625\n(Die Frage-Ausgabe gehört mit zur Ausgabe.)",
+      "start-code": "import java.util.Scanner;\n\npublic class Zinsrechner {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "double kapital = scanner.nextInt(); – dann kannst du mit *= 1.05 rechnen.",
+        "for (int jahr = 1; jahr <= 3; jahr++) { kapital *= 1.05; System.out.println(\"Nach Jahr \" + jahr + \": \" + kapital); }",
+        "Ausgeben VOR oder NACH der Erhöhung? Nach Jahr 1 soll 105.0 stehen – also erst erhöhen, dann ausgeben."
+      ],
+      "loesung": "import java.util.Scanner;\n\npublic class Zinsrechner {\n\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        System.out.print(\"Startkapital? \");\n        double kapital = scanner.nextInt();\n\n        for (int jahr = 1; jahr <= 3; jahr++) {\n            kapital *= 1.05;\n            System.out.println(\"Nach Jahr \" + jahr + \": \" + kapital);\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "eingabe": "100", "erwartet": "Startkapital? Nach Jahr 1: 105.0\nNach Jahr 2: 110.25\nNach Jahr 3: 115.7625" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wann läuft ein do-while-Körper?",
+      "optionen": ["Nur bei true", "Mindestens einmal", "Nie bei false", "Doppelt"],
+      "richtig": 1,
+      "erklaerung": "do-while prüft die Bedingung erst nach dem ersten Durchlauf."
+    },
+    {
+      "frage": "Was gibt es aus?\nfor (int i = 1; i <= 4; i++) {\n    if (i == 2) continue;\n    if (i == 4) break;\n    System.out.println(i);\n}",
+      "optionen": ["1 2 3 4", "1 und 3", "1 2 3", "1, 3 und 4"],
+      "richtig": 1,
+      "erklaerung": "2 wird übersprungen (continue), bei 4 bricht break ab – also 1 und 3."
+    },
+    {
+      "frage": "Wie viele Zeilen gibt es bei 4 äußeren und 2 inneren Durchläufen?",
+      "optionen": ["4", "2", "6", "8"],
+      "richtig": 3,
+      "erklaerung": "4 x 2 = 8 Zeilen."
+    },
+    {
+      "frage": "Welcher Vergleich prüft 'x liegt zwischen 1 und 9 (beide inklusive)'?",
+      "optionen": ["1 <= x <= 9", "x >= 1 && x <= 9", "x >= 1 || x <= 9", "x > 1 && x < 9"],
+      "richtig": 1,
+      "erklaerung": "In Java muss man zwei Vergleiche mit && verknüpfen."
+    },
+    {
+      "frage": "Was passiert ohne Anweisung, die die Schleifen-Bedingung ändert?",
+      "optionen": ["Kompilierfehler", "Endlosschleife", "Die Schleife läuft einmal", "Die Schleife läuft gar nicht"],
+      "richtig": 1,
+      "erklaerung": "Ohne Änderung bleibt die Bedingung für immer wahr – Endlosschleife."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Ausgabe vor der Erhöhung",
+      "erklaerung": "Wenn 'Nach Jahr 1' schon den ZINS enthalten soll, muss zuerst multipliziert, dann ausgegeben werden."
+    },
+    {
+      "fehler": "Scanner-Variablen als int weiterrechnen",
+      "erklaerung": "Zinsen brauchen double: Nach dem Einlesen in double umwandeln (double kapital = scanner.nextInt(); geht automatisch)."
+    }
+  ]
+}

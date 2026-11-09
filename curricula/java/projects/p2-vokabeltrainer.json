@@ -1,0 +1,65 @@
+﻿{
+  "id": "p2",
+  "typ": "projekt",
+  "titel": "Vokabeltrainer",
+  "lernziele": [
+    "HashMap als Datenquelle nutzen",
+    "Eingaben prüfen und Punkte vergeben",
+    "Ergebnisse auswerten und ausgeben"
+  ],
+  "erklaerung": "## Lernprogramm für dich selbst\nDu baust einen **Vokabeltrainer**: Das Programm fragt deutsche Wörter ab, du tippst die englische Übersetzung, es gibt Punkte.\n\n**Was du brauchst:** HashMap (Modul 7), Scanner-Eingaben (Modul 1), if/else (Modul 2), Zähler (Modul 1).\n\nIn drei Schritten zum fertigen Trainer - jeder Schritt ist einzeln testbar.",
+  "beispiel-code": "import java.util.HashMap;\n\npublic class Fragemuster {\n\n    public static void main(String[] args) {\n        HashMap<String, String> vokabeln = new HashMap<>();\n        vokabeln.put(\"Hund\", \"dog\");\n        System.out.println(\"Was heißt Hund?\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Schritt 1 - Der Vokabelpool: Lege in der Klasse Vokabeltrainer eine HashMap<String, String> 'vokabeln' an mit: Hund→dog, Katze→cat, Haus→house. Gib alle drei Fragen aus: 'Was heißt Hund?', 'Was heißt Katze?', 'Was heißt Haus?' (jeweils eine Zeile).",
+      "start-code": "import java.util.HashMap;\n\npublic class Vokabeltrainer {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "HashMap anlegen und drei put-Aufrufe.",
+        "Für die Fragen: System.out.println(\"Was heißt Hund?\"); usw.",
+        "Später kannst du mit keySet() automatisch fragen - hier reicht die feste Liste."
+      ],
+      "loesung": "import java.util.HashMap;\n\npublic class Vokabeltrainer {\n\n    public static void main(String[] args) {\n        HashMap<String, String> vokabeln = new HashMap<>();\n        vokabeln.put(\"Hund\", \"dog\");\n        vokabeln.put(\"Katze\", \"cat\");\n        vokabeln.put(\"Haus\", \"house\");\n\n        System.out.println(\"Was heißt Hund?\");\n        System.out.println(\"Was heißt Katze?\");\n        System.out.println(\"Was heißt Haus?\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Was heißt Hund?\nWas heißt Katze?\nWas heißt Haus?" }
+    },
+    {
+      "aufgabenstellung": "Schritt 2 - Abfragen mit Antwort: Erweitere main: Nach jeder Frage liest ein Scanner die Antwort (nextLine). Bei richtiger Antwort: 'Richtig! 1 Punkt' und punkte++; sonst 'Falsch, richtig wäre: <antwort>'. Die Prüfung simuliert die Eingaben: dog, maus, house. Erwartete Ausgabe:\nWas heißt Hund?\nRichtig! 1 Punkt\nWas heißt Katze?\nFalsch, richtig wäre: cat\nWas heißt Haus?\nRichtig! 1 Punkt",
+      "start-code": "import java.util.HashMap;\nimport java.util.Scanner;\n\npublic class Vokabeltrainer {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Struktur pro Frage: println(\"Was heißt Hund?\"); String antwort = scanner.nextLine(); if (antwort.equals(vokabeln.get(\"Hund\"))) { ... } else { ... }",
+        "Zähler: int punkte = 0; dann punkte++ bei Erfolg.",
+        "Im else-Fall die richtige Lösung mit vokabeln.get(\"Katze\") holen - nicht hardcoden."
+      ],
+      "loesung": "import java.util.HashMap;\nimport java.util.Scanner;\n\npublic class Vokabeltrainer {\n\n    public static void main(String[] args) {\n        HashMap<String, String> vokabeln = new HashMap<>();\n        vokabeln.put(\"Hund\", \"dog\");\n        vokabeln.put(\"Katze\", \"cat\");\n        vokabeln.put(\"Haus\", \"house\");\n\n        Scanner scanner = new Scanner(System.in);\n        int punkte = 0;\n\n        System.out.println(\"Was heißt Hund?\");\n        String antwort1 = scanner.nextLine();\n        if (antwort1.equals(vokabeln.get(\"Hund\"))) {\n            System.out.println(\"Richtig! 1 Punkt\");\n            punkte++;\n        } else {\n            System.out.println(\"Falsch, richtig wäre: \" + vokabeln.get(\"Hund\"));\n        }\n\n        System.out.println(\"Was heißt Katze?\");\n        String antwort2 = scanner.nextLine();\n        if (antwort2.equals(vokabeln.get(\"Katze\"))) {\n            System.out.println(\"Richtig! 1 Punkt\");\n            punkte++;\n        } else {\n            System.out.println(\"Falsch, richtig wäre: \" + vokabeln.get(\"Katze\"));\n        }\n\n        System.out.println(\"Was heißt Haus?\");\n        String antwort3 = scanner.nextLine();\n        if (antwort3.equals(vokabeln.get(\"Haus\"))) {\n            System.out.println(\"Richtig! 1 Punkt\");\n            punkte++;\n        } else {\n            System.out.println(\"Falsch, richtig wäre: \" + vokabeln.get(\"Haus\"));\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "eingabe": "dog\nmaus\nhouse\n", "erwartet": "Was heißt Hund?\nRichtig! 1 Punkt\nWas heißt Katze?\nFalsch, richtig wäre: cat\nWas heißt Haus?\nRichtig! 1 Punkt" }
+    },
+    {
+      "aufgabenstellung": "Schritt 3 - Auswertung: Gib nach den drei Fragen aus: 'Ergebnis: <punkte> von 3' und 'Quote: <prozent>%'. Die Quote ist punkte * 100 / 3 als ganze Zahl (int). Mit 2 Punkten ergibt das:\nErgebnis: 2 von 3\nQuote: 66%",
+      "start-code": "import java.util.HashMap;\nimport java.util.Scanner;\n\npublic class Vokabeltrainer {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Nach den drei Fragen: System.out.println(\"Ergebnis: \" + punkte + \" von 3\");",
+        "Ganze Zahl: int quote = punkte * 100 / 3; (Integer-Division!)",
+        "Ausgabe der Quote mit Prozentzeichen im Text: \"Quote: \" + quote + \"%\""
+      ],
+      "loesung": "import java.util.HashMap;\nimport java.util.Scanner;\n\npublic class Vokabeltrainer {\n\n    public static void main(String[] args) {\n        HashMap<String, String> vokabeln = new HashMap<>();\n        vokabeln.put(\"Hund\", \"dog\");\n        vokabeln.put(\"Katze\", \"cat\");\n        vokabeln.put(\"Haus\", \"house\");\n\n        Scanner scanner = new Scanner(System.in);\n        int punkte = 0;\n\n        System.out.println(\"Was heißt Hund?\");\n        String antwort1 = scanner.nextLine();\n        if (antwort1.equals(vokabeln.get(\"Hund\"))) {\n            punkte++;\n        } else {\n            System.out.println(\"Falsch, richtig wäre: \" + vokabeln.get(\"Hund\"));\n        }\n\n        System.out.println(\"Was heißt Katze?\");\n        String antwort2 = scanner.nextLine();\n        if (antwort2.equals(vokabeln.get(\"Katze\"))) {\n            punkte++;\n        } else {\n            System.out.println(\"Falsch, richtig wäre: \" + vokabeln.get(\"Katze\"));\n        }\n\n        System.out.println(\"Was heißt Haus?\");\n        String antwort3 = scanner.nextLine();\n        if (antwort3.equals(vokabeln.get(\"Haus\"))) {\n            punkte++;\n        } else {\n            System.out.println(\"Falsch, richtig wäre: \" + vokabeln.get(\"Haus\"));\n        }\n\n        int quote = punkte * 100 / 3;\n        System.out.println(\"Ergebnis: \" + punkte + \" von 3\");\n        System.out.println(\"Quote: \" + quote + \"%\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "eingabe": "dog\nmaus\nhouse\n", "erwartet": "Was heißt Hund?\nWas heißt Katze?\nFalsch, richtig wäre: cat\nWas heißt Haus?\nErgebnis: 2 von 3\nQuote: 66%" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Warum HashMap für den Vokabelpool?",
+      "optionen": ["Weil sie sortiert", "Schlüssel (deutsch) → Wert (englisch) passt perfekt", "Weil sie schneller druckt", "Gar nicht"],
+      "richtig": 1,
+      "erklaerung": "Lookup per Schlüssel ist genau das, was ein Vokabeltrainer braucht."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Vergleich mit ==",
+      "erklaerung": "antwort.equals(loesung) - Strings nie mit == vergleichen!"
+    },
+    {
+      "fehler": "Quote mit double und Nachkommastellen",
+      "erklaerung": "Die Aufgabe verlangt eine ganze Zahl: int quote = punkte * 100 / 3;"
+    }
+  ]
+}

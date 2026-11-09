@@ -1,0 +1,60 @@
+{
+  "id": "m4-l01",
+  "typ": "lektion",
+  "titel": "Methoden definieren und aufrufen",
+  "lernziele": [
+    "Eine eigene Methode schreiben und aufrufen",
+    "Verstehen, warum Methoden Code wiederverwendbar machen",
+    "Statische Methoden in derselben Klasse aufrufen"
+  ],
+  "erklaerung": "## Methoden sind Maschinen\nEine Methode ist ein **benannter Code-Block**, den du beliebig oft aufrufen kannst – wie ein Knopf an einer Maschine.\n```java\npublic class Begruesser {\n\n    public static void gruess() {\n        System.out.println(\"Willkommen im Verein!\");\n    }\n\n    public static void main(String[] args) {\n        gruess();      // Aufruf 1\n        gruess();      // Aufruf 2 - gleicher Code, kein Copy-Paste\n    }\n}\n```\nAufbau: `public static void name() { ... }`\n- `public` – sichtbar von außen (später mehr)\n- `static` – gehört zur Klasse selbst, nicht zu einem Objekt\n- `void` – die Methode gibt NICHTS zurück (nur Druckarbeit)\n- `name()` – der Aufrufname, gefolgt von Klammern\nMethoden werden **innerhalb der Klasse** definiert (auf Ebene der Klasse, nicht innerhalb einer anderen Methode!).",
+  "beispiel-code": "public class Werkstatt {\n\n    public static void kopfzeileDrucken() {\n        System.out.println(\"=================\");\n        System.out.println(\"  AUTOWERKSTATT\");\n        System.out.println(\"=================\");\n    }\n\n    public static void main(String[] args) {\n        kopfzeileDrucken();\n        System.out.println(\"Ölwechsel erledigt.\");\n        kopfzeileDrucken();\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Verein soll eine Methode 'mitteilung()' enthalten, die 'Mitgliederversammlung am Freitag!' ausgibt. Rufe sie in main zweimal auf (es entstehen zwei Zeilen).",
+      "start-code": "public class Verein {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Methoden-Kopf: public static void mitteilung() { ... } – auf Klassenebene, neben main.",
+        "Aufruf im main: mitteilung();",
+        "Zwei Aufrufe hintereinander erzeugen zwei identische Zeilen."
+      ],
+      "loesung": "public class Verein {\n\n    public static void mitteilung() {\n        System.out.println(\"Mitgliederversammlung am Freitag!\");\n    }\n\n    public static void main(String[] args) {\n        mitteilung();\n        mitteilung();\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Mitgliederversammlung am Freitag!\nMitgliederversammlung am Freitag!" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Sportschule hat zwei Methoden: 'aufwaermen()' gibt 'Aufwärmen' aus und 'dehnen()' gibt 'Dehnen'. main ruft auf: aufwaermen, dehnen, aufwaermen – drei Zeilen.",
+      "start-code": "public class Sportschule {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Zwei Methoden definieren, jeweils mit eigenem println.",
+        "In main drei Aufrufe in der geforderten Reihenfolge.",
+        "Die Reihenfolge der Aufrufe bestimmt die Ausgabe, nicht die der Definitionen."
+      ],
+      "loesung": "public class Sportschule {\n\n    public static void aufwaermen() {\n        System.out.println(\"Aufwärmen\");\n    }\n\n    public static void dehnen() {\n        System.out.println(\"Dehnen\");\n    }\n\n    public static void main(String[] args) {\n        aufwaermen();\n        dehnen();\n        aufwaermen();\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Aufwärmen\nDehnen\nAufwärmen" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was bedeutet void bei einer Methode?",
+      "optionen": ["Die Methode ist leer", "Die Methode gibt nichts zurück", "Die Methode läuft endlos", "Die Methode ist privat"],
+      "richtig": 1,
+      "erklaerung": "void = kein Rückgabewert. Rückgabewerte folgen in Lektion 3."
+    },
+    {
+      "frage": "Woran erkennst du einen Methodenaufruf?",
+      "optionen": ["An den runden Klammern: gruess()", "An geschweiften Klammern", "Am Semikolon", "Am Wort static"],
+      "richtig": 0,
+      "erklaerung": "Name + runde Klammern ruft die Methode auf."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Methode innerhalb von main definiert",
+      "erklaerung": "Methoden gehören auf Klassenebene, nebeneinander - nicht ineinander. Sonst: 'illegal start of expression'."
+    },
+    {
+      "fehler": "Methode definiert, aber nie aufgerufen",
+      "erklaerung": "Definition allein macht nichts - es muss ein Aufruf wie mitteilung(); im main stehen."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "m1-l02",
+  "typ": "lektion",
+  "titel": "Dein erstes Programm im Detail",
+  "lernziele": [
+    "Die Bausteine eines Java-Programms benennen können",
+    "Verstehen, was die main-Methode ist",
+    "Ein Programm von oben nach unten lesen können"
+  ],
+  "erklaerung": "## Anatomie eines Java-Programms\n```java\npublic class GruessGott {          // die Klasse = der Bauplan / die Datei\n    public static void main(String[] args) {   // der Startpunkt\n        System.out.println(\"Hallo!\");          // eine Anweisung\n    }\n}\n```\n- `public class Name` eröffnet die **Klasse** – ihr Name muss mit dem Dateinamen übereinstimmen (Klasse `GruessGott` → Datei `GruessGott.java`).\n- `main` ist die **Startmethode**: Hier beginnt der Computer zu arbeiten. Ohne main startet nichts.\n- Die geschweiften Klammern `{ }` bilden **Blöcke**: Sie sagen, was zusammengehört – wie Klammern in der Mathematik.\n- Anweisungen laufen **von oben nach unten**.\n## Konvention (Guter Stil)\n- Klassennamen starten mit **Großbuchstaben** (`MeineKlasse`).\n- Jede `{`-Klammer auf eigener Ebene, Code wird mit 4 Leerzeichen eingerückt – so sieht man Blöcke auf einen Blick.",
+  "beispiel-code": "public class Tagesablauf {\n\n    public static void main(String[] args) {\n        System.out.println(\"Aufstehen\");\n        System.out.println(\"Zähne putzen\");\n        System.out.println(\"Programmieren lernen\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Baue die Klasse Tagesplan mit einer main-Methode, die drei Dinge ausgibt, die du heute vorhast – zum Beispiel 'Frühstücken', 'Lernen', 'Spazieren'.",
+      "start-code": "public class Tagesplan {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Drei System.out.println(...)-Anweisungen im main-Block reichen.",
+        "Wähle eigene Texte – wichtig ist nur: Anweisungen in Anführungszeichen + Semikolon.",
+        "Tipp: Texte wie \"Frühstücken\" ohne Anführungszeichen im Text selbst zu verwenden erspart Escape-Zeichen."
+      ],
+      "loesung": "public class Tagesplan {\n\n    public static void main(String[] args) {\n        System.out.println(\"Frühstücken\");\n        System.out.println(\"Lernen\");\n        System.out.println(\"Spazieren\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Frühstücken\nLernen\nSpazieren" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Countdown soll rückwärts zählen: Gib 3, 2, 1 aus – jede Zahl in einer eigenen Zeile – und dann 'Los!'.",
+      "start-code": "public class Countdown {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Vier println-Anweisungen – die Reihenfolge bestimmt die Ausgabe.",
+        "Zahlen kannst du ohne Anführungszeichen ausgeben: System.out.println(3);",
+        "Der letzte Befehl gibt den Text Los! aus: System.out.println(\"Los!\");"
+      ],
+      "loesung": "public class Countdown {\n\n    public static void main(String[] args) {\n        System.out.println(3);\n        System.out.println(2);\n        System.out.println(1);\n        System.out.println(\"Los!\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "3\n2\n1\nLos!" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wo beginnt die Ausführung eines Java-Programms?",
+      "optionen": ["In der ersten Klasse der Datei", "In der main-Methode", "Beim letzten Befehl", "Im Betriebssystem"],
+      "richtig": 1,
+      "erklaerung": "Die main-Methode ist der offizielle Startpunkt jedes Java-Programms."
+    },
+    {
+      "frage": "Wie muss die Datei heißen, wenn die Klasse Weltraum heißt?",
+      "optionen": ["weltraum.java", "Klasse.java", "Weltraum.java", "Beliebig.java"],
+      "richtig": 2,
+      "erklaerung": "Der Dateiname muss exakt dem Klassennamen entsprechen: Weltraum.java."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Klammern vergessen oder vertauscht",
+      "erklaerung": "Jede { braucht eine passende }. Der Compiler sagt dann 'reached end of file while parsing' – zähle die Klammern Paar für Paar."
+    },
+    {
+      "fehler": "main falsch geschrieben",
+      "erklaerung": "Es muss exakt public static void main(String[] args) heißen. Sonst findet der Computer den Startpunkt nicht: 'main method not found'."
+    }
+  ]
+}

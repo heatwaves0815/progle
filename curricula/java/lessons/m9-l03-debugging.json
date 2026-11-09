@@ -1,0 +1,49 @@
+﻿{
+  "id": "m9-l03",
+  "typ": "lektion",
+  "titel": "Debugging - Fehlern auf der Spur",
+  "lernziele": [
+    "Systematische Fehlersuche mit Ausgaben lernen",
+    "Vermutungen gezielt prüfen",
+    "Die 4 Schritte des Debuggens anwenden"
+  ],
+  "erklaerung": "## Detektivarbeit statt Raten\nDebuggen heißt: **Vermutungen prüfen**. Der klassische Ablauf:\n1. **Beobachten**: Was sollte passieren? Was passiert wirklich?\n2. **Eingrenzen**: Wo weicht der Weg ab? (Mit Ausgaben dazwischen!)\n3. **Prüfen**: Stimmen die Werte an dieser Stelle?\n4. **Fixen und testen**: Änderung machen, erneut laufen lassen.\n## Das Werkzeug: Kontrollausgaben\n```java\nint summe = 0;\nfor (int i = 1; i <= 4; i++) {\n    summe += i;\n    System.out.println(\"Debug i=\" + i + \" summe=\" + summe);   // Spur legen\n}\nSystem.out.println(\"Ergebnis: \" + summe);\n```\nSo siehst du bei welchem Durchlauf etwas kippt. IDEs haben zusätzlich Debugger mit Haltepunkten (Breakpoints) - das Prinzip bleibt gleich: Zustand ansehen, Vermutung prüfen.\n## Häufige Übeltäter\n- Off-by-one (i <= statt i <)\n- Falsche Variable benutzt (summe statt tempSumme)\n- Zuweisung statt Vergleich (= statt ==)\n- Uninitialisierte Werte",
+  "beispiel-code": "public class Fehlerjagd {\n\n    public static void main(String[] args) {\n        int[] werte = {4, 8, 15};\n        int summe = 0;\n\n        for (int i = 0; i < werte.length; i++) {\n            summe += werte[i];\n            System.out.println(\"Debug: nach Wert \" + werte[i] + \" ist summe=\" + summe);\n        }\n        System.out.println(\"Fertig. Summe=\" + summe);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Spurensicherung: Ein Array {5, 10, 20} wird aufsummiert. Gib pro Durchlauf eine Debug-Zeile aus: 'Schritt <i>: summe=<summe>' (i beginnt bei 1) und am Ende 'Summe: 35'.",
+      "start-code": "public class Spurensicherung {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "In der Schleife: System.out.println(\"Schritt \" + (i + 1) + \": summe=\" + summe); – NACH der Addition.",
+        "Der Anzeige-Index (i + 1) hat Klammern.",
+        "Am Ende außerhalb der Schleife: \"Summe: \" + summe."
+      ],
+      "loesung": "public class Spurensicherung {\n\n    public static void main(String[] args) {\n        int[] werte = {5, 10, 20};\n        int summe = 0;\n\n        for (int i = 0; i < werte.length; i++) {\n            summe += werte[i];\n            System.out.println(\"Schritt \" + (i + 1) + \": summe=\" + summe);\n        }\n        System.out.println(\"Summe: \" + summe);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Schritt 1: summe=5\nSchritt 2: summe=15\nSchritt 3: summe=35\nSumme: 35" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was ist der erste Schritt beim Debuggen?",
+      "optionen": ["Code löschen", "Beobachten: Soll vs. Ist", "Neu installieren", "Alle Variablen umbenennen"],
+      "richtig": 1,
+      "erklaerung": "Erst genau beschreiben, was abweicht - dann suchen."
+    },
+    {
+      "frage": "Wozu dienen Kontrollausgaben?",
+      "optionen": ["Deko", "Den Programmzustand an bestimmten Stellen sichtbar machen", "Als Kommentare", "Für die Endabnahme"],
+      "richtig": 1,
+      "erklaerung": "Sie zeigen Variablenwerte zur Laufzeit - Vermutungen werden überprüfbar."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Auf Verdacht ändern",
+      "erklaerung": "Ohne Vermutung herumdoktern macht es schlimmer. Erst eingrenzen, dann fixen."
+    },
+    {
+      "fehler": "Debug-Ausgaben vergessen zu entfernen",
+      "erklaerung": "Am Ende aufräumen - oder sie bewusst als 'Debug:' markieren wie hier."
+    }
+  ]
+}

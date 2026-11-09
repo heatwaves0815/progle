@@ -1,0 +1,68 @@
+/* Theme: Mitternacht (dunkles Marineblau mit Cyan-Akzent) */
+.root {
+    -pr-bg-0: #060910;
+    -pr-bg-1: #0a0f1a;
+    -pr-card: #101828;
+    -pr-card-2: #16223a;
+    -pr-border: #22304e;
+    -pr-sidebar: #0d1524;
+    -pr-lesson-card: #0f1829;
+    -pr-feedback: #132036;
+    -pr-editor: #0b1120;
+
+    -pr-text: #dbe4f3;
+    -pr-text-dim: #7c8aa5;
+    -pr-title: #f0f6ff;
+    -pr-desc: #9fb0cc;
+    -pr-prompt: #55647f;
+    -pr-disabled-text: #5f7191;
+
+    -pr-accent: #38bdf8;
+    -pr-accent-2: #22d3ee;
+    -pr-success: #34d399;
+    -pr-success-bg: #34d399;
+    -pr-success-text: #060910;
+    -pr-warn: #fbbf24;
+    -pr-error: #fda4af;
+    -pr-link: #67c9f5;
+    -pr-link-hover: #9adcf9;
+    -pr-disabled-bg: #17223a;
+
+    -pr-logo-1: #7dd3fc;
+    -pr-logo-2: #5eead4;
+    -pr-bubble-1: #0e7490;
+    -pr-bubble-2: #2563eb;
+
+    -pr-chip-bg: #38bdf826;
+    -pr-chip-text: #8fd4f8;
+    -pr-listhover: #38bdf814;
+    -pr-listsel: #38bdf82b;
+    -pr-glow: #38bdf82e;
+    -pr-hint-bg: #38bdf81a;
+    -pr-hint-text: #a5dcf8;
+    -pr-thumb: #22314f;
+    -pr-selection: #1e3a5f;
+    -pr-lineno: #54698a;
+
+    -pr-code-text: #cfe3f5;
+    -pr-code-decl: #7dd3fc;
+    -pr-code-ctrl: #f472b6;
+    -pr-code-method: #fde68a;
+    -pr-code-literal: #7dd3fc;
+    -pr-code-type: #67e8f9;
+    -pr-code-string: #86efac;
+    -pr-code-comment: #64748b;
+    -pr-code-number: #fbbf24;
+    -pr-code-anno: #fcd34d;
+    -pr-code-inline: #7dd3fc;
+
+    -pr-md-h2: #c3d2ea;
+    -pr-md-p: #b4c4de;
+    -pr-md-bold: #ffffff;
+
+    -pr-notice-bg: #0e2a3f;
+    -pr-notice-border: #1d4a63;
+    -pr-notice-text: #7dd3fc;
+
+    -pr-avatar-user: #152036;
+}

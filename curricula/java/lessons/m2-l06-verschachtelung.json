@@ -1,0 +1,60 @@
+{
+  "id": "m2-l06",
+  "typ": "lektion",
+  "titel": "Verschachtelung, break und continue",
+  "lernziele": [
+    "Schleifen ineinander verschachteln",
+    "Mit continue einen Durchlauf überspringen",
+    "Mit break früh aussteigen"
+  ],
+  "erklaerung": "## Schleifen im Schleifen\nEine Schleife kann eine weitere Schleife enthalten – wie ein Kalender: äußere Schleife = Wochen, innere = Tage.\n```java\nfor (int reihe = 1; reihe <= 3; reihe++) {\n    for (int sitz = 1; sitz <= 4; sitz++) {\n        System.out.println(reihe + \"-\" + sitz);\n    }\n}\n```\nDie innere Schleife läuft für **jeden** äußeren Durchlauf komplett durch: 3 x 4 = 12 Zeilen.\n## Continue: diesen Durchlauf überspringen\n```java\nfor (int i = 1; i <= 5; i++) {\n    if (i == 3) {\n        continue;   // Rest des Körpers überspringen\n    }\n    System.out.println(i);   // 1, 2, 4, 5\n}\n```\n## Break: komplett raus\n`break` verlässt die **umgebende** Schleife sofort. Praktisch, wenn das Ziel früher erreicht ist.\nMerke: `continue` betrifft die nächste Schleife um ihn herum, `break` auch. In verschachtelten Schleifen gilt immer die innerste.",
+  "beispiel-code": "public class Kinosaal {\n\n    public static void main(String[] args) {\n        for (int reihe = 1; reihe <= 2; reihe++) {\n            for (int platz = 1; platz <= 3; platz++) {\n                if (reihe == 1 && platz == 2) {\n                    continue;   // Platz 1-2 ist defekt\n                }\n                System.out.println(\"Reihe \" + reihe + \", Platz \" + platz);\n            }\n        }\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Malreihe gibt die kleinen Multiplikationen von 2 und 3 aus: Für jede Zahl x von 2 bis 3 und jeden Faktor f von 1 bis 3 eine Zeile 'x * f = ergebnis'. Beispiel-Zeile: '2 * 1 = 2'.",
+      "start-code": "public class Malreihe {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Äußere Schleife: for (int x = 2; x <= 3; x++)",
+        "Innere Schleife: for (int f = 1; f <= 3; f++)",
+        "Ausgabe: System.out.println(x + \" * \" + f + \" = \" + (x * f)); – die Klammern um x*f sind wichtig!"
+      ],
+      "loesung": "public class Malreihe {\n\n    public static void main(String[] args) {\n        for (int x = 2; x <= 3; x++) {\n            for (int f = 1; f <= 3; f++) {\n                System.out.println(x + \" * \" + f + \" = \" + (x * f));\n            }\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "2 * 1 = 2\n2 * 2 = 4\n2 * 3 = 6\n3 * 1 = 3\n3 * 2 = 6\n3 * 3 = 9" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Einzelhandel prüft Nummern 1 bis 5: Nummern, die durch 2 teilbar sind, werden ÜBERSPRUNGEN (continue). Gib die übrigen Nummern als 'Nummer: <n>' aus (1, 3, 5).",
+      "start-code": "public class Einzelhandel {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Gerade Zahlen: n % 2 == 0.",
+        "if (n % 2 == 0) { continue; }",
+        "Die Ausgabe kommt NACH der if-Abfrage."
+      ],
+      "loesung": "public class Einzelhandel {\n\n    public static void main(String[] args) {\n        for (int n = 1; n <= 5; n++) {\n            if (n % 2 == 0) {\n                continue;\n            }\n            System.out.println(\"Nummer: \" + n);\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Nummer: 1\nNummer: 3\nNummer: 5" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie oft läuft die innere Schleife insgesamt bei 3 äußeren und 4 inneren Durchläufen?",
+      "optionen": ["3", "4", "7", "12"],
+      "richtig": 3,
+      "erklaerung": "Für jeden äußeren Durchlauf läuft die innere komplett: 3 x 4 = 12."
+    },
+    {
+      "frage": "Was macht continue?",
+      "optionen": ["Beendet die Schleife", "Überspringt den Rest des aktuellen Durchlaufs", "Startet die Schleife neu", "Macht nichts"],
+      "richtig": 1,
+      "erklaerung": "continue springt direkt zum nächsten Durchlauf; break verlässt die Schleife ganz."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Verschachtelung durcheinandergebracht",
+      "erklaerung": "Einrückung hilft! Jede { untereinander einrücken – dann sieht man, was wo endet."
+    },
+    {
+      "fehler": "x * f ohne Klammern",
+      "erklaerung": "\"Ergebnis: \" + x * f rechnet zwar korrekt, aber bei + und * gemischt ist (x * f) mit Klammern klarer und sicherer."
+    }
+  ]
+}

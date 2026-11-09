@@ -1,0 +1,49 @@
+{
+  "id": "m2-l03",
+  "typ": "lektion",
+  "titel": "Else-if und Switch",
+  "lernziele": [
+    "Mehrere Fälle mit else-if prüfen",
+    "Feste Werte elegant mit switch abarbeiten",
+    "Wissen, wann switch passt und wann if"
+  ],
+  "erklaerung": "## Mehr als zwei Wege\nFür mehrere Fälle hängst du else-if-Ketten an:\n```java\nint punkte = 78;\n\nif (punkte >= 90) {\n    System.out.println(\"Note 1\");\n} else if (punkte >= 75) {\n    System.out.println(\"Note 2\");\n} else if (punkte >= 50) {\n    System.out.println(\"Note 3\");\n} else {\n    System.out.println(\"Nicht bestanden\");\n}\n```\nJava prüft von **oben nach unten** und nimmt den ERSTEN passenden Fall – alles darunter wird übersprungen. Deshalb: von der härtesten Bedingung abwärts sortieren.\n## Switch: die Menükarte\nWenn es um **feste Werte** geht (Zahlen, chars, Strings), ist switch übersichtlicher:\n```java\nint wahl = 2;\nswitch (wahl) {\n    case 1 -> System.out.println(\"Pizza\");\n    case 2 -> System.out.println(\"Salat\");\n    case 3 -> System.out.println(\"Suppe\");\n    default -> System.out.println(\"Nix gefunden\");\n}\n```\nDie moderne Pfeil-Syntax (Java 14+) braucht kein `break` mehr.",
+  "beispiel-code": "public class Wochentagsplan {\n\n    public static void main(String[] args) {\n        int tag = 6;   // 1 = Montag ... 7 = Sonntag\n\n        switch (tag) {\n            case 1 -> System.out.println(\"Arbeitsbeginn\");\n            case 6 -> System.out.println(\"Sporttag!\");\n            case 7 -> System.out.println(\"Familientag!\");\n            default -> System.out.println(\"Normaler Tag\");\n        }\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Note vergibt Schulnoten: punkte = 82. Regeln: >= 90 → 'sehr gut', >= 80 → 'gut', >= 70 → 'befriedigend', sonst → 'üben!'. Gib die Note aus.",
+      "start-code": "public class Note {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "If-Kette von oben nach unten: if (punkte >= 90) ... else if (punkte >= 80) ...",
+        "82 landet im zweiten Fall: >= 80 ist die erste zutreffende Bedingung.",
+        "Am Ende fängt else alle Restfälle."
+      ],
+      "loesung": "public class Note {\n\n    public static void main(String[] args) {\n        int punkte = 82;\n\n        if (punkte >= 90) {\n            System.out.println(\"sehr gut\");\n        } else if (punkte >= 80) {\n            System.out.println(\"gut\");\n        } else if (punkte >= 70) {\n            System.out.println(\"befriedigend\");\n        } else {\n            System.out.println(\"üben!\");\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "gut" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Bei einer if-else-if-Kette: Welcher Fall läuft, wenn zwei Bedingungen zutreffen?",
+      "optionen": ["Beide nacheinander", "Nur der erste zutreffende", "Nur der letzte", "Alle im else"],
+      "richtig": 1,
+      "erklaerung": "Die Kette nimmt den ERSTEN passenden Zweig und überspringt den Rest."
+    },
+    {
+      "frage": "Wofür ist switch besonders geeignet?",
+      "optionen": ["Für Bereichs-Checks wie x > 100", "Für feste Einzelwerte wie 1, 2, 3", "Für Textlängen", "Für Schleifen"],
+      "richtig": 1,
+      "erklaerung": "switch mappt feste Werte auf Fälle – Bereiche gehören in if-Ketten."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Reihenfolge der else-if-Kette falsch",
+      "erklaerung": "if (punkte >= 50) zuerst fängt auch 95 ab! Von strengster zu lockerster Bedingung sortieren."
+    },
+    {
+      "fehler": "Switch mit Bereichen versuchen",
+      "erklaerung": "case x > 10 geht nicht – switch kennt nur feste Werte. Für Bereiche: if."
+    }
+  ]
+}

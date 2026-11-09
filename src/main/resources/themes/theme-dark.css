@@ -1,0 +1,68 @@
+/* Theme: Dunkel Violett (Standard) */
+.root {
+    -pr-bg-0: #0d0f16;
+    -pr-bg-1: #12141c;
+    -pr-card: #1a1d29;
+    -pr-card-2: #222636;
+    -pr-border: #2a2f42;
+    -pr-sidebar: #161926;
+    -pr-lesson-card: #191c27;
+    -pr-feedback: #202433;
+    -pr-editor: #1e1e1e;
+
+    -pr-text: #e7eaf3;
+    -pr-text-dim: #9aa3b8;
+    -pr-title: #ffffff;
+    -pr-desc: #b8bfcc;
+    -pr-prompt: #6b7382;
+    -pr-disabled-text: #7d8590;
+
+    -pr-accent: #8b7cff;
+    -pr-accent-2: #57a1ff;
+    -pr-success: #4ade80;
+    -pr-success-bg: #4ade80;
+    -pr-success-text: #0d0f16;
+    -pr-warn: #fbbf24;
+    -pr-error: #ff8a8a;
+    -pr-link: #9c8fff;
+    -pr-link-hover: #c0b6ff;
+    -pr-disabled-bg: #2c3140;
+
+    -pr-logo-1: #b3a5ff;
+    -pr-logo-2: #66a3ff;
+    -pr-bubble-1: #5b46d6;
+    -pr-bubble-2: #3f6fd8;
+
+    -pr-chip-bg: #8b7cff26;
+    -pr-chip-text: #b9aeff;
+    -pr-listhover: #8b7cff14;
+    -pr-listsel: #8b7cff2b;
+    -pr-glow: #8b7cff2e;
+    -pr-hint-bg: #8b7cff1a;
+    -pr-hint-text: #cfc6ff;
+    -pr-thumb: #31374a;
+    -pr-selection: #264f78;
+    -pr-lineno: #858585;
+
+    -pr-code-text: #d4d4d4;
+    -pr-code-decl: #569cd6;
+    -pr-code-ctrl: #c586c0;
+    -pr-code-method: #dcdcaa;
+    -pr-code-literal: #569cd6;
+    -pr-code-type: #9cdcfe;
+    -pr-code-string: #ce9178;
+    -pr-code-comment: #6a9955;
+    -pr-code-number: #b5cea8;
+    -pr-code-anno: #dcdcaa;
+    -pr-code-inline: #9ecbff;
+
+    -pr-md-h2: #d8dcf0;
+    -pr-md-p: #cdd3e0;
+    -pr-md-bold: #ffffff;
+
+    -pr-notice-bg: #4d3d16;
+    -pr-notice-border: #6e5a20;
+    -pr-notice-text: #f0d27a;
+
+    -pr-avatar-user: #2e3446;
+}

@@ -1,0 +1,65 @@
+{
+  "id": "p1",
+  "typ": "projekt",
+  "titel": "Konsolen-Kontoverwaltung",
+  "lernziele": [
+    "OOP, Schleifen, Scanner und Validierung kombinieren",
+    "Ein Menü-Programm von Null auf bauen",
+    "Eigene Lösungen Schritt für Schritt testen"
+  ],
+  "erklaerung": "## Dein erstes echtes Programm\nDu baust eine **Kontoverwaltung** für die Kommandozeile: Geld einzahlen, abheben, Stand prüfen. In drei Schritten - teste jeden Schritt mit 'Abgeben und prüfen', bevor du weitermachst.\n\n**Was du brauchst:** Klassen und Objekte (Modul 5), Scanner (Modul 1), Schleifen (Modul 2).\n\nDanach kannst du jedes Menü-Programm schreiben - von To-do-Listen bis zu Spielerkarten.",
+  "beispiel-code": "public class Menuemuster {\n\n    public static void main(String[] args) {\n        System.out.println(\"1) Aktion A\");\n        System.out.println(\"2) Aktion B\");\n        System.out.println(\"0) Beenden\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Schritt 1 - Die Konto-Klasse: Erstelle (ohne public) die Klasse Konto mit privatem double guthaben, Konstruktor mit Startbetrag, Methoden einzahlen(double) (nur positive Beträge), abheben(double) (nur wenn genug da ist) und getGuthaben(). In main (Klasse Kontoverwaltung): Konto mit 100 erzeugen, 50 einzahlen, 30 abheben. Ausgabe: 'Kontostand: 120.0'.",
+      "start-code": "public class Kontoverwaltung {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Denke an die Prüfung in einzahlen und abheben: if (betrag > 0) bzw. if (betrag <= guthaben).",
+        "abheben zieht ab: this.guthaben -= betrag; - nur wenn genug vorhanden.",
+        "In main: drei Aufrufe, dann System.out.println(\"Kontostand: \" + k.getGuthaben());"
+      ],
+      "loesung": "public class Kontoverwaltung {\n\n    public static void main(String[] args) {\n        Konto konto = new Konto(100);\n        konto.einzahlen(50);\n        konto.abheben(30);\n        System.out.println(\"Kontostand: \" + konto.getGuthaben());\n    }\n}\n\nclass Konto {\n    private double guthaben;\n\n    Konto(double startbetrag) {\n        if (startbetrag >= 0) {\n            this.guthaben = startbetrag;\n        }\n    }\n\n    void einzahlen(double betrag) {\n        if (betrag > 0) {\n            this.guthaben += betrag;\n        }\n    }\n\n    void abheben(double betrag) {\n        if (betrag > 0 && betrag <= guthaben) {\n            this.guthaben -= betrag;\n        }\n    }\n\n    public double getGuthaben() {\n        return guthaben;\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Kontostand: 120.0" }
+    },
+    {
+      "aufgabenstellung": "Schritt 2 - Das Menü: Erweitere Kontoverwaltung um eine Methode 'static void menue()', die ausgibt:\n--- Kontoverwaltung ---\n1) Einzahlen\n2) Abheben\n3) Kontostand\n4) Beenden\nRufe sie in main auf.",
+      "start-code": "public class Kontoverwaltung {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "static void menue() auf Klassenebene, fünf println-Anweisungen.",
+        "Die erste Zeile: \"--- Kontoverwaltung ---\"",
+        "Rufe menue(); in main auf."
+      ],
+      "loesung": "public class Kontoverwaltung {\n\n    public static void menue() {\n        System.out.println(\"--- Kontoverwaltung ---\");\n        System.out.println(\"1) Einzahlen\");\n        System.out.println(\"2) Abheben\");\n        System.out.println(\"3) Kontostand\");\n        System.out.println(\"4) Beenden\");\n    }\n\n    public static void main(String[] args) {\n        menue();\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "--- Kontoverwaltung ---\n1) Einzahlen\n2) Abheben\n3) Kontostand\n4) Beenden" }
+    },
+    {
+      "aufgabenstellung": "Schritt 3 - Das komplette Programm: main startet eine while(true)-Schleife mit Menü und Scanner. Wahl 1: Betrag einlesen und einzahlen; Wahl 2: Betrag einlesen und abheben; Wahl 3: Kontostand ausgeben als 'Kontostand: <wert>'; Wahl 4: 'Auf Wiedersehen' und break (mit System.exit oder break vor der Schleife - nutze break und gib den Text VOR dem break aus). Die Prüfung simuliert: 1, 500, 3, 4. Erwartete Ausgabe:\n--- Kontoverwaltung ---\n1) Einzahlen\n2) Abheben\n3) Kontostand\n4) Beenden\nWahl: Betrag: --- Kontoverwaltung ---\n1) Einzahlen\n2) Abheben\n3) Kontostand\n4) Beenden\nWahl: Kontostand: 500.0\n--- Kontoverwaltung ---\n1) Einzahlen\n2) Abheben\n3) Kontostand\n4) Beenden\nWahl: Auf Wiedersehen\n(Erläuterung: Nach Wahl 1 + Betrag 500 kommt das Menü erneut, dann zeigt Wahl 3 den Stand 500.0, dann beendet Wahl 4.)",
+      "start-code": "import java.util.Scanner;\n\npublic class Kontoverwaltung {\n\n    static double guthaben = 0;\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Struktur: while (true) { menue(); System.out.print(\"Wahl: \"); int wahl = scanner.nextInt(); if (wahl == 1) { System.out.print(\"Betrag: \"); guthaben += scanner.nextDouble(); } else if (wahl == 3) { ... } else if (wahl == 4) { System.out.println(\"Auf Wiedersehen\"); break; } }",
+        "Guthaben als static double, damit alle Methoden darauf zugreifen können.",
+        "Für Wahl 2 gilt das gleiche Muster mit -=. Die Prüfung testet 1 → 500 → 3 → 4."
+      ],
+      "loesung": "import java.util.Scanner;\n\npublic class Kontoverwaltung {\n\n    static double guthaben = 0;\n\n    public static void menue() {\n        System.out.println(\"--- Kontoverwaltung ---\");\n        System.out.println(\"1) Einzahlen\");\n        System.out.println(\"2) Abheben\");\n        System.out.println(\"3) Kontostand\");\n        System.out.println(\"4) Beenden\");\n    }\n\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n\n        while (true) {\n            menue();\n            System.out.print(\"Wahl: \");\n            int wahl = scanner.nextInt();\n\n            if (wahl == 1) {\n                System.out.print(\"Betrag: \");\n                guthaben += scanner.nextDouble();\n            } else if (wahl == 2) {\n                System.out.print(\"Betrag: \");\n                guthaben -= scanner.nextDouble();\n            } else if (wahl == 3) {\n                System.out.println(\"Kontostand: \" + guthaben);\n            } else if (wahl == 4) {\n                System.out.println(\"Auf Wiedersehen\");\n                break;\n            }\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "eingabe": "1\n500\n3\n4\n", "erwartet": "--- Kontoverwaltung ---\n1) Einzahlen\n2) Abheben\n3) Kontostand\n4) Beenden\nWahl: Betrag: --- Kontoverwaltung ---\n1) Einzahlen\n2) Abheben\n3) Kontostand\n4) Beenden\nWahl: Kontostand: 500.0\n--- Kontoverwaltung ---\n1) Einzahlen\n2) Abheben\n3) Kontostand\n4) Beenden\nWahl: Auf Wiedersehen" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Warum läuft das Menü in einer while(true)-Schleife?",
+      "optionen": ["Damit es schneller ist", "Damit der Nutzer beliebig viele Aktionen machen kann", "Weil while schöner ist", "Damit der Scanner schließt"],
+      "richtig": 1,
+      "erklaerung": "Die Schleife zeigt das Menü so lange wieder, bis der Nutzer 'Beenden' wählt."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Scanner in der Schleife neu anlegen",
+      "erklaerung": "Scanner einmal VOR der Schleife erzeugen - sonst geht Eingabe verloren."
+    },
+    {
+      "fehler": "Menü nach der Aktion vergessen",
+      "erklaerung": "Das Menü gehört innerhalb die Schleife - sonst sieht der Nutzer es nur einmal."
+    }
+  ]
+}

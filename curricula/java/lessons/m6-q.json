@@ -1,0 +1,66 @@
+{
+  "id": "m6-q",
+  "typ": "modul-quiz",
+  "titel": "Modul-Quiz: Vererbung und Interfaces",
+  "lernziele": [
+    "OOP-Fortgeschrittenen-Konzepte prüfen",
+    "Ein Tierheim mit Vererbung als Abschluss bauen"
+  ],
+  "erklaerung": "## Der OOP-Fortgeschrittenen-Check\nFünf Fragen zu Vererbung, Polymorphie, Interfaces & Co. Danach: das **Tierheim** - Vererbung plus Polymorphie in Aktion.",
+  "beispiel-code": "public class MusterVererbung {\n\n    public static void main(String[] args) {\n        Form form = new Kreis();\n        form.umfang();\n    }\n}\n\nclass Form {\n    void umfang() {\n        System.out.println(\"Form\");\n    }\n}\n\nclass Kreis extends Form {\n    void umfang() {\n        System.out.println(\"2 * pi * r\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Abschlussaufgabe 'Tierheim': Abstract class Haustier mit Attribut name (Konstruktor) und ABSTRAKTER Methode lauten(). Kindklassen Hund ('Wuff') und Katze ('Miau') implementieren lauten() mit '<name> sagt: ...'. main: Haustier[] mit Hund('Bello') und Katze('Mimi'); Schleife ruft lauten() auf. Ausgabe: 'Bello sagt: Wuff' und 'Mimi sagt: Miau'.",
+      "start-code": "public class Tierheim {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "abstract class Haustier { String name; Haustier(String name) {...} abstract String lauten(); }",
+        "Kindklassen überschreiben lauten() und bauen den Text mit name zusammen.",
+        "Im main: Haustier[] heim = {new Hund(\"Bello\"), new Katze(\"Mimi\")}; dann for-each."
+      ],
+      "loesung": "public class Tierheim {\n\n    public static void main(String[] args) {\n        Haustier[] heim = {new Hund(\"Bello\"), new Katze(\"Mimi\")};\n        for (Haustier tier : heim) {\n            System.out.println(tier.lauten());\n        }\n    }\n}\n\nabstract class Haustier {\n    String name;\n\n    Haustier(String name) {\n        this.name = name;\n    }\n\n    abstract String lauten();\n}\n\nclass Hund extends Haustier {\n\n    Hund(String name) {\n        super(name);\n    }\n\n    String lauten() {\n        return name + \" sagt: Wuff\";\n    }\n}\n\nclass Katze extends Haustier {\n\n    Katze(String name) {\n        super(name);\n    }\n\n    String lauten() {\n        return name + \" sagt: Miau\";\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Bello sagt: Wuff\nMimi sagt: Miau" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was bedeutet extends?",
+      "optionen": ["Erben einer Klasse", "Implementieren eines Interfaces", "Importieren", "Löschen"],
+      "richtig": 0,
+      "erklaerung": "extends erbt von EINER Klasse, implements umsetzt Interfaces."
+    },
+    {
+      "frage": "Welche Methode läuft bei: Haustier h = new Hund(); h.lauten();?",
+      "optionen": ["Haustier.lauten()", "Hund.lauten()", "Beide", "Fehler"],
+      "richtig": 1,
+      "erklaerung": "Polymorphie: Das echte Objekt entscheidet zur Laufzeit."
+    },
+    {
+      "frage": "Kann eine abstrakte Klasse auch normale Methoden haben?",
+      "optionen": ["Nein, nur abstrakte", "Ja - Mischung ist erlaubt", "Nur static", "Nur Konstruktoren"],
+      "richtig": 1,
+      "erklaerung": "Abstrakt heißt: mindestens EINE abstrakte Methode oder als abstract markiert; normale Methoden sind erlaubt."
+    },
+    {
+      "frage": "Wofür stehen Interfaces?",
+      "optionen": ["Für ist-ein-Beziehungen", "Für Fähigkeiten (kann-Beziehungen)", "Für Schleifen", "Für Imports"],
+      "richtig": 1,
+      "erklaerung": "Interfaces beschreiben Fähigkeiten; Vererbung beschreibt Wesen."
+    },
+    {
+      "frage": "Wozu dient @Override?",
+      "optionen": ["Nur Deko", "Der Compiler prüft, dass die Methode wirklich überschrieben wird", "Es macht Methoden public", "Es startet Polymorphie"],
+      "richtig": 1,
+      "erklaerung": "Tippfehler im Methodennamen werden so sofort erkannt."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "super() in Kindkonstruktor vergessen",
+      "erklaerung": "Wenn die Elternklasse keinen parameterlosen Konstruktor hat, kompiliert das Kind nicht ohne super(...)."
+    },
+    {
+      "fehler": "Interface-Methoden nicht public",
+      "erklaerung": "Implementierungen von Interface-Methoden müssen public sein."
+    }
+  ]
+}

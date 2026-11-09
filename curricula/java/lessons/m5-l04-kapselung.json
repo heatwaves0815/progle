@@ -1,0 +1,49 @@
+{
+  "id": "m5-l04",
+  "typ": "lektion",
+  "titel": "Kapselung mit private",
+  "lernziele": [
+    "Attribute mit private schützen",
+    "Verstehen, warum direkter Zugriff riskant ist",
+    "Zugriff über kontrollierte Wege aufbauen"
+  ],
+  "erklaerung": "## Der Tresor mit Kontrollschlitz\n**Kapselung** = Attribute verstecken (`private`) und den Zugriff kontrollieren. Warum?\n```java\nclass Sparschwein {\n    private double stand;   // von außen NICHT erreichbar\n\n    void einzahlen(double betrag) {\n        if (betrag > 0) {\n            stand += betrag;   // nur gültige Beträge kommen durch\n        }\n    }\n\n    double standAnzeigen() {\n        return stand;\n    }\n}\n```\nOhne private könnte jeder von außen `sparschwein.stand = -999;` schreiben und den Zustand kaputtmachen. Mit private ist der einzige Weg die Methode - und die kann Regeln durchsetzen (Prüfschleuse).\n- `private` = nur innerhalb derselben Klasse sichtbar.\n- `public` = für alle sichtbar.\nRegel: **Attribute private, Methoden meist public.**",
+  "beispiel-code": "public class Bankdemo {\n\n    public static void main(String[] args) {\n        Sparschwein schwein = new Sparschwein();\n        schwein.einzahlen(50);\n        schwein.einzahlen(-30);   // wird abgelehnt\n        System.out.println(\"Stand: \" + schwein.standAnzeigen());\n    }\n}\n\nclass Sparschwein {\n    private double stand;\n\n    void einzahlen(double betrag) {\n        if (betrag > 0) {\n            stand += betrag;\n        }\n    }\n\n    double standAnzeigen() {\n        return stand;\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Zugticket hat ein private int alter. Methoden 'setzeAlter(int a)' (akzeptiert nur Werte 6 bis 99) und 'gibAlter()' (liefert alter). main: setzeAlter(30), setzeAlter(200) (wird ignoriert), Ausgabe 'Alter: 30'.",
+      "start-code": "public class Zugticket {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "private int alter; - von main aus ist t.alter jetzt NICHT mehr erreichbar.",
+        "setzeAlter: nur wenn (a >= 6 && a <= 99) alter = a;",
+        "gibAlter liefert mit return das Attribut."
+      ],
+      "loesung": "public class Zugticket {\n\n    public static void main(String[] args) {\n        Zugticket t = new Zugticket();\n        t.setzeAlter(30);\n        t.setzeAlter(200);\n        System.out.println(\"Alter: \" + t.gibAlter());\n    }\n\n    private int alter;\n\n    public void setzeAlter(int a) {\n        if (a >= 6 && a <= 99) {\n            alter = a;\n        }\n    }\n\n    public int gibAlter() {\n        return alter;\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Alter: 30" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was bedeutet private vor einem Attribut?",
+      "optionen": ["Das Attribut existiert nicht", "Nur diese Klasse kann es direkt erreichen", "Es ist konstant", "Es wird gelöscht"],
+      "richtig": 1,
+      "erklaerung": "private versteckt das Attribut vor direktem Zugriff von außen."
+    },
+    {
+      "frage": "Warum Kapselung?",
+      "optionen": ["Code ist kürzer", "Zustand wird vor ungültigen Werten geschützt", "Es macht das Programm schneller", "Java verlangt es immer"],
+      "richtig": 1,
+      "erklaerung": "Die Klasse kontrolliert selbst, was reinkommt - so bleibt der Zustand gültig."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Private Attribute von außen nutzen",
+      "erklaerung": "t.alter = 30; kompiliert nicht: 'alter has private access'. Den Weg über Methoden nehmen."
+    },
+    {
+      "fehler": "Alles privat gemacht",
+      "erklaerung": "Auch Methoden private machen → niemand kommt mehr an die Funktionalität. Nur Attribute verstecken, Wege öffnen."
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+﻿{
+  "id": "m5-l05",
+  "typ": "lektion",
+  "titel": "Getter und Setter",
+  "lernziele": [
+    "Getter- und Setter-Konventionen kennen",
+    "Validierung im Setter einbauen",
+    "Nur-Lese-Zugriff über Getter ermöglichen"
+  ],
+  "erklaerung": "## Der offizielle Empfang und Ausgang\nGetter und Setter sind die Standard-Wege zu privaten Attributen:\n```java\nclass Person {\n    private String name;\n    private int alter;\n\n    public String getName() {\n        return name;\n    }\n\n    public void setAlter(int alter) {\n        if (alter >= 0) {\n            this.alter = alter;\n        }\n    }\n\n    public int getAlter() {\n        return alter;\n    }\n}\n```\nKonventionen:\n- Getter: `getAttribut()` (bei boolean: `isAttribut()`)\n- Setter: `setAttribut(typ wert)`\nDer Setter ist die **Schleuse**: Hier prüfst du, ob der neue Wert überhaupt erlaubt ist.\nTipp: Manchmal gibt es **keinen Setter** - z. B. bei einer Ausweisnummer, die nach der Geburt nie geändert wird. Dann bleibt das Attribut schreibgeschützt.",
+  "beispiel-code": "public class Bibliotheksapp {\n\n    public static void main(String[] args) {\n        Buch buch = new Buch();\n        buch.setTitel(\"Java für Kids\");\n        buch.setSeiten(320);\n        buch.setSeiten(-5);   // wird abgelehnt\n\n        System.out.println(buch.getTitel() + \" hat \" + buch.getSeiten() + \" Seiten\");\n    }\n}\n\nclass Buch {\n    private String titel;\n    private int seiten;\n\n    public String getTitel() {\n        return titel;\n    }\n\n    public void setTitel(String titel) {\n        if (titel != null && !titel.isBlank()) {\n            this.titel = titel;\n        }\n    }\n\n    public int getSeiten() {\n        return seiten;\n    }\n\n    public void setSeiten(int seiten) {\n        if (seiten > 0) {\n            this.seiten = seiten;\n        }\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Medikamentenapp: Klasse Medikament (ohne public) mit privatem String name und privater double dosis. Getter/Setter für beide; setDosis akzeptiert nur Werte größer 0 und höchstens 500. main: setName('Ibuprofen'), setDosis(200), setDosis(800) (abgelehnt), Ausgabe 'Ibuprofen: 200.0 mg'.",
+      "start-code": "public class Medikamentenapp {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Getter: getName() / getDosis(); Setter mit Prüfung: if (dosis > 0 && dosis <= 500).",
+        "Namen ohne Prüfung übernehmen: this.name = name;",
+        "Ausgabe: m.getName() + \": \" + m.getDosis() + \" mg\""
+      ],
+      "loesung": "public class Medikamentenapp {\n\n    public static void main(String[] args) {\n        Medikament m = new Medikament();\n        m.setName(\"Ibuprofen\");\n        m.setDosis(200);\n        m.setDosis(800);\n        System.out.println(m.getName() + \": \" + m.getDosis() + \" mg\");\n    }\n}\n\nclass Medikament {\n    private String name;\n    private double dosis;\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public double getDosis() {\n        return dosis;\n    }\n\n    public void setDosis(double dosis) {\n        if (dosis > 0 && dosis <= 500) {\n            this.dosis = dosis;\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Ibuprofen: 200.0 mg" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie heißt der Getter für ein boolean Attribut 'aktiv'?",
+      "optionen": ["getAktiv()", "isAktiv()", "aktiv()", "booleanAktiv()"],
+      "richtig": 1,
+      "erklaerung": "Bei boolean-Gettern ist die Konvention isAttribut()."
+    },
+    {
+      "frage": "Was gehört in einen Setter?",
+      "optionen": ["Nur die Zuweisung", "Die Prüfung des neuen Werts und dann die Zuweisung", "Eine Schleife", "Den Konstruktor"],
+      "richtig": 1,
+      "erklaerung": "Der Setter ist die Kontrollschleuse für den Attribut-Zugriff."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Setter ohne Prüfung",
+      "erklaerung": "setDosis(-50); wird dann durchgelassen - die Kapselung bringt nichts, wenn die Schleuse offen steht."
+    },
+    {
+      "fehler": "Getter, der das Attribut ändert",
+      "erklaerung": "Ein Getter sollte NUR lesen. Änderungen gehören in Methoden mit klarem Namen (z. B. erhoehePunkte())."
+    }
+  ]
+}

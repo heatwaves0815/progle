@@ -1,0 +1,49 @@
+﻿{
+  "id": "m9-l04",
+  "typ": "lektion",
+  "titel": "Projektstruktur mit Maven",
+  "lernziele": [
+    "Die Maven-Ordnerstruktur kennen",
+    "pom.xml und seine Aufgabe verstehen",
+    "Wissen, wohin Quellcode und Dateien gehören"
+  ],
+  "erklaerung": "## Ordnung im Projekt\n**Maven** ist das Standard-Werkzeug für Java-Projekte. Es verwaltet Ordner, Abhängigkeiten und den Build.\n```\nmein-projekt/\n├── pom.xml                     <- Projektdatei (Name, Abhängigkeiten)\n└── src/\n    └── main/\n        ├── java/               <- hier liegt ALLER Code\n        │   └── de/meinprojekt/Main.java\n        └── resources/          <- Dateien wie config.json, Bilder\n```\n## pom.xml in Kürze\n```xml\n<project>\n  <modelVersion>4.0.0</modelVersion>\n  <groupId>de.meinprojekt</groupId>\n  <artifactId>mein-projekt</artifactId>\n  <version>1.0.0</version>\n  <dependencies>...</dependencies>   <- Bibliotheken\n</project>\n```\nWichtige Befehle: `mvn compile` (übersetzen), `mvn test` (Tests), `mvn package` (JAR bauen).\nDie Ordner sind **Konvention**: Jeder Java-Entwickler findet sich sofort zurecht. Progle selbst ist so ein Maven-Projekt!",
+  "beispiel-code": "public class Projektinfo {\n\n    public static void main(String[] args) {\n        System.out.println(\"Projekt: mein-projekt 1.0.0\");\n        System.out.println(\"Struktur: src/main/java + src/main/resources\");\n        System.out.println(\"Build: mvn compile / test / package\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse StrukturCheck: Gib mit println drei Zeilen aus: 'Ordner: src/main/java', 'Ordner: src/main/resources', 'Datei: pom.xml'.",
+      "start-code": "public class StrukturCheck {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Drei println-Anweisungen mit den Pfaden in Anführungszeichen.",
+        "Der Quellcode-Ordner heißt src/main/java.",
+        "Die Projektdatei heißt pom.xml."
+      ],
+      "loesung": "public class StrukturCheck {\n\n    public static void main(String[] args) {\n        System.out.println(\"Ordner: src/main/java\");\n        System.out.println(\"Ordner: src/main/resources\");\n        System.out.println(\"Datei: pom.xml\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Ordner: src/main/java\nOrdner: src/main/resources\nDatei: pom.xml" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wo liegen in einem Maven-Projekt die Java-Dateien?",
+      "optionen": ["src/main/java", "src/files", "java/src", "im Wurzelordner"],
+      "richtig": 0,
+      "erklaerung": "Konvention: src/main/java für Code, src/main/resources für Dateien."
+    },
+    {
+      "frage": "Was steht in der pom.xml?",
+      "optionen": ["Der gesamte Quellcode", "Projekt-Metadaten und Abhängigkeiten", "Nur die Tests", "Die Ausgabe"],
+      "richtig": 1,
+      "erklaerung": "pom.xml beschreibt das Projekt und seine Bibliotheken."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Ordner selbst erfinden",
+      "erklaerung": "Quelle, Tests und Ressourcen haben feste Plätze - Abweichungen verwirren Maven und Kollegen."
+    },
+    {
+      "fehler": "pom.xml manuell auseinanderbauen",
+      "erklaerung": "Änderungen an Abhängigkeiten fügt man im <dependencies>-Block ein - Maven lädt den Rest selbst."
+    }
+  ]
+}

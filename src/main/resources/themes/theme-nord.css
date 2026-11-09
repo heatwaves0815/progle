@@ -1,0 +1,68 @@
+/* Theme: Nordisch (Nord-Palette) */
+.root {
+    -pr-bg-0: #242933;
+    -pr-bg-1: #2e3440;
+    -pr-card: #3b4252;
+    -pr-card-2: #434c5e;
+    -pr-border: #4c566a;
+    -pr-sidebar: #353c49;
+    -pr-lesson-card: #3a4250;
+    -pr-feedback: #3f4757;
+    -pr-editor: #272c36;
+
+    -pr-text: #eceff4;
+    -pr-text-dim: #a5adbd;
+    -pr-title: #eceff4;
+    -pr-desc: #c5cdda;
+    -pr-prompt: #7b8494;
+    -pr-disabled-text: #8b95a7;
+
+    -pr-accent: #88c0d0;
+    -pr-accent-2: #81a1c1;
+    -pr-success: #a3be8c;
+    -pr-success-bg: #a3be8c;
+    -pr-success-text: #2e3440;
+    -pr-warn: #ebcb8b;
+    -pr-error: #bf616a;
+    -pr-link: #81a1c1;
+    -pr-link-hover: #a9c7dc;
+    -pr-disabled-bg: #434c5e;
+
+    -pr-logo-1: #8fbcbb;
+    -pr-logo-2: #88c0d0;
+    -pr-bubble-1: #5e81ac;
+    -pr-bubble-2: #81a1c1;
+
+    -pr-chip-bg: #88c0d033;
+    -pr-chip-text: #b5d8e2;
+    -pr-listhover: #88c0d01f;
+    -pr-listsel: #88c0d033;
+    -pr-glow: #88c0d02e;
+    -pr-hint-bg: #88c0d01f;
+    -pr-hint-text: #cfe5ec;
+    -pr-thumb: #4c566a;
+    -pr-selection: #434c5e;
+    -pr-lineno: #6f7d95;
+
+    -pr-code-text: #d8dee9;
+    -pr-code-decl: #81a1c1;
+    -pr-code-ctrl: #b48ead;
+    -pr-code-method: #88c0d0;
+    -pr-code-literal: #81a1c1;
+    -pr-code-type: #8fbcbb;
+    -pr-code-string: #a3be8c;
+    -pr-code-comment: #616e88;
+    -pr-code-number: #b48ead;
+    -pr-code-anno: #ebcb8b;
+    -pr-code-inline: #88c0d0;
+
+    -pr-md-h2: #dfe4ee;
+    -pr-md-p: #ccd3e0;
+    -pr-md-bold: #ffffff;
+
+    -pr-notice-bg: #4a4a35;
+    -pr-notice-border: #616149;
+    -pr-notice-text: #ebcb8b;
+
+    -pr-avatar-user: #434c5e;
+}

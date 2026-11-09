@@ -1,0 +1,49 @@
+﻿{
+  "id": "m8-l02",
+  "typ": "lektion",
+  "titel": "Stream API - Datenflüsse",
+  "lernziele": [
+    "Eine Liste in einen Stream verwandeln und filtern",
+    "map und forEach kennenlernen",
+    "Elegante Datenverarbeitung schreiben"
+  ],
+  "erklaerung": "## Daten wie am Fließband\nEin **Stream** leitet Daten durch eine Kette von Verarbeitungsschritten:\n```java\nimport java.util.List;\n\nList<String> namen = List.of(\"Anna\", \"Ben\", \"Christian\");\n\nnamen.stream()\n     .filter(n -> n.startsWith(\"A\"))\n     .forEach(n -> System.out.println(\"Hallo \" + n));\n```\n## Die wichtigsten Bausteine\n- `filter(bedingung)` – lässt nur Elemente durch, für die true gilt\n- `map(funktion)` – verwandelt jedes Element (z. B. String → Länge)\n- `sorted()` – sortiert\n- `forEach(aktion)` – führt für jedes Element etwas aus (Endstation!)\n- `count()` – Anzahl als long\n- `collect(Collectors.toList())` – Ergebnis wieder als Liste\nWichtig: Streams sind **faul** – ohne eine End-Operation (forEach, count, collect) passiert nichts.\n```java\nlong anzahl = namen.stream()\n                   .filter(n -> n.length() > 3)\n                   .count();      // 3\n```",
+  "beispiel-code": "import java.util.List;\n\npublic class Filmliste {\n\n    public static void main(String[] args) {\n        List<String> filme = List.of(\"Up\", \"Interstellar\", \"Coco\");\n\n        System.out.println(\"Lange Titel:\");\n        filme.stream()\n             .filter(titel -> titel.length() > 4)\n             .forEach(titel -> System.out.println(\"- \" + titel));\n\n        long anzahl = filme.stream().count();\n        System.out.println(\"Gesamt: \" + anzahl);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Namensfilter: Liste mit 'Anna', 'Bob', 'Christian'. Per Stream: filtere Namen mit Länge > 3 und gib sie mit forEach als '- <name>' aus (Anna, Christian). Danach gib die Gesamtanzahl der Liste aus: 'Gesamt: 3'.",
+      "start-code": "import java.util.List;\n\npublic class Namensfilter {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "List.of(...) erzeugt eine fertige Liste.",
+        "namen.stream().filter(n -> n.length() > 3).forEach(n -> System.out.println(\"- \" + n));",
+        "Gesamtanzahl: namen.size() oder namen.stream().count()."
+      ],
+      "loesung": "import java.util.List;\n\npublic class Namensfilter {\n\n    public static void main(String[] args) {\n        List<String> namen = List.of(\"Anna\", \"Bob\", \"Christian\");\n\n        namen.stream()\n             .filter(n -> n.length() > 3)\n             .forEach(n -> System.out.println(\"- \" + n));\n\n        System.out.println(\"Gesamt: \" + namen.size());\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "- Anna\n- Christian\nGesamt: 3" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was macht filter()?",
+      "optionen": ["Löscht Elemente", "Lässt nur passende Elemente durch", "Sortiert", "Zählt"],
+      "richtig": 1,
+      "erklaerung": "filter prüft jedes Element gegen die Bedingung."
+    },
+    {
+      "frage": "Was passiert ohne End-Operation wie forEach oder count?",
+      "optionen": ["Fehler", "Nichts - Streams sind faul", "Alles läuft doppelt", "Die Liste wird geleert"],
+      "richtig": 1,
+      "erklaerung": "Ohne Endstation wird der Stream nie ausgewertet."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Endoperation vergessen",
+      "erklaerung": "liste.stream().filter(...) alleine tut nichts. Immer mit forEach/count/collect abschließen."
+    },
+    {
+      "fehler": "Denselben Stream zweimal nutzen",
+      "erklaerung": "Ein Stream ist einmal verwendbar - für eine zweite Runde: liste.stream() neu holen."
+    }
+  ]
+}

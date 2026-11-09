@@ -1,0 +1,66 @@
+{
+  "id": "m9-q",
+  "typ": "modul-quiz",
+  "titel": "Modul-Quiz: Praxis",
+  "lernziele": [
+    "Praxis-Wissen prüfen",
+    "Einen Highscore-Speicher als Abschluss bauen"
+  ],
+  "erklaerung": "## Praxis-Check\nFünf Fragen zu Dateien, Tests, Debugging und Maven. In der **Abschlussaufgabe** speicherst du eine Highscore-Liste in einer Datei.",
+  "beispiel-code": "import java.nio.file.Files;\nimport java.nio.file.Path;\n\npublic class MusterPraxis {\n\n    public static void main(String[] args) throws Exception {\n        Files.writeString(Path.of(\"demo.txt\"), \"Hallo\");\n        System.out.println(Files.readString(Path.of(\"demo.txt\")));\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Abschlussaufgabe 'Highscore-Datei': Die Klasse HighscoreSpeicher schreibt drei Zeilen ('Alice 100', 'Bob 80', 'Cem 60') in die Datei 'highscore.txt' (mit \\n zwischen ihnen), liest die Datei zurück und gibt sie komplett aus. Ausgabe:\nAlice 100\nBob 80\nCem 60",
+      "start-code": "import java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\n\npublic class HighscoreSpeicher {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Text zusammenbauen: String inhalt = \"Alice 100\\nBob 80\\nCem 60\";",
+        "Schreiben: Files.writeString(Path.of(\"highscore.txt\"), inhalt);",
+        "Lesen: System.out.println(Files.readString(Path.of(\"highscore.txt\"))); - try/catch nicht vergessen."
+      ],
+      "loesung": "import java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\n\npublic class HighscoreSpeicher {\n\n    public static void main(String[] args) {\n        Path datei = Path.of(\"highscore.txt\");\n        try {\n            Files.writeString(datei, \"Alice 100\\nBob 80\\nCem 60\");\n            System.out.println(Files.readString(datei));\n        } catch (IOException e) {\n            System.out.println(\"Datei-Problem: \" + e.getMessage());\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Alice 100\nBob 80\nCem 60" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Welche Exception ist bei Dateizugriff zu erwarten?",
+      "optionen": ["NullPointerException", "IOException", "EnumException", "LoopException"],
+      "richtig": 1,
+      "erklaerung": "IOException ist checked - sie muss behandelt werden."
+    },
+    {
+      "frage": "Was druckt die Prüfmethode, wenn eine Bedingung false ist?",
+      "optionen": ["OK", "FAIL", "WARN", "Fehler: Abbruch"],
+      "richtig": 1,
+      "erklaerung": "FAIL zeigt sofort, dass ein Testfall nicht erfüllt ist."
+    },
+    {
+      "frage": "Wo landet src/main/resources-Inhalt wie eine config.json?",
+      "optionen": ["Im Code-Ordner", "In den Ressourcen (Dateien) des Programms", "In der pom.xml", "Gar nirgends"],
+      "richtig": 1,
+      "erklaerung": "resources ist für Dateien, java für Code."
+    },
+    {
+      "frage": "Was ist ein Breakpoint?",
+      "optionen": ["Eine Art Schleife", "Ein Haltepunkt, an dem der Debugger anhält", "Ein Fehler-Typ", "Ein Maven-Befehl"],
+      "richtig": 1,
+      "erklaerung": "Am Breakpoint pausiert das Programm - du schaust dir Variablen an."
+    },
+    {
+      "frage": "Welcher Maven-Befehl übersetzt das Projekt?",
+      "optionen": ["mvn run", "mvn compile", "mvn start", "mvn build-all"],
+      "richtig": 1,
+      "erklaerung": "compile übersetzt; test führt Tests aus; package baut das JAR."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Datei nach dem Schreiben nicht wieder lesen",
+      "erklaerung": "Testschritt für Schritt: erst schreiben, dann Inhalt prüfen - so siehst du, ob wirklich das Drin steht, was du erwartest."
+    },
+    {
+      "fehler": "Windows-Zeilenumbrüche vergessen",
+      "erklaerung": "Beim Zeilenweise-Lesen mit \\n rechnen - oder .lines() nutzen, das umgeht das Problem."
+    }
+  ]
+}

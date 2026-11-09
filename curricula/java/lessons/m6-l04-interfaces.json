@@ -1,0 +1,49 @@
+{
+  "id": "m6-l04",
+  "typ": "lektion",
+  "titel": "Interfaces",
+  "lernziele": [
+    "Interfaces als Fähigkeits-Versprechen verstehen",
+    "Klassen mehrere Interfaces geben",
+    "Polymorphie über Interfaces nutzen"
+  ],
+  "erklaerung": "## Fähigkeiten statt Verwandtschaft\nEin **Interface** ist ein Vertrag: Wer ihn unterschreibt (`implements`), MUSS die aufgelisteten Methoden liefern.\n```java\ninterface Speicherbar {\n    void speichern();\n}\n\nclass Dokument implements Speicherbar {\n    public void speichern() {\n        System.out.println(\"Dokument gespeichert\");\n    }\n}\n```\n## Warum das toll ist\n- EINE Klasse kann VIELE Interfaces umsetzen: `class Fisch implements Schwimmer, Essbar` - aber nur EINE Klasse erben.\n- Interfaces beschreiben **Fähigkeiten** (kann-schwimmen), Vererbung beschreibt **Wesen** (ist-ein-Tier).\n- Über das Interface polymorph arbeiten:\n```java\nSpeicherbar[] alles = {new Dokument(), new Foto()};\nfor (Speicherbar s : alles) {\n    s.speichern();      // jedes Objekt speichert auf seine Art\n}\n```\nFaustregel: Was KANN es tun? → Interface. Was IST es? → Vererbung.",
+    "beispiel-code": "public class Haushaltsapp {\n\n    public static void main(String[] args) {\n        Waschbar[] waschen = {new Geschirr(), new Waesche()};\n        for (Waschbar w : waschen) {\n            w.waschen();\n        }\n    }\n}\n\ninterface Waschbar {\n    void waschen();\n}\n\nclass Geschirr implements Waschbar {\n    public void waschen() {\n        System.out.println(\"Teller spülen\");\n    }\n}\n\nclass Waesche implements Waschbar {\n    public void waschen() {\n        System.out.println(\"Waschmaschine laufen lassen\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Musikapp: interface Abspielbar mit Methode void abspielen(). Zwei Klassen implementieren es: Lied ('Lied läuft') und Podcast ('Podcast läuft'). main: Abspielbar[] mit einem Lied und einem Podcast, Schleife ruft abspielen() auf.",
+      "start-code": "public class Musikapp {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "interface Abspielbar { void abspielen(); }",
+        "class Lied implements Abspielbar { public void abspielen() {...} } - public nicht vergessen!",
+        "Array vom Typ Abspielbar, for-each, aufrufen."
+      ],
+      "loesung": "public class Musikapp {\n\n    public static void main(String[] args) {\n        Abspielbar[] liste = {new Lied(), new Podcast()};\n        for (Abspielbar a : liste) {\n            a.abspielen();\n        }\n    }\n}\n\ninterface Abspielbar {\n    void abspielen();\n}\n\nclass Lied implements Abspielbar {\n    public void abspielen() {\n        System.out.println(\"Lied läuft\");\n    }\n}\n\nclass Podcast implements Abspielbar {\n    public void abspielen() {\n        System.out.println(\"Podcast läuft\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Lied läuft\nPodcast läuft" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Welches Schlüsselwort nutzt eine Klasse für ein Interface?",
+      "optionen": ["extends", "implements", "interface", "uses"],
+      "richtig": 1,
+      "erklaerung": "implements heißt: Ich erfülle diesen Vertrag."
+    },
+    {
+      "frage": "Wie viele Interfaces kann eine Klasse umsetzen?",
+      "optionen": ["Genau eines", "Maximal zwei", "Beliebig viele", "Nur bei abstract"],
+      "richtig": 2,
+      "erklaerung": "Anders als bei Vererbung (nur ein extends) sind mehrere Interfaces erlaubt."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "public beim Interface-Methoden vergessen",
+      "erklaerung": "Interface-Methoden sind implizit public - die Implementierung MUSS public sein, sonst 'weaker access privileges'."
+    },
+    {
+      "fehler": "extends statt implements",
+      "erklaerung": "Interfaces werden implementiert, nicht erweitert (außer Interface erbt Interface)."
+    }
+  ]
+}

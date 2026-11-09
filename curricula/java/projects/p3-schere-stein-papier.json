@@ -1,0 +1,71 @@
+﻿{
+  "id": "p3",
+  "typ": "projekt",
+  "titel": "Schere-Stein-Papier mit Highscore",
+  "lernziele": [
+    "Ein Spiel-Programm mit Rundenlogik bauen",
+    "Enums und Vergleiche kombinieren",
+    "Ergebnisse in einer Datei dauerhaft speichern"
+  ],
+  "erklaerung": "## Der Klassiker als eigenes Spiel\nDu baust **Schere-Stein-Papier**: Der Spieler wählt, der Computer spielt eine feste Zugfolge (damit dein Programm testbar bleibt), und am Ende landet der Sieg in einer Highscore-Datei.\n\n**Was du brauchst:** Enums (Modul 7), Methoden (Modul 4), Dateien (Modul 9), Scanner (Modul 1).\n\nSpielregeln: Schere schlägt Papier, Papier schlägt Stein, Stein schlägt Schere. Gleichstand = Unentschieden.",
+  "beispiel-code": "public class Zugmuster {\n\n    enum Zug { SCHERE, STEIN, PAPIER }\n\n    public static void main(String[] args) {\n        Zug[] computerZuege = {Zug.STEIN, Zug.SCHERE};\n        System.out.println(\"Runde 1: Computer wählt \" + computerZuege[0]);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Schritt 1 - Der Vergleich: Erstelle enum Zug { SCHERE, STEIN, PAPIER } und eine Methode 'static String vergleiche(Zug spieler, Zug computer)': gleich → 'Unentschieden'; Spieler gewinnt bei (SCHERE vs PAPIER, STEIN vs SCHERE, PAPIER vs STEIN) → 'Gewonnen!'; sonst → 'Verloren!'. main prüft: vergleiche(SCHERE, PAPIER), vergleiche(STEIN, STEIN), vergleiche(SCHERE, STEIN). Ausgabe:\nGewonnen!\nUnentschieden\nVerloren!",
+      "start-code": "public class Spielwiese {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "enum Zug { SCHERE, STEIN, PAPIER } - auf Klassenebene oder als eigene Datei-Klasse.",
+        "Erst auf Gleichstand prüfen: if (spieler == computer).",
+        "Drei Gewinn-Kombinationen mit || verknüpfen."
+      ],
+      "loesung": "public class Spielwiese {\n\n    enum Zug { SCHERE, STEIN, PAPIER }\n\n    public static String vergleiche(Zug spieler, Zug computer) {\n        if (spieler == computer) {\n            return \"Unentschieden\";\n        }\n        boolean gewonnen = (spieler == Zug.SCHERE && computer == Zug.PAPIER)\n                || (spieler == Zug.STEIN && computer == Zug.SCHERE)\n                || (spieler == Zug.PAPIER && computer == Zug.STEIN);\n        return gewonnen ? \"Gewonnen!\" : \"Verloren!\";\n    }\n\n    public static void main(String[] args) {\n        System.out.println(vergleiche(Zug.SCHERE, Zug.PAPIER));\n        System.out.println(vergleiche(Zug.STEIN, Zug.STEIN));\n        System.out.println(vergleiche(Zug.SCHERE, Zug.STEIN));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Gewonnen!\nUnentschieden\nVerloren!" }
+    },
+    {
+      "aufgabenstellung": "Schritt 2 - Das Spiel: main spielt 2 Runden gegen die feste Computer-Folge {STEIN, SCHERE}. Pro Runde: Ausgabe 'Runde <n>: computer=<zug>' und der Spieler tippt SCHERE/STEIN/PAPIER (Scanner, nextLine, valueOf). Danach das Rundenergebnis aus Schritt 1 ausgeben. Die Prüfung simuliert Eingaben: SCHERE, SCHERE. Erwartete Ausgabe:\nRunde 1: computer=STEIN\nDein Zug: Unentschieden\nRunde 2: computer=SCHERE\nDein Zug: Gewonnen!",
+      "start-code": "import java.util.Scanner;\n\npublic class Spielwiese {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Zug[] computerZuege = {Zug.STEIN, Zug.SCHERE};",
+        "for (int runde = 0; runde < computerZuege.length; runde++) { ... }",
+        "Spielerzug einlesen: Zug meins = Zug.valueOf(scanner.nextLine()); - Achtung: Großbuchstaben nötig."
+      ],
+      "loesung": "import java.util.Scanner;\n\npublic class Spielwiese {\n\n    enum Zug { SCHERE, STEIN, PAPIER }\n\n    public static String vergleiche(Zug spieler, Zug computer) {\n        if (spieler == computer) {\n            return \"Unentschieden\";\n        }\n        boolean gewonnen = (spieler == Zug.SCHERE && computer == Zug.PAPIER)\n                || (spieler == Zug.STEIN && computer == Zug.SCHERE)\n                || (spieler == Zug.PAPIER && computer == Zug.STEIN);\n        return gewonnen ? \"Gewonnen!\" : \"Verloren!\";\n    }\n\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        Zug[] computerZuege = {Zug.STEIN, Zug.SCHERE};\n\n        for (int runde = 0; runde < computerZuege.length; runde++) {\n            System.out.println(\"Runde \" + (runde + 1) + \": computer=\" + computerZuege[runde]);\n            System.out.println(\"Dein Zug:\");\n            Zug spieler = Zug.valueOf(scanner.nextLine());\n            System.out.println(vergleiche(spieler, computerZuege[runde]));\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "eingabe": "SCHERE\nSCHERE\n", "erwartet": "Runde 1: computer=STEIN\nDein Zug:\nVerloren!\nRunde 2: computer=SCHERE\nDein Zug:\nUnentschieden" }
+    },
+    {
+      "aufgabenstellung": "Schritt 3 - Highscore: Zähle die Siege aus Schritt 2 und schreibe nach dem Spiel 'Siege: <n>' in die Datei 'highscore.txt' und gib die Datei danach aus: 'Highscore-Datei: Siege: <n>'. Die Prüfung simuliert wieder: SCHERE, SCHERE (Das sind 0 Siege). Erwartete Ausgabe (nach den Runden-Zeilen aus Schritt 2):\nHighscore-Datei: Siege: 0",
+      "start-code": "import java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.util.Scanner;\n\npublic class Spielwiese {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "int siege = 0; in der Runde: if (vergleiche(...).equals(\"Gewonnen!\")) siege++;",
+        "Nach den Runden: Files.writeString(Path.of(\"highscore.txt\"), \"Siege: \" + siege); - im try/catch (IOException).",
+        "Ausgabe: System.out.println(\"Highscore-Datei: \" + Files.readString(Path.of(\"highscore.txt\")));"
+      ],
+      "loesung": "import java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.util.Scanner;\n\npublic class Spielwiese {\n\n    enum Zug { SCHERE, STEIN, PAPIER }\n\n    public static String vergleiche(Zug spieler, Zug computer) {\n        if (spieler == computer) {\n            return \"Unentschieden\";\n        }\n        boolean gewonnen = (spieler == Zug.SCHERE && computer == Zug.PAPIER)\n                || (spieler == Zug.STEIN && computer == Zug.SCHERE)\n                || (spieler == Zug.PAPIER && computer == Zug.STEIN);\n        return gewonnen ? \"Gewonnen!\" : \"Verloren!\";\n    }\n\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        Zug[] computerZuege = {Zug.STEIN, Zug.SCHERE};\n        int siege = 0;\n\n        for (int runde = 0; runde < computerZuege.length; runde++) {\n            System.out.println(\"Runde \" + (runde + 1) + \": computer=\" + computerZuege[runde]);\n            System.out.println(\"Dein Zug:\");\n            Zug spieler = Zug.valueOf(scanner.nextLine());\n            String ergebnis = vergleiche(spieler, computerZuege[runde]);\n            System.out.println(ergebnis);\n            if (ergebnis.equals(\"Gewonnen!\")) {\n                siege++;\n            }\n        }\n\n        Path datei = Path.of(\"highscore.txt\");\n        try {\n            Files.writeString(datei, \"Siege: \" + siege);\n            System.out.println(\"Highscore-Datei: \" + Files.readString(datei));\n        } catch (IOException e) {\n            System.out.println(\"Datei-Problem: \" + e.getMessage());\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "eingabe": "SCHERE\nSCHERE\n", "erwartet": "Runde 1: computer=STEIN\nDein Zug:\nVerloren!\nRunde 2: computer=SCHERE\nDein Zug:\nUnentschieden\nHighscore-Datei: Siege: 0" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Warum spielt der Computer hier eine feste Zugfolge?",
+      "optionen": ["Weil Zufall verboten ist", "Damit die Ausgabe (und damit der Test) gleich bleibt", "Weil es fairer ist", "Aus Tradition"],
+      "richtig": 1,
+      "erklaerung": "Deterministische Programme sind automatisiert prüfbar. Zufall könntest du später mit java.util.Random ergänzen."
+    },
+    {
+      "frage": "Was macht Zug.valueOf(\"SCHERE\")?",
+      "optionen": ["Nichts", "Wandelt den Text in den Enum-Wert um", "Löscht den Enum", "Vergleicht Enums"],
+      "richtig": 1,
+      "erklaerung": "valueOf übersetzt Text (exakter Name!) in den passenden Enum-Wert."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Kleinbuchstaben bei valueOf",
+      "erklaerung": "valueOf(\"schere\") wirft eine IllegalArgumentException - Enums heißen SCHERE."
+    },
+    {
+      "fehler": "try/catch um Dateizugriff vergessen",
+      "erklaerung": "IOException ist checked - ohne Behandlung kompiliert Schritt 3 nicht."
+    }
+  ]
+}

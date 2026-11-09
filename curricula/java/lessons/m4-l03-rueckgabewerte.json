@@ -1,0 +1,60 @@
+{
+  "id": "m4-l03",
+  "typ": "lektion",
+  "titel": "Rückgabewerte",
+  "lernziele": [
+    "Mit return Ergebnisse zurückgeben",
+    "Ergebnisse weiterverarbeiten",
+    "void und Rückgabetyp unterscheiden"
+  ],
+  "erklaerung": "## Methoden liefern Ergebnisse\nStatt selbst auszugeben, kann eine Methode ihr Ergebnis **zurückgeben**:\n```java\npublic static double umrechnen(double euro) {\n    return euro * 0.92;      // Euro -> CHF (Beispielkurs)\n}\n\npublic static void main(String[] args) {\n    double ergebnis = umrechnen(100);   // Ergebnis einsammeln\n    System.out.println(\"100 Euro sind \" + ergebnis + \" CHF\");\n}\n```\n- Der **Rückgabetyp** steht statt void: `double umrechnen(...)`\n- `return` wirft das Ergebnis zurück und **beendet die Methode sofort**.\n- Das Ergebnis kannst du speichern, ausgeben oder direkt weiterrechnen: `umrechnen(umrechnen(100))`\n## Regel\nEine Methode mit Rückgabetyp `int` muss in **jedem Zweig** ein return haben – sonst meckert der Compiler.",
+  "beispiel-code": "public class Notenrechner {\n\n    public static int punkteZuNote(int punkte) {\n        if (punkte >= 90) {\n            return 1;\n        } else if (punkte >= 65) {\n            return 2;\n        } else if (punkte >= 50) {\n            return 3;\n        } else {\n            return 4;\n        }\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"Mit 92 Punkten: Note \" + punkteZuNote(92));\n        System.out.println(\"Mit 61 Punkten: Note \" + punkteZuNote(61));\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Kreisrechner hat eine Methode 'static double flaecheninhalt(double radius)', die radius * radius * 3.14 zurückgibt. main gibt aus: 'Fläche bei Radius 3: 28.26'.",
+      "start-code": "public class Kreisrechner {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Kopf: public static double flaecheninhalt(double radius)",
+        "Im Körper: return radius * radius * 3.14;",
+        "In main: System.out.println(\"Fläche bei Radius 3: \" + flaecheninhalt(3));"
+      ],
+      "loesung": "public class Kreisrechner {\n\n    public static double flaecheninhalt(double radius) {\n        return radius * radius * 3.14;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"Fläche bei Radius 3: \" + flaecheninhalt(3));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Fläche bei Radius 3: 28.26" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Rabattrechner hat eine Methode 'static double reduziert(double preis)', die 10 % Rabatt abzieht (preis * 0.9). main rechnet: 50.0 Euro ergeben 'Neuer Preis: 45.0'.",
+      "start-code": "public class Rabattrechner {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "return preis * 0.9;",
+        "In main: System.out.println(\"Neuer Preis: \" + reduziert(50.0));",
+        "50.0 * 0.9 = 45.0 – Java zeigt doubles ohne unnötige Nullen."
+      ],
+      "loesung": "public class Rabattrechner {\n\n    public static double reduziert(double preis) {\n        return preis * 0.9;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"Neuer Preis: \" + reduziert(50.0));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Neuer Preis: 45.0" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was macht return in einer Methode?",
+      "optionen": ["Gibt Text aus", "Liefert ein Ergebnis und beendet die Methode sofort", "Startet die Methode neu", "Löscht Variablen"],
+      "richtig": 1,
+      "erklaerung": "return übergibt den Wert an den Aufrufer und beendet die Methode."
+    },
+    {
+      "frage": "Welcher Kopf passt zu einer Methode, die eine ganze Zahl liefert?",
+      "optionen": ["public static void summe()", "public static int summe()", "public static int summe(void)", "void int summe()"],
+      "richtig": 1,
+      "erklaerung": "Der Rückgabetyp int sagt: Diese Methode liefert eine ganze Zahl."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "return in void-Methode mit Wert",
+      "erklaerung": "void-Methoden dürfen kein return wert; haben. Entweder Rückgabetyp ändern oder return; ohne Wert."
+    },
+    {
+      "fehler": "Rückgabewert ignoriert",
+      "erklaerung": "flaecheninhalt(3); allein verwirft das Ergebnis. Zuweisen oder direkt ausgeben."
+    }
+  ]
+}

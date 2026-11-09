@@ -1,0 +1,60 @@
+{
+  "id": "m2-l01",
+  "typ": "lektion",
+  "titel": "Booleans und Vergleiche",
+  "lernziele": [
+    "Werte mit ==, !=, <, >, <=, >= vergleichen",
+    "Bedingungen mit && und || verknüpfen",
+    "Verstehen, dass Vergleiche boolean ergeben"
+  ],
+  "erklaerung": "## Vergleiche liefern wahr oder falsch\nEin Vergleich ist eine Frage mit der Antwort **true** oder **false**:\n```java\nint alter = 17;\nboolean volljaehrig = alter >= 18;   // false\nSystem.out.println(volljaehrig);     // false\n```\n| Operator | Frage |\n|---|---|\n| `==` | gleich? |\n| `!=` | ungleich? |\n| `<` `>` | kleiner / größer? |\n| `<=` `>=` | kleiner-gleich / größer-gleich? |\nAchtung: `==` vergleicht, `=` weist zu! Verwechselung ist der Klassiker.\n## Bedingungen kombinieren\n- `&&` (UND): beide Seiten müssen stimmen – `alter >= 12 && alter < 18`\n- `||` (ODER): mindestens eine Seite muss stimmen\n- `!` (NICHT): dreht um – `!istVolljaehrig`\nDie Reihenfolge: Vergleiche binden stärker als &&, und && stärker als ||.",
+  "beispiel-code": "public class Kinokasse {\n\n    public static void main(String[] args) {\n        int alter = 15;\n        boolean mitEltern = true;\n\n        boolean freigabeOhne = alter >= 18;\n        boolean freigabeMit = alter >= 12 && mitEltern;\n        boolean darfRein = freigabeOhne || freigabeMit;\n\n        System.out.println(\"Ohne Eltern rein? \" + freigabeOhne);\n        System.out.println(\"Mit Eltern rein? \" + freigabeMit);\n        System.out.println(\"Darf rein? \" + darfRein);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Ticketpruefung prüft: int alter = 16; boolean hatTicket = true. Gib aus 'Alter ok: ' + (alter >= 12) und 'Rein: ' + (alter >= 12 && hatTicket).",
+      "start-code": "public class Ticketpruefung {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Der Ausdruck alter >= 12 ergibt bereits true oder false.",
+        "Verknüpfen mit &&: alter >= 12 && hatTicket",
+        "Ausgabe: System.out.println(\"Alter ok: \" + (alter >= 12)); – die Klammern zwingen Java, zuerst zu vergleichen."
+      ],
+      "loesung": "public class Ticketpruefung {\n\n    public static void main(String[] args) {\n        int alter = 16;\n        boolean hatTicket = true;\n\n        System.out.println(\"Alter ok: \" + (alter >= 12));\n        System.out.println(\"Rein: \" + (alter >= 12 && hatTicket));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Alter ok: true\nRein: true" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Wetterschutz: boolean regnet = true; boolean windet = false; boolean kalt = true. Gib drei Zeilen aus: 'Schirm: ' + regnet, 'Jacke: ' + (kalt || windet), 'Zuhause bleiben: ' + (!regnet && !kalt).",
+      "start-code": "public class Wetterschutz {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "|| heißt ODER, ! dreht den Wahrheitswert um.",
+        "!regnet && !kalt heißt: regnet nicht UND kalt nicht.",
+        "Bei kalt = true und regnet = true ist !regnet && !kalt false."
+      ],
+      "loesung": "public class Wetterschutz {\n\n    public static void main(String[] args) {\n        boolean regnet = true;\n        boolean windet = false;\n        boolean kalt = true;\n\n        System.out.println(\"Schirm: \" + regnet);\n        System.out.println(\"Jacke: \" + (kalt || windet));\n        System.out.println(\"Zuhause bleiben: \" + (!regnet && !kalt));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Schirm: true\nJacke: true\nZuhause bleiben: false" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was ergibt 5 > 3?",
+      "optionen": ["true", "false", "5", "Einen Fehler"],
+      "richtig": 0,
+      "erklaerung": "5 ist größer als 3 – der Vergleich ergibt true."
+    },
+    {
+      "frage": "Was unterscheidet = und == in Java?",
+      "optionen": ["Nichts", "= vergleicht, == weist zu", "= weist zu, == vergleicht", "Beide sind nur Deko"],
+      "richtig": 2,
+      "erklaerung": "= ist Zuweisung, == ist Vergleich."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "= statt == im Vergleich",
+      "erklaerung": "if (x = 5) kompiliert nicht – Zuweisung statt Vergleich. Gemeint war x == 5."
+    },
+    {
+      "fehler": "String-Vergleich mit ==",
+      "erklaerung": "Bei Texten vergleichst du mit name.equals(\"Alex\") – == vergleicht Speicherplätze, nicht den Inhalt. (Kommt bald genauer.)"
+    }
+  ]
+}

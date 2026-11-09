@@ -1,0 +1,49 @@
+﻿{
+  "id": "m9-l01",
+  "typ": "lektion",
+  "titel": "Dateien lesen und schreiben",
+  "lernziele": [
+    "Mit Files.writeString und readString Dateien anlegen und lesen",
+    "Fehler beim Dateizugriff abfangen",
+    "Wissen, wofür IOException steht"
+  ],
+  "erklaerung": "## Programme mit Gedächtnis\nDateien behalten Daten über Programmende hinaus. Die Klasse `Files` macht Lesen und Schreiben einfach:\n```java\nimport java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\n\nPath datei = Path.of(\"notizen.txt\");\nFiles.writeString(datei, \"Zeile 1\\nZeile 2\");       // schreiben\nString inhalt = Files.readString(datei);             // lesen\nSystem.out.println(inhalt);\n```\n## Achtung: IOException\nDateizugriffe können scheitern (kein Recht, Platte voll...). Der Compiler VERLANGT daher try/catch oder `throws IOException` in der Methoden-Signatur (checked Exception):\n```java\ntry {\n    Files.writeString(datei, \"Hallo\");\n} catch (IOException e) {\n    System.out.println(\"Fehler: \" + e.getMessage());\n}\n```\n`writeString` überschreibt bestehende Dateien. Mit `Files.appendString(...)` hängst du an.",
+  "beispiel-code": "import java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\n\npublic class Tagebuch {\n\n    public static void main(String[] args) {\n        Path datei = Path.of(\"tagebuch.txt\");\n        try {\n            Files.writeString(datei, \"Montag: Java gelernt\\nDienstag: noch mehr Java\");\n            String inhalt = Files.readString(datei);\n            System.out.println(inhalt);\n            System.out.println(\"Einträge gelesen: \" + inhalt.lines().count());\n        } catch (IOException e) {\n            System.out.println(\"Datei-Problem: \" + e.getMessage());\n        }\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Einkaufsnotiz: Schreibe 'Milch;Brot;Kaffee' in die Datei 'einkauf.txt', lies sie zurück und gib den Inhalt aus. Fange IOException ab. Ausgabe: 'Milch;Brot;Kaffee'.",
+      "start-code": "import java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\n\npublic class Einkaufsnotiz {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Path datei = Path.of(\"einkauf.txt\");",
+        "Files.writeString(datei, \"Milch;Brot;Kaffee\");",
+        "String inhalt = Files.readString(datei); dann println(inhalt) - alles im try-Block."
+      ],
+      "loesung": "import java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\n\npublic class Einkaufsnotiz {\n\n    public static void main(String[] args) {\n        Path datei = Path.of(\"einkauf.txt\");\n        try {\n            Files.writeString(datei, \"Milch;Brot;Kaffee\");\n            String inhalt = Files.readString(datei);\n            System.out.println(inhalt);\n        } catch (IOException e) {\n            System.out.println(\"Datei-Problem: \" + e.getMessage());\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Milch;Brot;Kaffee" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Warum verlangt der Compiler try/catch bei Files.writeString?",
+      "optionen": ["Aus Tradition", "Weil IOException eine checked Exception ist", "Weil Dateien langsam sind", "Tut er nicht"],
+      "richtig": 1,
+      "erklaerung": "Checked Exceptions müssen behandelt oder mit throws weitergegeben werden."
+    },
+    {
+      "frage": "Was macht Files.writeString, wenn die Datei schon existiert?",
+      "optionen": ["Hängt an", "Überschreibt sie", "Wirft immer einen Fehler", "Fragt nach"],
+      "richtig": 1,
+      "erklaerung": "writeString überschreibt; appendString hängt an."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "IOException ignorieren",
+      "erklaerung": "Ohne try/catch oder throws IOException kompiliert der Code nicht."
+    },
+    {
+      "fehler": "Relative Pfade suchen",
+      "erklaerung": "notizen.txt landet im Arbeitsverzeichnis des Programms - nicht verwundern, wenn du sie im Projektordner findest."
+    }
+  ]
+}

@@ -1,0 +1,857 @@
+/* ============================================================
+   Progle Design System - Basis
+   ALLE Farben sind als Design-Tokens (Looked-Up-Colors) im
+   .root-Block definiert. Themes (resources/themes/theme-*.css)
+   ueberschreiben ausschliesslich diese Tokens.
+   ============================================================ */
+
+.root {
+    /* Flächen */
+    -pr-bg-0: #0d0f16;
+    -pr-bg-1: #12141c;
+    -pr-card: #1a1d29;
+    -pr-card-2: #222636;
+    -pr-border: #2a2f42;
+    -pr-sidebar: #161926;
+    -pr-lesson-card: #191c27;
+    -pr-feedback: #202433;
+    -pr-editor: #14161f;
+
+    /* Text */
+    -pr-text: #e7eaf3;
+    -pr-text-dim: #9aa3b8;
+    -pr-title: #ffffff;
+    -pr-desc: #b8bfcc;
+    -pr-prompt: #6b7382;
+    -pr-disabled-text: #7d8590;
+
+    /* Akzent */
+    -pr-accent: #8b7cff;
+    -pr-accent-2: #57a1ff;
+    -pr-success: #4ade80;
+    -pr-success-bg: #4ade80;
+    -pr-success-text: #0d0f16;
+    -pr-warn: #fbbf24;
+    -pr-error: #ff8a8a;
+    -pr-link: #9c8fff;
+    -pr-link-hover: #c0b6ff;
+    -pr-disabled-bg: #2c3140;
+
+    /* Logos / Verläufe / Blasen */
+    -pr-logo-1: #b3a5ff;
+    -pr-logo-2: #66a3ff;
+    -pr-bubble-1: #5b46d6;
+    -pr-bubble-2: #3f6fd8;
+    -pr-notice-bg: #4d3d16;
+    -pr-notice-border: #6e5a20;
+    -pr-notice-text: #f0d27a;
+    -pr-avatar-user: #2e3446;
+
+    /* Listen, Chips, Effekte */
+    -pr-chip-bg: #8b7cff26;
+    -pr-chip-text: #b9aeff;
+    -pr-listhover: #8b7cff14;
+    -pr-listsel: #8b7cff2b;
+    -pr-glow: #8b7cff2e;
+    -pr-hint-bg: #8b7cff1a;
+    -pr-hint-text: #cfc6ff;
+    -pr-thumb: #31374a;
+    -pr-selection: #31415f;
+    -pr-lineno: #6e7681;
+
+    /* Code (je Theme eigenes Editor-Schema) */
+    -pr-code-text: #d4d4d4;
+    -pr-code-decl: #569cd6;
+    -pr-code-ctrl: #c586c0;
+    -pr-code-type: #9cdcfe;
+    -pr-code-method: #dcdcaa;
+    -pr-code-literal: #569cd6;
+    -pr-code-string: #ce9178;
+    -pr-code-comment: #6a9955;
+    -pr-code-number: #b5cea8;
+    -pr-code-anno: #dcdcaa;
+    -pr-code-inline: #9ecbff;
+
+    /* Markdown */
+    -pr-md-h2: #d8dcf0;
+    -pr-md-p: #cdd3e0;
+    -pr-md-bold: #ffffff;
+
+    /* Hinweis-Box (Notice) */
+    -pr-notice-bg: #4d3d16;
+    -pr-notice-border: #6e5a20;
+    -pr-notice-text: #f0d27a;
+
+    -fx-background-color: -pr-bg-1;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+}
+
+.label {
+    -fx-text-fill: -pr-text;
+}
+
+/* ---------- Icons (SVGPath) ---------- */
+
+.icon {
+    -fx-fill: -pr-accent;
+}
+.icon-dim {
+    -fx-fill: -pr-text-dim;
+}
+.icon-success {
+    -fx-fill: -pr-success;
+}
+.icon-warn {
+    -fx-fill: -pr-warn;
+}
+.icon-accent {
+    -fx-fill: -pr-accent;
+}
+
+/* ---------- Typografie ---------- */
+
+.logo-gradient {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to bottom right, -pr-logo-1, -pr-logo-2);
+}
+
+.greeting {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -pr-text;
+}
+
+.subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: -pr-text-dim;
+}
+
+.section-heading {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -pr-text;
+}
+
+.muted {
+    -fx-text-fill: -pr-text-dim;
+    -fx-font-size: 12px;
+}
+
+.chip {
+    -fx-background-color: -pr-chip-bg;
+    -fx-text-fill: -pr-chip-text;
+    -fx-padding: 4 12 4 12;
+    -fx-background-radius: 999;
+    -fx-font-size: 11.5px;
+}
+
+.chip-success {
+    -fx-background-color: -pr-success-bg;
+    -fx-text-fill: -pr-success-text;
+    -fx-padding: 5 14 5 14;
+    -fx-background-radius: 999;
+    -fx-font-size: 12.5px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Karten / Container ---------- */
+
+.card {
+    -fx-background-color: -pr-card;
+    -fx-background-radius: 14;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 14;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, #00000059, 16, 0.08, 0, 5);
+}
+
+.pane-transparent {
+    -fx-background-color: transparent;
+}
+
+.sidebar-card {
+    -fx-background-color: -pr-sidebar;
+    -fx-background-radius: 16;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 16;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, #00000059, 18, 0.08, 0, 5);
+}
+
+.progress-card {
+    -fx-padding: 14;
+    -fx-background-color: -pr-card;
+}
+
+.lesson-card {
+    -fx-padding: 24;
+    -fx-background-color: -pr-lesson-card;
+}
+
+.spotlight-card {
+    -fx-padding: 18;
+    -fx-background-color: #00000000;
+}
+
+.spotlight-glow {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 50%, -pr-glow 0%, #00000000 70%);
+}
+
+/* ---------- Buttons ---------- */
+
+.button {
+    -fx-background-color: -pr-card-2;
+    -fx-text-fill: -pr-text;
+    -fx-background-radius: 10;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 8 14 8 14;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 8;
+}
+.button:hover {
+    -fx-background-color: derive(-pr-card-2, 14%);
+}
+.button:pressed {
+    -fx-background-color: derive(-pr-card-2, -8%);
+}
+.button:focused {
+    -fx-border-color: -pr-accent;
+    -fx-effect: dropshadow(gaussian, -pr-glow, 10, 0.15, 0, 0);
+}
+
+.primary {
+    -fx-background-color: linear-gradient(to bottom right, -pr-accent, -pr-accent-2);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-color: transparent;
+    -fx-border-radius: 10;
+    -fx-padding: 9 18 9 18;
+}
+.primary:hover {
+    -fx-background-color: linear-gradient(to bottom right, derive(-pr-accent, 14%), derive(-pr-accent-2, 14%));
+}
+.primary:pressed {
+    -fx-background-color: linear-gradient(to bottom right, derive(-pr-accent, -10%), derive(-pr-accent-2, -10%));
+}
+.primary:focused {
+    -fx-border-color: rgba(255, 255, 255, 0.65);
+    -fx-effect: dropshadow(gaussian, -pr-glow, 12, 0.2, 0, 0);
+}
+.primary .icon {
+    -fx-fill: #ffffff;
+}
+.primary:disabled {
+    -fx-background-color: -pr-disabled-bg;
+    -fx-text-fill: -pr-disabled-text;
+}
+
+.link {
+    -fx-background-color: transparent;
+    -fx-text-fill: -pr-link;
+    -fx-border-color: transparent;
+    -fx-padding: 5 8 5 8;
+    -fx-underline: true;
+}
+.link:hover {
+    -fx-text-fill: -pr-link-hover;
+    -fx-background-color: transparent;
+}
+.link:focused {
+    -fx-border-color: transparent;
+    -fx-effect: null;
+}
+
+/* ---------- Formulare ---------- */
+
+.text-field {
+    -fx-background-color: -pr-card-2;
+    -fx-text-fill: -pr-text;
+    -fx-prompt-text-fill: -pr-prompt;
+    -fx-background-radius: 12;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-padding: 10 14 10 14;
+}
+.text-field:focused {
+    -fx-border-color: -pr-accent;
+    -fx-effect: dropshadow(gaussian, -pr-glow, 10, 0.15, 0, 0);
+}
+
+.radio-button {
+    -fx-text-fill: -pr-text;
+    -fx-padding: 3 0 3 0;
+}
+.radio-button .radio {
+    -fx-background-color: -pr-card-2;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 999;
+    -fx-background-radius: 999;
+}
+.radio-button:hover .radio {
+    -fx-border-color: -pr-accent;
+}
+.radio-button:selected .mark {
+    -fx-background-color: -pr-accent;
+}
+
+.progress-indicator {
+    -fx-progress-color: -pr-accent;
+}
+
+/* ---------- Sidebar / Lektionsliste ---------- */
+
+.lesson-rows {
+    -fx-background-color: transparent;
+    -fx-padding: 2 0 2 0;
+}
+.lesson-row {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-padding: 9 12 9 12;
+    -fx-background-insets: 2;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 10;
+}
+.lesson-row:hover {
+    -fx-background-color: -pr-listhover;
+}
+.lesson-row.selected {
+    -fx-background-color: -pr-listsel;
+}
+.lesson-row.selected .lesson-row-text {
+    -fx-text-fill: -pr-title;
+    -fx-font-weight: bold;
+}
+.lesson-row.done .lesson-row-text {
+    -fx-text-fill: -pr-success;
+}
+.lesson-row.done.selected .lesson-row-text {
+    -fx-text-fill: -pr-success;
+}
+.module-header {
+    -fx-background-color: transparent;
+    -fx-text-fill: -pr-accent;
+    -fx-font-weight: bold;
+    -fx-font-size: 13.5px;
+}
+
+/* ---------- Lektion ---------- */
+
+.lesson-title {
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -pr-title;
+}
+.lesson-description {
+    -fx-font-size: 13.5px;
+    -fx-text-fill: -pr-desc;
+}
+
+.feedback,
+.feedback .content,
+.feedback .scroll-pane,
+.feedback .scroll-pane .viewport {
+    -fx-background-color: transparent;
+    -fx-background-radius: 12;
+}
+.feedback {
+    -fx-control-inner-background: -pr-feedback;
+    -fx-background-color: -pr-feedback;
+    -fx-text-fill: -pr-text;
+    -fx-prompt-text-fill: -pr-prompt;
+    -fx-background-radius: 12;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-highlight-fill: -pr-glow;
+}
+.feedback:focused {
+    -fx-border-color: -pr-accent;
+}
+
+/* ---------- Code-Editor ---------- */
+
+.code-area {
+    -fx-background-color: -pr-editor;
+    -fx-background-radius: 12;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 12;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 13px;
+}
+.styled-text-area .text {
+    -fx-fill: -pr-code-text;
+}
+.styled-text-area .selection {
+    -fx-fill: -pr-selection;
+}
+.styled-text-area .text.kw-decl {
+    -fx-fill: -pr-code-decl;
+}
+.styled-text-area .text.kw-ctrl {
+    -fx-fill: -pr-code-ctrl;
+}
+.styled-text-area .text.type {
+    -fx-fill: -pr-code-type;
+}
+.styled-text-area .text.method {
+    -fx-fill: -pr-code-method;
+}
+.styled-text-area .text.literal {
+    -fx-fill: -pr-code-literal;
+}
+.styled-text-area .text.string, .styled-text-area .text.textblock, .styled-text-area .text.char {
+    -fx-fill: -pr-code-string;
+}
+.styled-text-area .text.comment {
+    -fx-fill: -pr-code-comment;
+}
+.styled-text-area .text.number {
+    -fx-fill: -pr-code-number;
+}
+.styled-text-area .text.annotation {
+    -fx-fill: -pr-code-anno;
+}
+.lineno {
+    -fx-fill: -pr-lineno;
+    -fx-text-fill: -pr-lineno;
+    -fx-background-color: transparent;
+}
+.code-area .paragraph-box .gutter {
+    -fx-background-color: transparent;
+}
+
+/* ---------- Chat ---------- */
+
+.chat-scroll {
+    -fx-background-color: transparent;
+}
+.chat-scroll .viewport {
+    -fx-background-color: transparent;
+}
+.chat-scroll .content {
+    -fx-background-color: transparent;
+}
+
+.chat-input-bar {
+    -fx-background-color: -pr-card;
+    -fx-background-radius: 14;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 14;
+    -fx-border-width: 1;
+    -fx-padding: 8 10 8 14;
+}
+.chat-input-bar.focused {
+    -fx-border-color: -pr-accent;
+    -fx-effect: dropshadow(gaussian, -pr-glow, 12, 0.15, 0, 0);
+}
+
+.chat-input {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-width: 0;
+    -fx-padding: 6 4 6 4;
+}
+.chat-input:focused {
+    -fx-border-color: transparent;
+    -fx-effect: null;
+}
+
+.avatar {
+    -fx-background-color: linear-gradient(to bottom right, -pr-accent, -pr-accent-2);
+    -fx-background-radius: 999;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+}
+.avatar .icon {
+    -fx-fill: #ffffff;
+}
+.avatar-user {
+    -fx-background-color: -pr-avatar-user;
+    -fx-border-color: -pr-border;
+    -fx-border-width: 1;
+}
+.avatar-text {
+    -fx-text-fill: -pr-text;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.bubble-user {
+    -fx-background-color: linear-gradient(to bottom right, -pr-bubble-1, -pr-bubble-2);
+    -fx-background-radius: 16 16 4 16;
+    -fx-padding: 12 16 12 16;
+    -fx-effect: dropshadow(gaussian, #00000040, 10, 0.1, 0, 3);
+}
+.bubble-tutor {
+    -fx-background-color: -pr-card;
+    -fx-background-radius: 16 16 16 4;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 16 16 16 4;
+    -fx-border-width: 1;
+    -fx-padding: 12 16 12 16;
+    -fx-effect: dropshadow(gaussian, #00000038, 10, 0.1, 0, 3);
+}
+.bubble-notice {
+    -fx-background-color: -pr-notice-bg;
+    -fx-background-radius: 10;
+    -fx-border-color: -pr-notice-border;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 10 14 10 14;
+}
+
+.msg-text {
+    -fx-fill: -pr-text;
+    -fx-font-size: 13.5px;
+}
+.bubble-user .msg-text {
+    -fx-fill: #ffffff;
+}
+.msg-code {
+    -fx-font-family: "Consolas";
+    -fx-fill: -pr-code-text;
+    -fx-font-size: 12.5px;
+}
+.msg-code.kw-decl {
+    -fx-fill: -pr-code-decl;
+}
+.msg-code.kw-ctrl {
+    -fx-fill: -pr-code-ctrl;
+}
+.msg-code.type {
+    -fx-fill: -pr-code-type;
+}
+.msg-code.method {
+    -fx-fill: -pr-code-method;
+}
+.msg-code.literal {
+    -fx-fill: -pr-code-literal;
+}
+.msg-code.string, .msg-code.textblock, .msg-code.char {
+    -fx-fill: -pr-code-string;
+}
+.msg-code.comment {
+    -fx-fill: -pr-code-comment;
+}
+.msg-code.number {
+    -fx-fill: -pr-code-number;
+}
+.msg-code.annotation {
+    -fx-fill: -pr-code-anno;
+}
+.notice-text {
+    -fx-fill: -pr-notice-text;
+    -fx-font-size: 13px;
+}
+
+.dot {
+    -fx-fill: -pr-accent;
+}
+
+/* ---------- Tabs ---------- */
+
+.main-tabs {
+    -fx-background-color: transparent;
+}
+.main-tabs > .tab-header-area {
+    -fx-background-color: transparent;
+    -fx-padding: 2 10 0 10;
+}
+.main-tabs .tab {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 10 22 10 22;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 8;
+}
+.main-tabs .tab .tab-label {
+    -fx-text-fill: -pr-text-dim;
+    -fx-font-size: 14px;
+}
+.main-tabs .tab:hover .tab-label {
+    -fx-text-fill: -pr-text;
+}
+.main-tabs .tab .icon {
+    -fx-fill: -pr-text-dim;
+}
+.main-tabs .tab:selected {
+    -fx-background-color: linear-gradient(to top, -pr-accent 0%, -pr-accent 9%, transparent 9%);
+}
+.main-tabs .tab:selected .tab-label {
+    -fx-text-fill: -pr-title;
+    -fx-font-weight: bold;
+}
+.main-tabs .tab:selected .icon {
+    -fx-fill: -pr-accent;
+}
+.main-tabs > .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+.main-tabs .tab-content-area {
+    -fx-background-color: transparent;
+}
+
+/* ---------- Fortschrittsbalken ---------- */
+
+.progress-bar {
+    -fx-background-color: transparent;
+}
+.progress-bar > .track {
+    -fx-background-color: -pr-card-2;
+    -fx-background-radius: 8;
+    -fx-background-insets: 0;
+}
+.progress-bar > .bar {
+    -fx-background-color: linear-gradient(to right, -pr-accent, -pr-accent-2);
+    -fx-background-radius: 8;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+/* ---------- Scrollbars ---------- */
+
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+.scroll-bar .thumb {
+    -fx-background-color: -pr-thumb;
+    -fx-background-radius: 999;
+    -fx-background-insets: 2;
+}
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 2;
+}
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-shape: null;
+    -fx-background-color: transparent;
+}
+.scroll-bar:vertical {
+    -fx-pref-width: 12;
+}
+.scroll-bar .thumb:hover,
+.scroll-bar .thumb:pressed {
+    -fx-background-color: -pr-accent;
+}
+.scroll-bar:horizontal {
+    -fx-pref-height: 10;
+}
+
+/* ---------- Willkommens-Assistent ---------- */
+
+.wizard-root {
+    -fx-background-color: -pr-bg-1;
+}
+
+.wizard-card {
+    -fx-padding: 36;
+    -fx-background-radius: 18;
+    -fx-effect: dropshadow(gaussian, #00000073, 28, 0.1, 0, 10);
+}
+
+.wizard-logo {
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to bottom right, -pr-logo-1, -pr-logo-2);
+}
+
+/* ---------- Dialoge ---------- */
+
+.dialog-pane {
+    -fx-background-color: -pr-bg-1;
+    -fx-border-color: -pr-border;
+    -fx-border-width: 1;
+}
+.dialog-pane .header-panel {
+    -fx-background-color: -pr-card;
+}
+.dialog-pane .label {
+    -fx-text-fill: -pr-text;
+}
+.dialog-pane .button {
+    -fx-background-color: -pr-card-2;
+}
+
+/* ---------- Sidebar-Scroll (aeussere Leiste unsichtbar und nicht klickbar) ---------- */
+
+.sidebar-scroll .scroll-bar:vertical {
+    -fx-pref-width: 0;
+}
+.sidebar-scroll .scroll-bar:horizontal {
+    -fx-pref-height: 0;
+}
+.sidebar-scroll .scroll-bar .thumb,
+.sidebar-scroll .scroll-bar .track {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+/* ---------- Curriculum / Unterricht ---------- */
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane .content {
+    -fx-background-color: transparent;
+}
+
+.sub-card {
+    -fx-background-color: -pr-card-2;
+    -fx-background-radius: 12;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-padding: 16;
+}
+
+.exercise-card {
+    -fx-border-color: derive(-pr-accent, -10%);
+}
+
+.task-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: -pr-text;
+}
+
+.hint-text {
+    -fx-background-color: -pr-hint-bg;
+    -fx-text-fill: -pr-hint-text;
+    -fx-padding: 10 14 10 14;
+    -fx-background-radius: 10;
+    -fx-font-size: 13px;
+}
+
+.project-row {
+    -fx-font-style: italic;
+}
+
+.quiz-question {
+    -fx-background-color: -pr-bg-1;
+    -fx-background-radius: 10;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 12;
+}
+.quiz-option {
+    -fx-text-fill: -pr-text;
+    -fx-padding: 2 0 2 0;
+}
+.quiz-right {
+    -fx-text-fill: -pr-success;
+}
+.quiz-wrong {
+    -fx-text-fill: -pr-error;
+}
+
+/* ---------- Markdown ---------- */
+
+.md-h1 {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-fill: -pr-title;
+}
+.md-h2 {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-fill: -pr-md-h2;
+}
+.md-h3 {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-fill: -pr-text;
+}
+.md-p {
+    -fx-fill: -pr-md-p;
+    -fx-font-size: 13.5px;
+}
+.md-bold {
+    -fx-font-weight: bold;
+    -fx-fill: -pr-md-bold;
+}
+.md-code-inline {
+    -fx-font-family: "Consolas";
+    -fx-fill: -pr-code-inline;
+    -fx-font-size: 12.5px;
+}
+.md-code-line {
+    -fx-font-family: "Consolas";
+    -fx-fill: -pr-code-comment;
+    -fx-font-size: 12.5px;
+}
+.md-code {
+    -fx-font-family: "Consolas";
+    -fx-fill: -pr-code-text;
+    -fx-font-size: 12.5px;
+}
+
+/* ---------- Sprachauswahl ---------- */
+
+.choice-card {
+    -fx-padding: 16 18 16 18;
+    -fx-cursor: hand;
+}
+.choice-hover {
+    -fx-border-color: -pr-accent;
+    -fx-effect: dropshadow(gaussian, -pr-glow, 16, 0.15, 0, 0);
+}
+.choice-titel {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -pr-title;
+}
+.choice-beschreibung {
+    -fx-text-fill: -pr-text-dim;
+    -fx-font-size: 12.5px;
+}
+
+/* ---------- ComboBox ---------- */
+
+.combo-box {
+    -fx-background-color: -pr-card-2;
+    -fx-background-radius: 10;
+    -fx-border-color: -pr-border;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 2 6 2 10;
+}
+.combo-box .list-cell {
+    -fx-text-fill: -pr-text;
+    -fx-background-color: transparent;
+}
+.combo-box .arrow,
+.combo-box .arrow-button {
+    -fx-background-color: -pr-text-dim;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: -pr-card;
+    -fx-border-color: -pr-border;
+    -fx-border-width: 1;
+}
+.combo-box-popup .list-cell {
+    -fx-background-color: -pr-card;
+    -fx-text-fill: -pr-text;
+    -fx-padding: 6 10 6 10;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: -pr-listhover;
+}
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: -pr-listsel;
+}

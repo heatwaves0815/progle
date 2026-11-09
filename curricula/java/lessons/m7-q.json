@@ -1,0 +1,66 @@
+{
+  "id": "m7-q",
+  "typ": "modul-quiz",
+  "titel": "Modul-Quiz: Fortgeschritten",
+  "lernziele": [
+    "Collections, Generics, Exceptions und Enums prüfen",
+    "Eine Wörterbuch-App als Abschluss bauen"
+  ],
+  "erklaerung": "## Sammlungen & Sicherheit im Test\nFünf Fragen. In der **Abschlussaufgabe** baust du ein kleines Wörterbuch mit HashMap und eigener Exception.",
+  "beispiel-code": "import java.util.ArrayList;\n\npublic class MusterCollections {\n\n    public static void main(String[] args) {\n        ArrayList<Integer> punkte = new ArrayList<>();\n        punkte.add(90);\n        punkte.add(75);\n        System.out.println(punkte.size());\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Abschlussaufgabe 'Wörterbuch': Klasse WoerterbuchDemo mit HashMap<String, String> (deutsch → englisch), gefüllt mit 'Haus' → 'house' und 'Baum' → 'tree'. In main: get(\"Haus\") ausgeben als 'Haus = house', und get(\"Auto\") sicher abfragen: wenn null, gib 'Unbekannt' aus. Ausgabe:\nHaus = house\nUnbekannt",
+      "start-code": "import java.util.HashMap;\n\npublic class WoerterbuchDemo {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Erst get(\"Auto\") in eine Variable holen, dann auf null prüfen.",
+        "String uebersetzung = wortbuch.get(\"Auto\"); if (uebersetzung == null) { ... }",
+        "Für den Fund-Fall: System.out.println(\"Haus = \" + wortbuch.get(\"Haus\"));"
+      ],
+      "loesung": "import java.util.HashMap;\n\npublic class WoerterbuchDemo {\n\n    public static void main(String[] args) {\n        HashMap<String, String> wortbuch = new HashMap<>();\n        wortbuch.put(\"Haus\", \"house\");\n        wortbuch.put(\"Baum\", \"tree\");\n\n        System.out.println(\"Haus = \" + wortbuch.get(\"Haus\"));\n\n        String uebersetzung = wortbuch.get(\"Auto\");\n        if (uebersetzung == null) {\n            System.out.println(\"Unbekannt\");\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Haus = house\nUnbekannt" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Welche Sammlung für Schlüssel-Wert-Paare?",
+      "optionen": ["ArrayList", "HashSet", "HashMap", "Array"],
+      "richtig": 2,
+      "erklaerung": "HashMap speichert Paare aus Schlüssel und Wert."
+    },
+    {
+      "frage": "Wofür steht <T> in Box<T>?",
+      "optionen": ["Für Text", "Für einen Typ-Platzhalter", "Für True", "Für Tabelle"],
+      "richtig": 1,
+      "erklaerung": "Generics: T wird beim Einsatz durch einen konkreten Typ ersetzt."
+    },
+    {
+      "frage": "Was fängt catch (Exception e) alles?",
+      "optionen": ["Nur ArithmeticException", "Alle Exceptions (als Ober-Typ)", "Nur checked", "Nichts"],
+      "richtig": 1,
+      "erklaerung": "Exception ist der Ober-Typ aller Exceptions - fängt alles (grob, aber sicher)."
+    },
+    {
+      "frage": "Wie viele Werte kann ein HashSet 'A', 'A', 'B' enthalten?",
+      "optionen": ["3", "2", "1", "0"],
+      "richtig": 1,
+      "erklaerung": "Duplikate fliegen raus: nur A und B bleiben."
+    },
+    {
+      "frage": "Wie iterierst du über alle Werte eines Enums Status?",
+      "optionen": ["Status.list()", "Status.values()", "Status.all()", "for (Status s in Status)"],
+      "richtig": 1,
+      "erklaerung": "values() liefert alle Enum-Konstanten als Array."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Null nicht prüfen bei get()",
+      "erklaerung": "map.get(\"Fehlend\") liefert null - besser containsKey() oder null-Check, sonst NullPointerException."
+    },
+    {
+      "fehler": "Box<int> schreiben",
+      "erklaerung": "Generics brauchen Objekt-Typen: Box<Integer>."
+    }
+  ]
+}

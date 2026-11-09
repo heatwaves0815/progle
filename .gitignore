@@ -1,0 +1,10 @@
+﻿target/
+config.json
+*.iml
+.idea/
+.vscode/
+tts/
+dist/
+
+# Dateien, die Programme im Editor zur Laufzeit anlegen (Testausgaben, Debug)
+/*.txt

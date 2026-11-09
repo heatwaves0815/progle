@@ -1,0 +1,49 @@
+{
+  "id": "m6-l01",
+  "typ": "lektion",
+  "titel": "Vererbung",
+  "lernziele": [
+    "Mit extends Eigenschaften erben",
+    "super nutzen, um den Eltern-Konstruktor aufzurufen",
+    "Die ist-ein-Beziehung erkennen"
+  ],
+  "erklaerung": "## Vom General zum Spezialisten\n**Vererbung**: Eine Klasse erbt Attribute und Methoden einer anderen.\n```java\nclass Fahrzeug {\n    String modell;\n\n    Fahrzeug(String modell) {\n        this.modell = modell;\n    }\n\n    void infos() {\n        System.out.println(\"Fahrzeug: \" + modell);\n    }\n}\n\nclass EAuto extends Fahrzeug {\n    int reichweite;\n\n    EAuto(String modell, int reichweite) {\n        super(modell);            // Eltern-Konstruktor aufrufen\n        this.reichweite = reichweite;\n    }\n}\n```\n- `extends` heißt: EAuto **ist ein** Fahrzeug (plus Extras).\n- `super(...)` ruft den Konstruktor der Elternklasse - muss erste Anweisung sein.\n- Das EAuto kann alles vom Fahrzeug UND seine eigenen Attribute.\nRegel: Vererbe nur bei echter **ist-ein**-Beziehung (EAuto IST ein Fahrzeug). Ein Motor IST kein Auto - das wäre eine hat-ein-Beziehung (Attribut!).",
+  "beispiel-code": "public class Fuhrpark {\n\n    public static void main(String[] args) {\n        EAuto tesla = new EAuto(\"Model 3\", 500);\n        tesla.infos();\n        System.out.println(\"Reichweite: \" + tesla.reichweite + \" km\");\n    }\n}\n\nclass Fahrzeug {\n    String modell;\n\n    Fahrzeug(String modell) {\n        this.modell = modell;\n    }\n\n    void infos() {\n        System.out.println(\"Fahrzeug: \" + modell);\n    }\n}\n\nclass EAuto extends Fahrzeug {\n    int reichweite;\n\n    EAuto(String modell, int reichweite) {\n        super(modell);\n        this.reichweite = reichweite;\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Zoodemo: Basisklasse Tier (Attribut name, Konstruktor, Methode gibLaut() die '...' ausgibt). Klasse Hund extends Tier: Konstruktor ruft super(name), gibLaut() gibt '<name> sagt: Wuff'. main: Hund hund = new Hund(\"Rex\"); hund.gibLaut(); → 'Rex sagt: Wuff'.",
+      "start-code": "public class Zoodemo {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "class Tier { String name; Tier(String name) {...} void gibLaut() {...} }",
+        "class Hund extends Tier mit Konstruktor Hund(String name) { super(name); }",
+        "gibLaut in Hund überschreibt die Eltern-Version."
+      ],
+      "loesung": "public class Zoodemo {\n\n    public static void main(String[] args) {\n        Hund hund = new Hund(\"Rex\");\n        hund.gibLaut();\n    }\n}\n\nclass Tier {\n    String name;\n\n    Tier(String name) {\n        this.name = name;\n    }\n\n    void gibLaut() {\n        System.out.println(\"...\");\n    }\n}\n\nclass Hund extends Tier {\n\n    Hund(String name) {\n        super(name);\n    }\n\n    void gibLaut() {\n        System.out.println(name + \" sagt: Wuff\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Rex sagt: Wuff" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was bedeutet extends?",
+      "optionen": ["Die Klasse wird gelöscht", "Die Klasse erbt von einer anderen", "Die Klasse ist abstract", "Die Klasse wird importiert"],
+      "richtig": 1,
+      "erklaerung": "extends heißt: Diese Klasse ist eine Spezialisierung der Elternklasse."
+    },
+    {
+      "frage": "Wozu dient super(...) im Konstruktor?",
+      "optionen": ["Zum Aufruf der Eltern-Konstruktors", "Zum Aufruf von main", "Zum Löschen von Attributen", "Für static"],
+      "richtig": 0,
+      "erklaerung": "super(...) initialisiert den Teil des Objekts, der aus der Elternklasse kommt."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "super(...) vergessen",
+      "erklaerung": "Fehlt der explizite Aufruf, versucht Java automatisch super() ohne Parameter - gibt es den nicht, kompiliert es nicht."
+    },
+    {
+      "fehler": "Hat-ein als ist-ein modelliert",
+      "erklaerung": "Motor extends Auto wäre falsch. Der Motor ist ein Teil (Attribut), kein Spezialfall."
+    }
+  ]
+}

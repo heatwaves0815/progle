@@ -1,0 +1,49 @@
+{
+  "id": "m8-l01",
+  "typ": "lektion",
+  "titel": "Lambdas - Funktionen als Werte",
+  "lernziele": [
+    "Lambda-Syntax lesen und schreiben",
+    "Lambdas an Methoden übergeben",
+    "Verstehen, wofür sie da sind"
+  ],
+  "erklaerung": "## Code in einer Variable\nEin **Lambda** ist eine kurze, anonyme Funktion: `parameter -> ergebnis`\n```java\ninterface Rechner {\n    double rechne(double a, double b);\n}\n\nRechner addition = (a, b) -> a + b;\nRechner multiplikation = (a, b) -> a * b;\n\nSystem.out.println(addition.rechne(2, 3));       // 5\nSystem.out.println(multiplikation.rechne(2, 3)); // 6\n```\nDer Lambda passt zu dem, was das Interface verlangt (hier: zwei double rein, ein double raus). Ein Interface mit genau EINER Methode nennt man **funktionale Schnittstelle**.\n## Noch kürzer\n- Ein Parameter ohne Klammern: `x -> x * x`\n- Nur ein Ausdruck ohne return: `(a, b) -> a + b`\n- Mehr Zeilen mit geschweiften Klammern: `(a, b) -> { int s = (int) (a + b); return s; }`\nLambdas ersetzen langweilige 'eine-Methode-Klassen' durch drei Zeichen.",
+  "beispiel-code": "public class Rechenzentrale {\n\n    interface Operation {\n        int anwenden(int a, int b);\n    }\n\n    public static void rechnen(int a, int b, Operation op) {\n        System.out.println(\"Ergebnis: \" + op.anwenden(a, b));\n    }\n\n    public static void main(String[] args) {\n        rechnen(10, 4, (a, b) -> a + b);\n        rechnen(10, 4, (a, b) -> a * b);\n        rechnen(10, 4, (a, b) -> a - b);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Textfilter: interface Pruefer { boolean pruefe(String text); }. main ruft eine Methode pruefe(text, lambda) mit zwei Lambdas auf: (t) -> t.length() > 5 und (t) -> t.contains(\"a\"). Bei 'Banane' → Ausgabe 'Lang genug: true' und 'Enthält a: true'.",
+      "start-code": "public class Textfilter {\n\n    interface Pruefer {\n        boolean pruefe(String text);\n    }\n\n    public static void pruefe(String text, Pruefer pruefer) {\n        System.out.println(pruefer.pruefe(text));\n    }\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Die Methode pruefe gibt das boolean-Ergebnis aus: System.out.println(pruefer.pruefe(text));",
+        "Im main: System.out.println(\"Lang genug:\"); pruefe(\"Banane\", t -> t.length() > 5);",
+        "Danach: System.out.println(\"Enthält a:\"); pruefe(\"Banane\", t -> t.contains(\"a\"));"
+      ],
+      "loesung": "public class Textfilter {\n\n    interface Pruefer {\n        boolean pruefe(String text);\n    }\n\n    public static void pruefe(String text, Pruefer pruefer) {\n        System.out.println(pruefer.pruefe(text));\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"Lang genug:\");\n        pruefe(\"Banane\", t -> t.length() > 5);\n        System.out.println(\"Enthält a:\");\n        pruefe(\"Banane\", t -> t.contains(\"a\"));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Lang genug:\ntrue\nEnthält a:\ntrue" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was bedeutet der Pfeil in (x) -> x * 2?",
+      "optionen": ["Vergleich", "Eingabe -> Ausgabe der Funktion", "Größer-gleich", "Zuweisung"],
+      "richtig": 1,
+      "erklaerung": "Links die Parameter, rechts der Körper des Lambdas."
+    },
+    {
+      "frage": "Wann passt ein Lambda zu einem Interface?",
+      "optionen": ["Immer", "Wenn das Interface genau eine abstrakte Methode hat", "Wenn es drei Methoden hat", "Nur bei static"],
+      "richtig": 1,
+      "erklaerung": "Funktionale Schnittstelle = genau eine abstrakte Methode."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Interface mit zwei Methoden",
+      "erklaerung": "Ein Lambda braucht EINE eindeutige Methode. Bei mehreren: normale Klasse schreiben."
+    },
+    {
+      "fehler": "Klammern bei mehreren Parametern vergessen",
+      "erklaerung": "a, b -> a + b geht nicht - bei mehreren Parametern: (a, b) -> a + b."
+    }
+  ]
+}

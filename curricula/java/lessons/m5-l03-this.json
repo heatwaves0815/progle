@@ -1,0 +1,49 @@
+{
+  "id": "m5-l03",
+  "typ": "lektion",
+  "titel": "this - das Ich der Klasse",
+  "lernziele": [
+    "Wissen, wofür this steht",
+    "Namenskonflikte mit this lösen",
+    "this für Konstruktor-Ketten nutzen"
+  ],
+  "erklaerung": "## this = dieses Objekt selbst\nInnerhalb einer Methode oder des Konstruktors bedeutet `this` **das aktuelle Objekt**:\n```java\nclass Kontakt {\n    String name;\n\n    Kontakt(String name) {\n        this.name = name;   // this.name = Attribut; name = Parameter\n    }\n}\n```\n## Wann brauche ich this?\nWenn Parameter und Attribut **gleich heißen**, unterscheidet `this.name` (Attribut) von `name` (Parameter).\nOhne Namenskonflikt ist `this.` optional: `this.name = \"Alex\";` und `name = \"Alex\";` sind dann identisch - aber mit this. ist die Absicht sofort klar.\n## Konstruktoren verketten\n`this(...)` ruft einen anderen Konstruktor derselben Klasse auf (muss die erste Anweisung sein):\n```java\nPunkt() {\n    this(0, 0);        // ruft Punkt(int, int)\n}\nPunkt(int x, int y) { ... }\n```",
+  "beispiel-code": "public class NamenskartenApp {\n\n    public static void main(String[] args) {\n        Karte k1 = new Karte(\"Kim\");\n        Karte k2 = new Karte(\"Tim\", \"Gast\");\n        System.out.println(k1.info());\n        System.out.println(k2.info());\n    }\n}\n\nclass Karte {\n    String name;\n    String rolle;\n\n    Karte(String name) {\n        this(name, \"Besucher\");   // verketteter Aufruf\n    }\n\n    Karte(String name, String rolle) {\n        this.name = name;\n        this.rolle = rolle;\n    }\n\n    String info() {\n        return name + \" (\" + rolle + \")\";\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Kontaktbuch: Klasse Kontakt mit Attributen name und telefon und EINEM Konstruktor Kontakt(String name, String telefon), der this verwendet. main erzeugt 'Anna' mit '0123' und gibt 'Anna: 0123' aus.",
+      "start-code": "public class Kontaktbuch {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "this.name = name; this.telefon = telefon; - links Attribut, rechts Parameter.",
+        "Ohne this. würde die Zuweisung nur den Parameter auf sich selbst setzen!",
+        "Ausgabe: k.name + \": \" + k.telefon"
+      ],
+      "loesung": "public class Kontaktbuch {\n\n    public static void main(String[] args) {\n        Kontakt k = new Kontakt(\"Anna\", \"0123\");\n        System.out.println(k.name + \": \" + k.telefon);\n    }\n}\n\nclass Kontakt {\n    String name;\n    String telefon;\n\n    Kontakt(String name, String telefon) {\n        this.name = name;\n        this.telefon = telefon;\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Anna: 0123" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was bedeutet this in einer Methode?",
+      "optionen": ["Die Klasse selbst", "Das aktuelle Objekt", "Den Konstruktor", "Ein import"],
+      "richtig": 1,
+      "erklaerung": "this verweist auf das Objekt, in dessen Kontext der Code gerade läuft."
+    },
+    {
+      "frage": "Wann ist this nötig?",
+      "optionen": ["Immer", "Nur bei gleichnamigem Parameter, um das Attribut zu markieren", "Nur in main", "Nie"],
+      "richtig": 1,
+      "erklaerung": "Ohne Namenskonflikt ist this. optional - aber oft lesbarer."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "this vergessen",
+      "erklaerung": "name = name; im Konstruktor weist den Parameter sich selbst zu - das Attribut bleibt null. Klassischer, schwer zu sehender Fehler!"
+    },
+    {
+      "fehler": "this(...) nicht als erste Anweisung",
+      "erklaerung": "Der verkettete Konstruktor-Aufruf this(...) muss die ERSTE Zeile im Konstruktor stehen."
+    }
+  ]
+}

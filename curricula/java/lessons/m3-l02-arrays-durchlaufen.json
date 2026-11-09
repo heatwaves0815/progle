@@ -1,0 +1,60 @@
+{
+  "id": "m3-l02",
+  "typ": "lektion",
+  "titel": "Arrays durchlaufen",
+  "lernziele": [
+    "Arrays mit for und length komplett durchlaufen",
+    "Summen über Arrays bilden",
+    "Den größten Wert finden"
+  ],
+  "erklaerung": "## Schleife trifft Array\nDas Traumpaar: `for` + `length` – so läuftst du jedes Array ab, egal wie groß:\n```java\nint[] temperaturen = {12, 15, 9, 21};\n\nfor (int i = 0; i < temperaturen.length; i++) {\n    System.out.println(\"Tag \" + (i + 1) + \": \" + temperaturen[i]);\n}\n```\n## Summe und Maximum\n```java\nint summe = 0;\nfor (int i = 0; i < temperaturen.length; i++) {\n    summe += temperaturen[i];\n}\n```\nMaximum: Merke dir den ersten Wert als Kandidat und aktualisiere, wenn du etwas Größeres findest.\n## Die for-each-Schleife\nWenn du nur die Werte brauchst (keinen Index), geht es noch eleganter:\n```java\nfor (int wert : temperaturen) {\n    System.out.println(wert);\n}\n```",
+  "beispiel-code": "public class Temperaturen {\n\n    public static void main(String[] args) {\n        int[] temperaturen = {12, 15, 9, 21};\n\n        int summe = 0;\n        int maximum = temperaturen[0];\n        for (int i = 0; i < temperaturen.length; i++) {\n            summe += temperaturen[i];\n            if (temperaturen[i] > maximum) {\n                maximum = temperaturen[i];\n            }\n        }\n        double durchschnitt = (double) summe / temperaturen.length;\n\n        System.out.println(\"Summe: \" + summe);\n        System.out.println(\"Durchschnitt: \" + durchschnitt);\n        System.out.println(\"Maximum: \" + maximum);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Umsatzliste: Das Array umsatz = {100, 250, 90, 400}. Gib jede Zeile als 'Tag <i>: <wert>' aus, wobei i bei 1 beginnt (Tag 1: 100 ...).",
+      "start-code": "public class Umsatzliste {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "for (int i = 0; i < umsatz.length; i++) { ... }",
+        "Anzeige-Nummer ist i + 1: \"Tag \" + (i + 1) + \": \" + umsatz[i]",
+        "Die Klammern um (i + 1) sind wichtig, sonst wird verkettet statt addiert."
+      ],
+      "loesung": "public class Umsatzliste {\n\n    public static void main(String[] args) {\n        int[] umsatz = {100, 250, 90, 400};\n\n        for (int i = 0; i < umsatz.length; i++) {\n            System.out.println(\"Tag \" + (i + 1) + \": \" + umsatz[i]);\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Tag 1: 100\nTag 2: 250\nTag 3: 90\nTag 4: 400" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Punktejagd: punkte = {3, 9, 4, 9, 1}. Finde den HÖCHSTEN Wert per Schleife und gib 'Bestpunktzahl: <max>' aus.",
+      "start-code": "public class Punktejagd {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Starte mit int max = punkte[0];",
+        "Im for-Durchlauf: if (punkte[i] > max) { max = punkte[i]; }",
+        "Nach der Schleife ausgeben – nicht innerhalb."
+      ],
+      "loesung": "public class Punktejagd {\n\n    public static void main(String[] args) {\n        int[] punkte = {3, 9, 4, 9, 1};\n\n        int max = punkte[0];\n        for (int i = 1; i < punkte.length; i++) {\n            if (punkte[i] > max) {\n                max = punkte[i];\n            }\n        }\n        System.out.println(\"Bestpunktzahl: \" + max);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Bestpunktzahl: 9" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie läuftst du ein Array daten komplett durch?",
+      "optionen": ["for (int i = 0; i <= daten.length; i++)", "for (int i = 1; i < daten.length; i++)", "for (int i = 0; i < daten.length; i++)", "for (int i = 0; i < daten.length - 1; i++)"],
+      "richtig": 2,
+      "erklaerung": "Von 0 bis length - 1 – also i < length."
+    },
+    {
+      "frage": "Was tut for (int wert : zahlen)?",
+      "optionen": ["Zählt Ziffern", "Geht alle Werte durch ohne Index", "Sortiert das Array", "Rechnet die Summe"],
+      "richtig": 1,
+      "erklaerung": "Das ist die for-each-Schleife: liefert jeden Wert einmal."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Maximum mit 0 starten",
+      "erklaerung": "Bei negativen Werten wäre max immer 0. Starte mit dem ersten Array-Wert."
+    },
+    {
+      "fehler": "i + 1 ohne Klammern in der Ausgabe",
+      "erklaerung": "\"Tag \" + i + 1 verkettet Text: 'Tag 01'. Klammern: \"Tag \" + (i + 1)."
+    }
+  ]
+}

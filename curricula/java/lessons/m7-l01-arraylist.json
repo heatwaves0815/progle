@@ -1,0 +1,49 @@
+{
+  "id": "m7-l01",
+  "typ": "lektion",
+  "titel": "ArrayList - Arrays mit Wachstum",
+  "lernziele": [
+    "Eine ArrayList anlegen und befüllen",
+    "Elemente hinzufügen, holen, entfernen",
+    "Größenunterschied zum Array kennen"
+  ],
+  "erklaerung": "## Der Dehnbar-Array\nArrays haben feste Größe. Die **ArrayList** wächst und schrumpft mit:\n```java\nimport java.util.ArrayList;\n\nArrayList<String> namen = new ArrayList<>();\nnamen.add(\"Anna\");          // anhängen\nnamen.add(\"Ben\");\nSystem.out.println(namen.get(0));     // Anna (Index ab 0)\nSystem.out.println(namen.size());     // 2 (size(), nicht length!)\nnamen.remove(\"Ben\");\nSystem.out.println(namen.contains(\"Ben\"));   // false\n```\n## Wichtige Methoden\n- `add(wert)` anhängen, `add(index, wert)` einfügen\n- `get(index)` lesen, `set(index, wert)` ersetzen\n- `remove(index)` oder `remove(objekt)` löschen\n- `size()` Anzahl, `contains(wert)` enthält?\nDer `<String>` in den spitzen Klammern sagt: In diese Liste gehören Strings (Generics - nächste Lektion vertieft das). For-each funktioniert wie bei Arrays: `for (String name : namen) { ... }`",
+  "beispiel-code": "import java.util.ArrayList;\n\npublic class Warteschlange {\n\n    public static void main(String[] args) {\n        ArrayList<String> warteschlange = new ArrayList<>();\n        warteschlange.add(\"Kunde A\");\n        warteschlange.add(\"Kunde B\");\n        warteschlange.add(\"Kunde C\");\n\n        System.out.println(\"Nächster: \" + warteschlange.get(0));\n        warteschlange.remove(0);\n        System.out.println(\"Neuer Nächster: \" + warteschlange.get(0));\n        System.out.println(\"Wartende: \" + warteschlange.size());\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Playlist: ArrayList<String> 'songs' mit 'Song A', 'Song B', 'Song C'. Gib size() aus als 'Anzahl: 3', entferne 'Song B', gib erneut aus: 'Anzahl: 2'.",
+      "start-code": "import java.util.ArrayList;\n\npublic class Playlist {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "ArrayList<String> songs = new ArrayList<>();",
+        "Entfernen über das Objekt: songs.remove(\"Song B\");",
+        "Anzahl mit songs.size() - ohne Klammern beim Feld, mit Klammern bei der Methode."
+      ],
+      "loesung": "import java.util.ArrayList;\n\npublic class Playlist {\n\n    public static void main(String[] args) {\n        ArrayList<String> songs = new ArrayList<>();\n        songs.add(\"Song A\");\n        songs.add(\"Song B\");\n        songs.add(\"Song C\");\n        System.out.println(\"Anzahl: \" + songs.size());\n\n        songs.remove(\"Song B\");\n        System.out.println(\"Anzahl: \" + songs.size());\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Anzahl: 3\nAnzahl: 2" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie bekommst du die Anzahl der Elemente einer ArrayList liste?",
+      "optionen": ["liste.length", "liste.length()", "liste.size()", "liste.count()"],
+      "richtig": 2,
+      "erklaerung": "ArrayList nutzt die Methode size(); Arrays das Feld length."
+    },
+    {
+      "frage": "Was passiert, wenn du in eine ArrayList mit <String> eine Zahl legen willst?",
+      "optionen": ["Geht problemlos", "Kompilierfehler", "Die Zahl wird zu Text", "Zur Laufzeit stürzt es ab"],
+      "richtig": 1,
+      "erklaerung": "Die spitze Klammer legt den Element-Typ fest - der Compiler wacht darüber."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "import vergessen",
+      "erklaerung": "Ohne import java.util.ArrayList; → 'cannot find symbol: class ArrayList'."
+    },
+    {
+      "fehler": "length statt size()",
+      "erklaerung": "Die ArrayList kennt kein length-Feld - size() ist der richtige Weg."
+    }
+  ]
+}

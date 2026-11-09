@@ -1,0 +1,60 @@
+{
+  "id": "m1-l06",
+  "typ": "lektion",
+  "titel": "Eingaben mit dem Scanner",
+  "lernziele": [
+    "Den Scanner anlegen und benutzen können",
+    "Text, ganze Zahlen und Kommazahlen einlesen",
+    "Eingaben direkt weiterverarbeiten"
+  ],
+  "erklaerung": "## Das Programm fragt, du antwortest\nBisher redete dein Programm nur. Mit dem **Scanner** kann es zuhören:\n```java\nimport java.util.Scanner;              // oben in der Datei\n\npublic class Begrüssung {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);   // Scanner anlegen\n\n        System.out.print(\"Wie heißt du? \");\n        String name = scanner.nextLine();           // liest eine Textzeile\n\n        System.out.println(\"Hallo, \" + name + \"!\");\n    }\n}\n```\n## Die wichtigsten Lese-Befehle\n- `scanner.nextLine()` liest eine **Textzeile** → String\n- `scanner.nextInt()` liest eine **ganze Zahl** → int\n- `scanner.nextDouble()` liest eine **Kommazahl** → double\nMerke: Vor dem Lesen fragst du den Nutzer mit `System.out.print(\"...?\")`, was er eingeben soll.\nIn Progle simuliert die Prüfung deine Tastatureingaben automatisch – du bekommst also sofort Feedback.",
+  "beispiel-code": "import java.util.Scanner;\n\npublic class KaffeeBestellung {\n\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n\n        System.out.print(\"Dein Name? \");\n        String name = scanner.nextLine();\n        System.out.print(\"Wie viele Tassen? \");\n        int tassen = scanner.nextInt();\n\n        double preisProTasse = 1.50;\n        double summe = tassen * preisProTasse;\n        System.out.println(name + \", das kostet \" + summe + \" Euro.\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Empfang fragt mit dem Scanner nach einem Namen (nextLine) und begrüßt danach mit 'Willkommen, <name>!'. Die Prüfung simuliert die Eingabe 'Samira'.",
+      "start-code": "import java.util.Scanner;\n\npublic class Empfang {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Oben in die Datei: import java.util.Scanner;",
+        "In main: Scanner scanner = new Scanner(System.in);",
+        "String name = scanner.nextLine(); dann ausgeben mit \"Willkommen, \" + name + \"!\""
+      ],
+      "loesung": "import java.util.Scanner;\n\npublic class Empfang {\n\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        System.out.print(\"Dein Name? \");\n        String name = scanner.nextLine();\n        System.out.println(\"Willkommen, \" + name + \"!\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "eingabe": "Samira", "erwartet": "Dein Name? Willkommen, Samira!" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Addierer liest zwei ganze Zahlen ein (nextInt) und gibt ihre Summe aus als 'Summe: <zahl>'. Die Prüfung simuliert die Eingaben 7 und 5. Die Frage-Ausgaben gehören mit zur Ausgabe.",
+      "start-code": "import java.util.Scanner;\n\npublic class Addierer {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Zwei scanner.nextInt()-Aufrufe, jeweils in eine eigene int-Variable.",
+        "int summe = zahl1 + zahl2;",
+        "Ausgabe: \"Summe: \" + summe"
+      ],
+      "loesung": "import java.util.Scanner;\n\npublic class Addierer {\n\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        System.out.print(\"Erste Zahl? \");\n        int zahl1 = scanner.nextInt();\n        System.out.print(\"Zweite Zahl? \");\n        int zahl2 = scanner.nextInt();\n\n        int summe = zahl1 + zahl2;\n        System.out.println(\"Summe: \" + summe);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "eingabe": "7\n5", "erwartet": "Erste Zahl? Zweite Zahl? Summe: 12" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wofür steht import java.util.Scanner; ganz oben in der Datei?",
+      "optionen": ["Es startet den Scanner", "Es macht die Scanner-Klasse aus der Java-Bibliothek verfügbar", "Es löscht alte Eingaben", "Es ist nur Deko"],
+      "richtig": 1,
+      "erklaerung": "Import heißt: Ich benutze eine Klasse, die außerhalb meiner Datei liegt."
+    },
+    {
+      "frage": "Welcher Scanner-Befehl liest eine ganze Zahl?",
+      "optionen": ["scanner.nextLine()", "scanner.read()", "scanner.nextInt()", "scanner.getDouble()"],
+      "richtig": 2,
+      "erklaerung": "nextInt() liest eine ganze Zahl, nextLine() eine Textzeile, nextDouble() eine Kommazahl."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Import vergessen",
+      "erklaerung": "Ohne import java.util.Scanner; meldet der Compiler: 'cannot find symbol: class Scanner'."
+    },
+    {
+      "fehler": "nextInt() liest, aber nextLine() danach springt in Leere",
+      "erklaerung": "nextInt() nimmt nur die Zahl und lässt den Zeilenumbruch stehen. Ein nächstes nextLine() bekommt dann einen leeren String – bekanntes Java-Verhalten, merken!"
+    }
+  ]
+}

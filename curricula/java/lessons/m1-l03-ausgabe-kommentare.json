@@ -1,0 +1,60 @@
+{
+  "id": "m1-l03",
+  "typ": "lektion",
+  "titel": "Ausgabe und Kommentare",
+  "lernziele": [
+    "println und print unterscheiden können",
+    "Sonderzeichen wie Zeilenumbruch und Tab nutzen",
+    "Code mit Kommentaren lesbar machen"
+  ],
+  "erklaerung": "## Zwei Ausgabe-Befehle\n- `System.out.println(\"...\")` gibt aus und macht einen **Zeilenumbruch** (ln = line new).\n- `System.out.print(\"...\")` gibt aus und **bleibt in der Zeile**.\n```java\nSystem.out.print(\"3 + 4 \");\nSystem.out.println(\"= 7\");   // Ausgabe: 3 + 4 = 7\n```\n## Sonderzeichen (Escape-Sequenzen)\nManche Zeichen steuern die Ausgabe, wenn sie mit einem Backslash `\\` kommen:\n- `\\n` = Zeilenumbruch, `\\t` = Tabulator (Einzug)\n- `\\\"` = Anführungszeichen im Text, `\\\\` = Backslash selbst\n```java\nSystem.out.println(\"Name\\tPunkte\");\nSystem.out.println(\"Anna\\t100\");\n```\n## Kommentare\nKommentare ignoriert der Computer – sie sind Notizen für Menschen:\n- `//` einzeilig\n- `/* ... */` mehrzeilig\nKommentare erklären das **Warum**, nicht das Offensichtliche.",
+  "beispiel-code": "public class Etikett {\n\n    public static void main(String[] args) {\n        // Kopfzeile mit Tabulator ausrichten\n        System.out.println(\"Artikel\\tPreis\");\n        System.out.println(\"Brot\\t2.49\");\n\n        // print bleibt in der Zeile, println beendet sie\n        System.out.print(\"Gesamt: \");\n        System.out.println(\"2.49 Euro\");\n\n        /* Mehrzeiliger Kommentar:\n           hier könnte man später\n           Rabatte einbauen. */\n        System.out.println(\"Danke für Ihren Einkauf!\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Preisliste soll mit Tabulator ausrichten: Zeile 1 'Artikel\tPreis', Zeile 2 'Brot\t2.49', Zeile 3 'Milch\t1.19'. (Der \t steht für einen Tabulator.)",
+      "start-code": "public class Preisliste {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "In Java schreibst du den Tabulator als \\t innerhalb des Strings.",
+        "Der Backslash selbst muss im Java-Code als \\t geschrieben werden – im Quelltext also: \"Artikel\\tPreis\".",
+        "Drei println-Anweisungen mit je einem \\t zwischen Artikel und Preis."
+      ],
+      "loesung": "public class Preisliste {\n\n    public static void main(String[] args) {\n        System.out.println(\"Artikel\\tPreis\");\n        System.out.println(\"Brot\\t2.49\");\n        System.out.println(\"Milch\\t1.19\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Artikel\tPreis\nBrot\t2.49\nMilch\t1.19" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse EtikettDruck soll mit print und println arbeiten: Erst 'Hallo ' OHNE Zeilenumbruch, dann 'Welt!' – die Ausgabe soll also 'Hallo Welt!' in einer Zeile sein.",
+      "start-code": "public class EtikettDruck {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "print macht keinen Zeilenumbruch, println schon.",
+        "Erster Befehl: System.out.print(\"Hallo \"); – mit Leerzeichen im Text!",
+        "Zweiter Befehl: System.out.println(\"Welt!\");"
+      ],
+      "loesung": "public class EtikettDruck {\n\n    public static void main(String[] args) {\n        System.out.print(\"Hallo \");\n        System.out.println(\"Welt!\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Hallo Welt!" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was ist der Unterschied zwischen print und println?",
+      "optionen": ["print ist schneller", "println macht danach einen Zeilenumbruch", "println kann keine Zahlen", "Es gibt keinen Unterschied"],
+      "richtig": 1,
+      "erklaerung": "println (= print line) hängt einen Zeilenumbruch an, print nicht."
+    },
+    {
+      "frage": "Was gibt System.out.println(\"A\\tB\"); aus?",
+      "optionen": ["A\\tB", "A B mit großem Abstand (Tabulator)", "AB", "Eine Fehlermeldung"],
+      "richtig": 1,
+      "erklaerung": "\\t ist das Escape-Zeichen für einen Tabulator."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Backslash vergessen",
+      "erklaerung": "Sonderzeichen wie Tabulator beginnen mit \\: statt nur t schreibst du \\t. Der Compiler meldet sonst oft 'illegal character'."
+    },
+    {
+      "fehler": "Anführungszeichen im Text nicht escaped",
+      "erklaerung": "Willst du \" im Text ausgeben, schreibst du \\\" – sonst denkt Java, der String sei zu Ende."
+    }
+  ]
+}

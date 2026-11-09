@@ -1,0 +1,49 @@
+{
+  "id": "m7-l06",
+  "typ": "lektion",
+  "titel": "Enums - feste Wertesets",
+  "lernziele": [
+    "Ein Enum anlegen und nutzen",
+    "Verstehen, warum Enums besser sind als Zahlen-Codes",
+    "Mit switch über Enums arbeiten"
+  ],
+  "erklaerung": "## Werte mit Vornamen\nEin **Enum** ist eine feste Liste möglicher Werte:\n```java\nenum Wochentag { MONTAG, DIENSTAG, MITTWOCH }\n\nWochentag heute = Wochentag.DIENSTAG;\n```\nDamit ist ausgeschlossen, dass jemand Wochentag.FEIERABEND erfindet - nur die definierten Werte existieren.\nVorteile gegenüber String oder int:\n- **Typsicherheit**: Keine Tippfehler wie \"dienstagg\".\n- **Lesbarkeit**: Status.AKTIV ist klarer als die Zahl 2.\n- **Verhalten**: Enums können Methoden und Felder haben.\n```java\nfor (Wochentag tag : Wochentag.values()) {\n    System.out.println(tag);\n}\nSystem.out.println(Wochentag.MONTAG.ordinal());   // Position: 0\n```\nSwitch mit Enums ist superlesbar (Pfeil-Syntax).",
+  "beispiel-code": "public class Lichtschalter {\n\n    enum Zustand { AUS, EINGESCHALTET, DEFEKT }\n\n    public static void main(String[] args) {\n        Zustand lampe = Zustand.AUS;\n\n        switch (lampe) {\n            case AUS -> System.out.println(\"Die Lampe ist aus\");\n            case EINGESCHALTET -> System.out.println(\"Die Lampe leuchtet\");\n            case DEFEKT -> System.out.println(\"Lampe ersetzen!\");\n        }\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Ampelsystem: enum Ampelphase { ROT, GELB, GRUEN }. In main: Ampelphase phase = Ampelphase.GRUEN; switch mit Pfeil-Syntax: ROT → 'Stop', GELB → 'Achtung', GRUEN → 'Fahren'. Ausgabe: 'Fahren'.",
+      "start-code": "public class Ampelsystem {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "enum direkt in der Datei (neben der Klasse) oder innerhalb der Klasse deklarieren.",
+        "switch (phase) { case ROT -> ...; case GELB -> ...; case GRUEN -> ...; }",
+        "Bei Enum-Cases schreibt man NUR den Namen: case GRUEN, nicht case Ampelphase.GRUEN."
+      ],
+      "loesung": "public class Ampelsystem {\n\n    enum Ampelphase { ROT, GELB, GRUEN }\n\n    public static void main(String[] args) {\n        Ampelphase phase = Ampelphase.GRUEN;\n\n        switch (phase) {\n            case ROT -> System.out.println(\"Stop\");\n            case GELB -> System.out.println(\"Achtung\");\n            case GRUEN -> System.out.println(\"Fahren\");\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Fahren" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was ist ein Enum?",
+      "optionen": ["Ein Array", "Eine feste Liste möglicher Werte", "Eine Schleife", "Ein Interface"],
+      "richtig": 1,
+      "erklaerung": "Enum definiert, welche Werte existieren dürfen - mehr gibt es nicht."
+    },
+    {
+      "frage": "Warum Enums statt int-Codes wie status = 2?",
+      "optionen": ["Kürzer", "Lesbar und typsicher", "Schneller", "Weil int verboten ist"],
+      "richtig": 1,
+      "erklaerung": "Status.AKTIV versteht jeder - und falsche Werte sind unmöglich."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Enum-Konstanten mit Anführungszeichen",
+      "erklaerung": "Ampelphase.ROT - ohne Quotes. Quotes wären Strings, nicht Enum-Werte."
+    },
+    {
+      "fehler": "Case mit Klassenname",
+      "erklaerung": "case Ampelphase.ROT geht nicht - im switch über Enums nur case ROT."
+    }
+  ]
+}

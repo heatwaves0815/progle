@@ -1,0 +1,73 @@
+{
+  "id": "m3-q",
+  "typ": "modul-quiz",
+  "titel": "Modul-Quiz: Arrays und Strings",
+  "lernziele": [
+    "Arrays und Strings in Kombination sicher nutzen",
+    "Wissenslücken erkennen",
+    "Einen Wortschlürfer als Abschluss bauen"
+  ],
+  "erklaerung": "## Arrays und Text im Test\nSechs Fragen zum Modul. Danach schreibst du in der **Abschlussaufgabe** einen 'Wortschlürfer', der ein Wort Zeichen für Zeichen verdoppelt.\nBestanden = alle Quizfragen richtig + laufende Abschlussaufgabe.",
+  "beispiel-code": "public class MusterArrays {\n\n    public static void main(String[] args) {\n        String[] worte = {\"a\", \"b\"};\n        for (String w : worte) {\n            System.out.println(w);\n        }\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Abschlussaufgabe 'Wortschlürfer': Die Klasse Wortschluerfer verdoppelt jeden Buchstaben des Wortes 'Javo'? Nein: 'Java' – mithilfe eines StringBuilders in einer for-Schleife über length() und charAt(). Ausgabe: 'JJaavvaa'.",
+      "start-code": "public class Wortschluerfer {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "StringBuilder sb = new StringBuilder();",
+        "for (int i = 0; i < wort.length(); i++) { sb.append(wort.charAt(i)); sb.append(wort.charAt(i)); }",
+        "Am Ende: System.out.println(sb.toString()); – bei 'Java' entsteht JJaavvaa."
+      ],
+      "loesung": "public class Wortschluerfer {\n\n    public static void main(String[] args) {\n        String wort = \"Java\";\n        StringBuilder sb = new StringBuilder();\n\n        for (int i = 0; i < wort.length(); i++) {\n            sb.append(wort.charAt(i));\n            sb.append(wort.charAt(i));\n        }\n        System.out.println(sb.toString());\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "JJaavvaa" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie greifst du auf den 3. Eintrag des Arrays liste zu?",
+      "optionen": ["liste[3]", "liste(3)", "liste[2]", "liste.third()"],
+      "richtig": 2,
+      "erklaerung": "Der 3. Eintrag hat Index 2 (Zählung ab 0)."
+    },
+    {
+      "frage": "Was ergibt \"Hallo\".charAt(1)?",
+      "optionen": ["H", "a", "l", "alo"],
+      "richtig": 1,
+      "erklaerung": "Index 1 ist das zweite Zeichen: 'a'."
+    },
+    {
+      "frage": "Wie viele Zeilen gibt eine Zeile/Spalte-Schleife über ein 3x4-Array aus?",
+      "optionen": ["3", "4", "7", "12"],
+      "richtig": 3,
+      "erklaerung": "3 Zeilen x 4 Spalten = 12 Werte."
+    },
+    {
+      "frage": "Was ergibt \"Test\".equals(\"test\")?",
+      "optionen": ["true", "false", "Fehler", "TEST"],
+      "richtig": 1,
+      "erklaerung": "equals() unterscheidet Groß-/Kleinschreibung – equalsIgnoreCase() nicht."
+    },
+    {
+      "frage": "Welcher Aufruf dreht einen Text um?",
+      "optionen": ["text.reverse()", "new StringBuilder(text).reverse().toString()", "text.backwards()", "reverse(text)"],
+      "richtig": 1,
+      "erklaerung": "reverse() gehört zum StringBuilder, nicht zum String."
+    },
+    {
+      "frage": "Was passiert bei zahlen[10] in einem Array der Länge 10?",
+      "optionen": ["Der 10. Wert", "Der 11. Wert", "ArrayIndexOutOfBoundsException", "null"],
+      "richtig": 2,
+      "erklaerung": "Gültige Indizes sind 0 bis 9."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "charAt in StringBuilder verwechselt",
+      "erklaerung": "Bei StringBuilder nutzt du charAt() nur zum Lesen – zum Anhängen ist append() da."
+    },
+    {
+      "fehler": "length() bei Arrays",
+      "erklaerung": "Array: length (ohne Klammern). String: length() (mit Klammern). Merkregel: Methoden haben Klammern, Felder nicht."
+    }
+  ]
+}

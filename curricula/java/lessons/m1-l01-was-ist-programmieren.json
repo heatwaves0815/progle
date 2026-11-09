@@ -1,0 +1,60 @@
+{
+  "id": "m1-l01",
+  "typ": "lektion",
+  "titel": "Was ist Programmieren?",
+  "lernziele": [
+    "Erklären können, was ein Programm ist",
+    "Wissen, welche Werkzeuge du zum Programmieren brauchst",
+    "Die ersten Anweisungen selbst ausführen"
+  ],
+  "erklaerung": "## Programmieren ist Rezepte schreiben\nEin Programm ist eine **Liste von Anweisungen**, die ein Computer Schritt für Schritt ausführt – genau wie ein Kochrezept.\n- Eine *Anweisung* ist ein einzelner Befehl, zum Beispiel Text ausgeben.\n- Der Computer macht **exakt** das, was du schreibst – nicht das, was du gemeint hast.\n- Jede Anweisung endet mit einem **Semikolon** (`;`).\n## Was du zum Programmieren brauchst\n- Das **JDK 21** (Java Development Kit): übersetzt und startet dein Programm. Progle bringt es fertig mit.\n- Einen **Editor**, in dem du Code tippst – Progle hat einen eingebaut.\n- Neugier: Fehler sind normal und gehören zum Lernen dazu!\n```java\npublic class Rezept {\n    public static void main(String[] args) {\n        System.out.println(\"1. Wasser kochen\");\n        System.out.println(\"2. Nudeln in den Topf\");\n    }\n}\n```\n`System.out.println(...)` heißt: *Gib den Text in Klammern auf dem Bildschirm aus und spring in die nächste Zeile.*",
+  "beispiel-code": "public class HalloRechner {\n\n    public static void main(String[] args) {\n        System.out.println(\"Ein Computer rechnet blitzschnell:\");\n        System.out.println(\"2 + 2 = 4\");\n        System.out.println(\"Und niemals müde!\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Schreibe eine Klasse Steckbrief mit einer main-Methode, die genau zwei Zeilen ausgibt: 'Ich heiße Alex' und dann 'Ich wohne in Berlin'.",
+      "start-code": "public class Steckbrief {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Du brauchst für jede Zeile einen eigenen System.out.println(...)-Befehl.",
+        "Der auszugebende Text gehört in Anführungszeichen, die Anweisung endet mit Semikolon.",
+        "Erste Zeile im main: System.out.println(\"Ich heiße Alex\");"
+      ],
+      "loesung": "public class Steckbrief {\n\n    public static void main(String[] args) {\n        System.out.println(\"Ich heiße Alex\");\n        System.out.println(\"Ich wohne in Berlin\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Ich heiße Alex\nIch wohne in Berlin" }
+    },
+    {
+      "aufgabenstellung": "Eine Einkaufsliste! Die Klasse Einkaufsliste soll drei Zeilen ausgeben: 'Milch', 'Brot', 'Äpfel' – in dieser Reihenfolge.",
+      "start-code": "public class Einkaufsliste {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Drei println-Anweisungen untereinander im main-Block.",
+        "Der Computer führt die Zeilen von oben nach unten aus – die Reihenfolge bestimmt die Ausgabe.",
+        "So beginnt es: System.out.println(\"Milch\");"
+      ],
+      "loesung": "public class Einkaufsliste {\n\n    public static void main(String[] args) {\n        System.out.println(\"Milch\");\n        System.out.println(\"Brot\");\n        System.out.println(\"Äpfel\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Milch\nBrot\nÄpfel" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was ist ein Programm?",
+      "optionen": ["Eine Liste von Anweisungen, die der Computer ausführt", "Ein Bildschirmschoner", "Eine Art Maus", "Ein Virus"],
+      "richtig": 0,
+      "erklaerung": "Ein Programm ist eine Schritt-für-Schritt-Anweisungsfolge, die der Computer ausführt."
+    },
+    {
+      "frage": "Womit endet eine Java-Anweisung?",
+      "optionen": ["Mit einem Punkt", "Mit einem Semikolon ;", "Mit einem Komma", "Gar nicht"],
+      "richtig": 1,
+      "erklaerung": "In Java endet jede Anweisung mit einem Semikolon (;)."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Semikolon vergessen",
+      "erklaerung": "Der Compiler meldet: ';' expected. Einfach das Semikolon am Zeilenende ergänzen."
+    },
+    {
+      "fehler": "System klein geschrieben",
+      "erklaerung": "Java unterscheidet Groß- und Kleinschreibung: system.out.println geht nicht – korrekt ist System.out.println."
+    }
+  ]
+}

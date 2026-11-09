@@ -1,0 +1,49 @@
+﻿{
+  "id": "m9-l02",
+  "typ": "lektion",
+  "titel": "Einfache Unit-Tests",
+  "lernziele": [
+    "Verstehen, was Unit-Tests prüfen",
+    "Eigenes Prüfmuster mit assert-Methode schreiben",
+    "Testfall-Gedanken strukturieren"
+  ],
+  "erklaerung": "## Der Prüfer im Code\nEin **Unit-Test** prüft automatisch, ob eine kleine Einheit (meist eine Methode) das richtige Ergebnis liefert - bei jeder Änderung.\nSpäter nutzt du Frameworks wie JUnit; das Muster dahinter ist immer gleich:\n```java\npublic static void pruefe(String name, boolean bedingung) {\n    if (bedingung) {\n        System.out.println(\"OK   \" + name);\n    } else {\n        System.out.println(\"FAIL \" + name);\n    }\n}\n```\n## Testfälle schreiben\n```java\npruefe(\"summe 2+3\", rechnen.summe(2, 3) == 5);\npruefe(\"summe negativ\", rechnen.summe(-2, 3) == 1);\n```\nGute Tests:\n- prüfen **einen klaren Fall** (normaler Fall, Sonderfall, Grenzfall)\n- haben **sprechende Namen**\n- laufen **ohne Zutun** und zeigen FAIL sofort\nIn dieser Lektion bauen wir das Muster selbst - dann versteht man JUnit später als Werkzeug mit genau diesem Prinzip.",
+  "beispiel-code": "public class Rechnertest {\n\n    public static int verdoppeln(int zahl) {\n        return zahl * 2;\n    }\n\n    public static void pruefe(String name, boolean bedingung) {\n        System.out.println((bedingung ? \"OK   \" : \"FAIL \") + name);\n    }\n\n    public static void main(String[] args) {\n        pruefe(\"verdoppeln 4\", verdoppeln(4) == 8);\n        pruefe(\"verdoppeln 0\", verdoppeln(0) == 0);\n        pruefe(\"verdoppeln -3\", verdoppeln(-3) == -6);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse IstGeradeTest: Methode 'static boolean istGerade(int zahl)' (return zahl % 2 == 0) und die Prüfmethode pruefe(name, bedingung) wie im Beispiel. Drei Tests: istGerade(4) == true, istGerade(7) == false, istGerade(0) == true. Ausgabezeilen: 'OK   gerade 4', 'OK   ungerade 7', 'OK   null ist gerade'.",
+      "start-code": "public class IstGeradeTest {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Zuerst istGerade und pruefe als static-Methoden definieren.",
+        "pruefe(\"gerade 4\", istGerade(4) == true);",
+        "Beachte: 0 % 2 == 0 - die Null ist gerade!"
+      ],
+      "loesung": "public class IstGeradeTest {\n\n    public static boolean istGerade(int zahl) {\n        return zahl % 2 == 0;\n    }\n\n    public static void pruefe(String name, boolean bedingung) {\n        System.out.println((bedingung ? \"OK   \" : \"FAIL \") + name);\n    }\n\n    public static void main(String[] args) {\n        pruefe(\"gerade 4\", istGerade(4) == true);\n        pruefe(\"ungerade 7\", istGerade(7) == false);\n        pruefe(\"null ist gerade\", istGerade(0) == true);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "OK   gerade 4\nOK   ungerade 7\nOK   null ist gerade" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was prüft ein Unit-Test?",
+      "optionen": ["Die ganze App per Hand", "Eine kleine Einheit automatisch", "Nur die Optik", "Das Betriebssystem"],
+      "richtig": 1,
+      "erklaerung": "Unit = Einheit: Eine Methode/Klasse wird automatisiert geprüft."
+    },
+    {
+      "frage": "Was ist ein Grenzfall-Test?",
+      "optionen": ["Ein Test am Rand des Übungsbuchs", "Ein Test mit extremen/Übergangswerten wie 0 oder Maximum", "Ein Test am Abend", "Ein fehlgeschlagener Test"],
+      "richtig": 1,
+      "erklaerung": "Grenzfälle (0, leere Liste, Maximum) verursachen die meisten Fehler."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Nur Erfolgsfälle testen",
+      "erklaerung": "Falsche Eingaben, 0, negative Zahlen - genau da hakt es meistens."
+    },
+    {
+      "fehler": "Testname ohne Aussage",
+      "erklaerung": "pruefe(\"test1\", ...) sagt nichts. Namen beschreiben den Erwartung: 'ungerade 7'."
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "id": "java",
+  "sprache": "Java",
+  "titel": "Java für Einsteiger",
+  "beschreibung": "Vom allerersten Programm bis zum eigenen Spiel mit Highscore: Java Schritt für Schritt, mit echten kleinen Projekten.",
+  "schwierigkeitsstufen": ["Anfänger", "Fortgeschritten", "Profi"],
+  "module": [
+    {
+      "id": "m1",
+      "titel": "Grundlagen",
+      "ueberblick": "Danach verstehst du, wie ein Programm entsteht, gibst Text aus, speicherst Werte in Variablen, liest Eingaben ein und rechnest mit Operatoren.",
+      "voraussetzungen": [],
+      "lektionen": ["m1-l01", "m1-l02", "m1-l03", "m1-l04", "m1-l05", "m1-l06", "m1-l07", "m1-q"]
+    },
+    {
+      "id": "m2",
+      "titel": "Kontrollfluss",
+      "ueberblick": "Danach trifft dein Programm Entscheidungen (if/else, switch), wiederholt Aufgaben (for, while, do-while) und steuert Schleifen mit break und continue.",
+      "voraussetzungen": ["m1"],
+      "lektionen": ["m2-l01", "m2-l02", "m2-l03", "m2-l04", "m2-l05", "m2-l06", "m2-q"]
+    },
+    {
+      "id": "m3",
+      "titel": "Arrays und Strings",
+      "ueberblick": "Danach verwaltest du viele Werte in Arrays (auch mehrdimensional) und bearbeitest Text elegant mit String-Methoden und dem StringBuilder.",
+      "voraussetzungen": ["m1", "m2"],
+      "lektionen": ["m3-l01", "m3-l02", "m3-l03", "m3-l04", "m3-l05", "m3-q"]
+    },
+    {
+      "id": "m4",
+      "titel": "Methoden",
+      "ueberblick": "Danach baust du wiederverwendbare Bausteine: Methoden mit Parametern und Rückgabewerten, Überladung, Rekursion und sauberem Scope.",
+      "voraussetzungen": ["m1", "m2", "m3"],
+      "lektionen": ["m4-l01", "m4-l02", "m4-l03", "m4-l04", "m4-l05", "m4-q"]
+    },
+    {
+      "id": "m5",
+      "titel": "OOP Teil 1: Klassen und Objekte",
+      "ueberblick": "Danach modellierst du echte Dinge als Klassen und Objekte, nutzt Konstruktoren, schützt Daten mit Kapselung und verstehst static.",
+      "voraussetzungen": ["m4"],
+      "lektionen": ["m5-l01", "m5-l02", "m5-l03", "m5-l04", "m5-l05", "m5-l06", "m5-q"]
+    },
+    {
+      "id": "m6",
+      "titel": "OOP Teil 2: Vererbung und Interfaces",
+      "ueberblick": "Danach vererbst du Verhalten, nutzt Polymorphie, abstrakte Klassen und Interfaces und vergleichst Objekte korrekt.",
+      "voraussetzungen": ["m5"],
+      "lektionen": ["m6-l01", "m6-l02", "m6-l03", "m6-l04", "m6-l05", "m6-q"]
+    },
+    {
+      "id": "m7",
+      "titel": "Fortgeschritten",
+      "ueberblick": "Danach verwaltest du Datenmengen mit Collections, arbeitest typsicher mit Generics, fängst Fehler mit Exceptions und modellierst feste Werte mit Enums.",
+      "voraussetzungen": ["m6"],
+      "lektionen": ["m7-l01", "m7-l02", "m7-l03", "m7-l04", "m7-l05", "m7-l06", "m7-q"]
+    },
+    {
+      "id": "m8",
+      "titel": "Modern Java",
+      "ueberblick": "Danach schreibst du kürzeren, eleganteren Code: Lambdas, die Stream API, Optional und Records.",
+      "voraussetzungen": ["m7"],
+      "lektionen": ["m8-l01", "m8-l02", "m8-l03", "m8-l04", "m8-q"]
+    },
+    {
+      "id": "m9",
+      "titel": "Praxis",
+      "ueberblick": "Danach speicherst du Daten in Dateien, prüfst Code mit Tests, findest Fehler mit dem Debugger und strukturierst Projekte mit Maven.",
+      "voraussetzungen": ["m8"],
+      "lektionen": ["m9-l01", "m9-l02", "m9-l03", "m9-l04", "m9-q"]
+    },
+    {
+      "id": "m10",
+      "titel": "Abschlussprojekte",
+      "ueberblick": "Danach beweist du dein Können in drei echten Projekten: Kontoverwaltung, Vokabeltrainer und ein Spiel mit Highscore.",
+      "voraussetzungen": ["m9"],
+      "lektionen": ["p1", "p2", "p3"]
+    }
+  ]
+}

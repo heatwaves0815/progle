@@ -1,0 +1,49 @@
+{
+  "id": "m5-l06",
+  "typ": "lektion",
+  "titel": "static - Klasse statt Objekt",
+  "lernziele": [
+    "Statische Attribute und Methoden verstehen",
+    "Zähler über alle Objekte führen",
+    "Wissen, wann static passt und wann nicht"
+  ],
+  "erklaerung": "## Einmal für alle\n`static` gehört zur **Klasse**, nicht zu einem einzelnen Objekt:\n- `static int anzahl` in Klasse Auto → EIN einziger Zähler, den ALLE Autos teilen.\n- Normale Attribute → jedes Objekt hat seine eigene Kopie.\n```java\nclass Auto {\n    static int anzahl = 0;    // geteilt\n    String kennzeichen;       // pro Objekt\n\n    Auto(String kennzeichen) {\n        this.kennzeichen = kennzeichen;\n        anzahl++;             // zählt über alle Objekte\n    }\n}\n```\nZugriff ohne Objekt: `Auto.anzahl` (Klasse.Punkt.Name).\n## Statische Methoden\n```java\nstatic double quadrieren(double x) {\n    return x * x;\n}\n// Aufruf: quadrieren(5) oder Klassenname.quadrieren(5)\n```\nAchtung: Eine statische Methode kann **keine normalen Attribute** direkt nutzen - die gehören ja zu Objekten, die hier gar nicht existieren.\nGut für: Konstanten, Hilfsfunktionen (Math.max ist auch static!), globale Zähler. Nicht gut für: alles, was pro Objekt unterschiedlich ist.",
+    "beispiel-code": "public class Bibliothekszaehler {\n\n    public static void main(String[] args) {\n        new Buch(\"Dune\");\n        new Buch(\"Foundation\");\n        Buch b3 = new Buch(\"Solaris\");\n        System.out.println(\"Anzahl Bücher: \" + Buch.anzahl);\n    }\n}\n\nclass Buch {\n    static int anzahl = 0;\n    String titel;\n\n    Buch(String titel) {\n        this.titel = titel;\n        anzahl++;\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Fahrradshop: Klasse Fahrrad (ohne public) mit static int verkauft = 0 und Attribut modell. Im Konstruktor verkauft++. main erzeugt drei Fahrräder ('Trek', 'Cube', 'Giant') und gibt 'Verkauft: 3' aus (mit Fahrrad.verkauft).",
+      "start-code": "public class Fahrradshop {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "static int verkauft = 0; auf Klassenebene.",
+        "Im Konstruktor: verkauft++;",
+        "Ausgabe über die Klasse: \"Verkauft: \" + Fahrrad.verkauft"
+      ],
+      "loesung": "public class Fahrradshop {\n\n    public static void main(String[] args) {\n        new Fahrrad(\"Trek\");\n        new Fahrrad(\"Cube\");\n        new Fahrrad(\"Giant\");\n        System.out.println(\"Verkauft: \" + Fahrrad.verkauft);\n    }\n}\n\nclass Fahrrad {\n    static int verkauft = 0;\n    String modell;\n\n    Fahrrad(String modell) {\n        this.modell = modell;\n        verkauft++;\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Verkauft: 3" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wieviele Kopien gibt es von einem static int Attribut?",
+      "optionen": ["Eine pro Objekt", "Genau eine für die ganze Klasse", "Eine pro Methode", "Unendlich"],
+      "richtig": 1,
+      "erklaerung": "Static gehört zur Klasse - es existiert genau einmal, egal wie viele Objekte es gibt."
+    },
+    {
+      "frage": "Kann eine statische Methode direkt ein normales Attribut lesen?",
+      "optionen": ["Ja, immer", "Nein - normale Attribute gehören zu Objekten", "Nur mit import", "Nur in main"],
+      "richtig": 1,
+      "erklaerung": "Ohne Objekt gibt es keine normalen Attribute - deshalb klappt das nicht."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Static für alles verwenden",
+      "erklaerung": "Namen, Stände, Zustände gehören ins Objekt. Nur wirklich geteilte Dinge (Zähler, Konstanten, Hilfsfunktionen) sind static."
+    },
+    {
+      "fehler": "Klassenname vor statischem Zugriff vergessen",
+      "erklaerung": "Innerhalb derselben Klasse gehts ohne; von außen heißt es Klasse.attribut - sonst 'cannot find symbol'."
+    }
+  ]
+}

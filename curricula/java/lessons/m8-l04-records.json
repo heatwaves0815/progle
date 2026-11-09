@@ -1,0 +1,49 @@
+{
+  "id": "m8-l04",
+  "typ": "lektion",
+  "titel": "Records - Kompaktdatencontainer",
+  "lernziele": [
+    "Records als Kurzsyntax für Datenklassen nutzen",
+    "Automatische Konstruktoren, Getter und toString nutzen",
+    "Wissen, wofür Records gedacht sind"
+  ],
+  "erklaerung": "## Daten-Klasse in einer Zeile\nViele Klassen sind reine Datenträger. Dafür gibt es seit Java 16 den **Record**:\n```java\nrecord Punkt(int x, int y) { }\n\nPunkt start = new Punkt(3, 4);\nSystem.out.println(start.x());        // 3\nSystem.out.println(start);            // Punkt[x=3, y=4]\n```\nEin Record generiert automatisch:\n- **Konstruktor** mit allen Parametern\n- **Zugriffsmethoden** ohne get-Präfix: `x()`, `y()`\n- `toString()` mit allen Werten\n- `equals()` und `hashCode()` - zwei Records mit gleichen Werten sind gleich!\n## Wofür?\nFür unveränderliche Datenpakete: Koordinaten, Buchungen, Konfigurationswerte. Wofür NICHT: Dinge mit viel Verhalten und veränderbarem Zustand - da bleibt es bei normalen Klassen.\nEin Record kann nicht erben (kein extends), aber Interfaces umsetzen.",
+  "beispiel-code": "public class Lagerdemo {\n\n    record Artikel(String name, int menge) { }\n\n    public static void main(String[] args) {\n        Artikel a1 = new Artikel(\"Schrauben\", 500);\n        Artikel a2 = new Artikel(\"Schrauben\", 500);\n\n        System.out.println(a1);\n        System.out.println(\"Gleich? \" + a1.equals(a2));\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Telefonbucheintrag: record Kontakt(String name, String nummer) {}. main: neuer Kontakt 'Anna', '0123', Ausgabe 'Anna: 0123' und dann der ganze Record mit println(kontakt).",
+      "start-code": "public class Telefonbucheintrag {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "record Kontakt(String name, String nummer) { } - mehr braucht es nicht.",
+        "Zugriff: kontakt.name() und kontakt.nummer() (ohne get).",
+        "println(kontakt) nutzt das automatische toString: Kontakt[name=Anna, nummer=0123]."
+      ],
+      "loesung": "public class Telefonbucheintrag {\n\n    record Kontakt(String name, String nummer) { }\n\n    public static void main(String[] args) {\n        Kontakt kontakt = new Kontakt(\"Anna\", \"0123\");\n        System.out.println(kontakt.name() + \": \" + kontakt.nummer());\n        System.out.println(kontakt);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Anna: 0123\nKontakt[name=Anna, nummer=0123]" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie heißt die Zugriffsmethode für die Record-Komponente name?",
+      "optionen": ["getName()", "name()", "name", "name.get()"],
+      "richtig": 1,
+      "erklaerung": "Records generieren Methoden direkt mit dem Komponentennamen."
+    },
+    {
+      "frage": "Was vergleicht record.equals() bei zwei Records mit gleichen Werten?",
+      "optionen": ["Speicherplätze", "Die Werte - Ergebnis true", "Nur den Namen", "Nichts"],
+      "richtig": 1,
+      "erklaerung": "Records erzeugen automatisch wertbasiertes equals und hashCode."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Setter erwartet",
+      "erklaerung": "Records sind unveränderlich - es gibt keine Setter. Für neue Werte: neues Record-Objekt erzeugen."
+    },
+    {
+      "fehler": "extends bei Records",
+      "erklaerung": "Records können keine Klassen erben - nur Interfaces implementieren."
+    }
+  ]
+}

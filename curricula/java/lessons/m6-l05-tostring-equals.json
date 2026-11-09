@@ -1,0 +1,49 @@
+{
+  "id": "m6-l05",
+  "typ": "lektion",
+  "titel": "toString, equals und hashCode",
+  "lernziele": [
+    "Objekte schön ausgeben mit toString",
+    "Inhaltliches Vergleichen mit equals",
+    "Wissen, wozu hashCode gut ist"
+  ],
+  "erklaerung": "## Standardmethoden für jedes Objekt\nJede Java-Klasse erbt drei wichtige Methoden von der Oberklasse Object - und sollte sie anpassen:\n```java\nclass Kunde {\n    String name;\n    int alter;\n\n    @Override\n    public String toString() {\n        return name + \" (\" + alter + \")\";\n    }\n\n    @Override\n    public boolean equals(Object obj) {\n        if (!(obj instanceof Kunde)) {\n            return false;\n        }\n        Kunde other = (Kunde) obj;\n        return name.equals(other.name) && alter == other.alter;\n    }\n\n    @Override\n    public int hashCode() {\n        return name.hashCode() + alter;\n    }\n}\n```\n- `toString()` ohne Überschreibung liefert Kauderwelsch wie `Kunde@1b6d3586`. Mit Überschreibung: `Alex (34)` - perfekt für println.\n- `equals()` ohne Überschreibung vergleicht Speicherplätze. Mit Überschreibung: zwei Kunden mit gleichen Daten sind 'gleich'.\n- `hashCode()` gehört zu equals - Sammlungen wie HashSet brauchen ihn (kommt im nächsten Modul).\nDie Annotation `@Override` ist optional, fängt aber Tippfehler ab.",
+  "beispiel-code": "public class Kundendemo {\n\n    public static void main(String[] args) {\n        Kunde k1 = new Kunde();\n        k1.name = \"Alex\";\n        k1.alter = 34;\n\n        System.out.println(k1);\n        System.out.println(k1.toString());\n    }\n}\n\nclass Kunde {\n    String name;\n    int alter;\n\n    @Override\n    public String toString() {\n        return name + \" (\" + alter + \")\";\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Produktdemo: Klasse Produkt (ohne public) mit den Attributen titel und preis, überschriebener toString-Methode ('<titel>: <preis> Euro'). main: neues Produkt 'Tasse', 9.99, Ausgabe mit println(produkt).",
+      "start-code": "public class Produktdemo {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "@Override public String toString() { return titel + \": \" + preis + \" Euro\"; }",
+        "println(produkt) ruft automatisch toString() auf.",
+        "Attribute direkt setzen: p.titel = \"Tasse\"; p.preis = 9.99;"
+      ],
+      "loesung": "public class Produktdemo {\n\n    public static void main(String[] args) {\n        Produkt p = new Produkt();\n        p.titel = \"Tasse\";\n        p.preis = 9.99;\n        System.out.println(p);\n    }\n}\n\nclass Produkt {\n    String titel;\n    double preis;\n\n    @Override\n    public String toString() {\n        return titel + \": \" + preis + \" Euro\";\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Tasse: 9.99 Euro" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was liefert println(objekt) ohne eigenes toString()?",
+      "optionen": ["Nichts", "Etwas wie Klassenname@1234abcd", "Eine Fehlermeldung", "null"],
+      "richtig": 1,
+      "erklaerung": "Das Standard-toString von Object zeigt Klasse + Speicherinfo - wenig hilfreich."
+    },
+    {
+      "frage": "Warum gehört hashCode() zu equals()?",
+      "optionen": ["Damit der Code kürzer wird", "Sammlungen wie HashMap brauchen beide zusammen", "Weil Java es vorschreibt", "Für die Ausgabe"],
+      "richtig": 1,
+      "erklaerung": "Gleiche Objekte müssen gleichen Hash haben - sonst finden HashMap/HashSet sie nicht wieder."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "equals mit == verwechselt",
+      "erklaerung": "kunde1 == kunde2 prüft Speicherplätze - auch nach Überschreiben von equals!"
+    },
+    {
+      "fehler": "@Override Tippfehler übersehen",
+      "erklaerung": "Mit @Override meldet der Compiler sofort, wenn du z. B. toSting() schreibst. Deshalb immer dranschreiben."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "m2-l05",
+  "typ": "lektion",
+  "titel": "While und do-while",
+  "lernziele": [
+    "While-Schleifen für unbekannte Durchlaufanzahl nutzen",
+    "Do-while und ihren Unterschied verstehen",
+    "Sicheres Abbruchkriterium bauen"
+  ],
+  "erklaerung": "## Schleifen ohne Zähler\nWenn du **nicht weißt**, wie oft etwas passieren soll, nimm while:\n```java\nint sparschwein = 0;\nint einwurf = 5;\n\nwhile (sparschwein < 20) {\n    sparschwein += einwurf;\n    System.out.println(\"Stand: \" + sparschwein);\n}\n```\nDie Bedingung wird **vor** jedem Durchlauf geprüft. Stimmt sie am Anfang schon nicht, läuft der Körper **nie**.\n## Do-while: erst handeln, dann fragen\n```java\ndo {\n    // läuft mindestens EINMAL\n} while (bedingung);\n```\nDie Prüfung kommt **nach** dem Körper – perfekt für 'Frage so lange, bis die Eingabe passt'.\n## Endlosschleifen bändigen\n`while (true) { ... }` läuft für immer – außer du brichst mit `break` aus:\n```java\nwhile (true) {\n    if (zielErreicht) {\n        break;      // verlässt die Schleife sofort\n    }\n}\n```\nAchte immer darauf, dass sich irgendwas in Richtung Abbruch ändert!",
+  "beispiel-code": "public class Sparschwein {\n\n    public static void main(String[] args) {\n        int stand = 0;\n        int ziel = 30;\n        int einwurf = 10;\n        int wuerfe = 0;\n\n        while (stand < ziel) {\n            stand += einwurf;\n            wuerfe++;\n            System.out.println(\"Wurf \" + wuerfe + \": Stand \" + stand);\n        }\n        System.out.println(\"Ziel erreicht nach \" + wuerfe + \" Einwürfen\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Akku: Startwert 100, jede Sekunde sinkt er um 25 (akku -= 25). Gib jede Zwischenstufe als 'Akku: <wert>' aus, solange der Akku größer als 0 ist. Die letzten Ausgaben sind 'Akku: 25' und 'Akku: 0'.",
+      "start-code": "public class Akku {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "int akku = 100; while (akku > 0) { ... }",
+        "Im Körper zuerst akku -= 25, dann ausgeben.",
+        "So sind die Werte 75, 50, 25, 0 – und bei 0 stoppt die Schleife."
+      ],
+      "loesung": "public class Akku {\n\n    public static void main(String[] args) {\n        int akku = 100;\n\n        while (akku > 0) {\n            akku -= 25;\n            System.out.println(\"Akku: \" + akku);\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Akku: 75\nAkku: 50\nAkku: 25\nAkku: 0" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Bankkonto simuliert Einzahlungen: start = 0, jede Einzahlung +20. Nutze eine while-Schleife, die läuft, bis das Konto mindestens 60 hat, und gib jeden Zwischenstand als 'Konto: <wert>' aus (20, 40, 60).",
+      "start-code": "public class Bankkonto {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "while (konto < 60) { konto += 20; ... }",
+        "Ausgabe nach der Erhöhung: \"Konto: \" + konto",
+        "Bei 60 stoppt die Schleife – 60 wird also noch ausgegeben."
+      ],
+      "loesung": "public class Bankkonto {\n\n    public static void main(String[] args) {\n        int konto = 0;\n\n        while (konto < 60) {\n            konto += 20;\n            System.out.println(\"Konto: \" + konto);\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Konto: 20\nKonto: 40\nKonto: 60" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was ist der Unterschied zwischen while und do-while?",
+      "optionen": ["Keiner", "do-while läuft mindestens einmal", "while läuft mindestens einmal", "do-while ist schneller"],
+      "richtig": 1,
+      "erklaerung": "do-while prüft die Bedingung erst nach dem ersten Durchlauf."
+    },
+    {
+      "frage": "Womit verlässt man eine Schleife sofort?",
+      "optionen": ["return", "break", "stop", "exit"],
+      "richtig": 1,
+      "erklaerung": "break verlässt die Schleife sofort; continue springt nur zum nächsten Durchlauf."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Endlosschleife ohne Änderung",
+      "erklaerung": "Wenn die Zähl-Variable im Körper nicht geändert wird, endet die Schleife nie. Progle stoppt nach 10 Sekunden."
+    },
+    {
+      "fehler": "Bedingung umgekehrt gedacht",
+      "erklaerung": "while (akku == 0) läuft nie, wenn akku mit 100 startet. Fragen: Wann SOLL der Körper laufen?"
+    }
+  ]
+}

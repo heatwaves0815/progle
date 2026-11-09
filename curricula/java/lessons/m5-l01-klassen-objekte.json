@@ -1,0 +1,60 @@
+{
+  "id": "m5-l01",
+  "typ": "lektion",
+  "titel": "Klassen und Objekte",
+  "lernziele": [
+    "Den Unterschied zwischen Klasse und Objekt erklären",
+    "Objekte mit new erzeugen und nutzen",
+    "Attribute setzen und lesen"
+  ],
+  "erklaerung": "## Klasse = Bauplan, Objekt = das echte Ding\nEine **Klasse** ist ein Bauplan (wie ein Plätzchenform), ein **Objekt** ist ein daraus hergestelltes Ding (das Plätzchen).\n```java\nclass Auto {\n    String marke;\n    int ps;\n}\n\npublic class Werkstatt {\n    public static void main(String[] args) {\n        Auto meinAuto = new Auto();     // Objekt erzeugen\n        meinAuto.marke = \"VW\";          // Attribut setzen\n        meinAuto.ps = 150;\n        System.out.println(meinAuto.marke + \" mit \" + meinAuto.ps + \" PS\");\n    }\n}\n```\n- `new Auto()` baut ein neues Objekt im Speicher.\n- Mit `objekt.attribut` liest und schreibst du seine Werte.\n- Von EINEM Bauplan kannst du VIELE Objekte bauen - jedes mit eigenen Werten.\nMehrere Klassen in einer Datei: Nur EINE darf `public` sein (die mit main).",
+  "beispiel-code": "public class Tiergarten {\n}\n\nclass Tier {\n    String name;\n    String geraeusch;\n}\n\nclass TiergartenHilfsklasse {\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Baue die Datei nach diesem Muster: public class Tiergarten mit main; zusätzlich (ohne public) die Klasse Tier mit den Attributen name (String) und geraeusch (String). Erzeuge in main ein Tier-Objekt: name = \"Bello\", geraeusch = \"Wuff\". Ausgabe: 'Bello sagt: Wuff'.",
+      "start-code": "public class Tiergarten {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "class Tier { String name; String geraeusch; } - außerhalb der main, auf Klassenebene.",
+        "In main: Tier t = new Tier();",
+        "Werte setzen: t.name = \"Bello\"; t.geraeusch = \"Wuff\"; dann ausgeben."
+      ],
+      "loesung": "public class Tiergarten {\n\n    public static void main(String[] args) {\n        Tier t = new Tier();\n        t.name = \"Bello\";\n        t.geraeusch = \"Wuff\";\n        System.out.println(t.name + \" sagt: \" + t.geraeusch);\n    }\n}\n\nclass Tier {\n    String name;\n    String geraeusch;\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Bello sagt: Wuff" }
+    },
+    {
+      "aufgabenstellung": "Zwei Objekte, eigene Werte: Erzeuge in der Klasse Gaesteliste (mit Klasse Gast, Attribut name) zwei Gäste: 'Anna' und 'Ben'. Gib beide aus: 'Gast 1: Anna' und 'Gast 2: Ben'.",
+      "start-code": "public class Gaesteliste {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Zwei separate new-Aufrufe: Gast g1 = new Gast(); Gast g2 = new Gast();",
+        "Jedes Objekt hat eigene Attribute - g1.name und g2.name sind unabhängig.",
+        "Ausgabe mit + verbinden."
+      ],
+      "loesung": "public class Gaesteliste {\n\n    public static void main(String[] args) {\n        Gast g1 = new Gast();\n        g1.name = \"Anna\";\n        Gast g2 = new Gast();\n        g2.name = \"Ben\";\n        System.out.println(\"Gast 1: \" + g1.name);\n        System.out.println(\"Gast 2: \" + g2.name);\n    }\n}\n\nclass Gast {\n    String name;\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Gast 1: Anna\nGast 2: Ben" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was ist eine Klasse?",
+      "optionen": ["Ein fertiges Ding im Speicher", "Ein Bauplan für Objekte", "Eine Methode", "Eine Schleife"],
+      "richtig": 1,
+      "erklaerung": "Die Klasse ist der Bauplan; Objekte entstehen daraus mit new."
+    },
+    {
+      "frage": "Was macht das Schlüsselwort new?",
+      "optionen": ["Benennt eine Klasse um", "Erzeugt ein neues Objekt", "Löscht ein Objekt", "Importiert eine Klasse"],
+      "richtig": 1,
+      "erklaerung": "new reserviert Speicher und baut ein frisches Objekt nach dem Bauplan."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Zwei public-Klassen in einer Datei",
+      "erklaerung": "Nur eine public-Klasse pro Datei, und sie bestimmt den Dateinamen. Hilfsklassen ohne public schreiben."
+    },
+    {
+      "fehler": "Objekt ohne new benutzen",
+      "erklaerung": "Tier t; t.name = \"Bello\"; geht nicht - t zeigt auf nichts (NullPointerException). Erst t = new Tier();"
+    }
+  ]
+}

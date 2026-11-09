@@ -1,0 +1,60 @@
+{
+  "id": "m1-l05",
+  "typ": "lektion",
+  "titel": "Datentypen",
+  "lernziele": [
+    "Die wichtigsten Datentypen kennen und richtig wählen",
+    "Zahlen, Text und Wahrheitswerte unterscheiden",
+    "Konstanten mit final anlegen"
+  ],
+  "erklaerung": "## Jede Box hat einen Typ\nDer Datentyp sagt, **was** in die Box darf:\n| Typ | Für was? | Beispiel |\n|---|---|---|\n| `int` | ganze Zahlen | 42, -7 |\n| `double` | Kommazahlen | 3.14, -0.5 |\n| `boolean` | wahr/falsch | true, false |\n| `char` | EIN Zeichen | 'A', '?' |\n| `String` | Text (beliebig lang) | \"Hallo\" |\nWichtige Unterschiede:\n- `double` schreibt man mit **Punkt**, nicht Komma: `3.5`\n- `char` verwendet **einfache** Anführungszeichen: `'A'`, String doppelte: `\"Hallo\"`\n- `boolean` kennt nur `true` und `false` – perfekt für Schalter\n## Konstanten\nWerte, die sich nie ändern, markiert man mit `final`:\n```java\nfinal double MWST_SATZ = 0.19;\n```\nKonvention: Konstanten schreibt man in GROSSBUCHSTABEN. Das ist wie ein verschlossenes Schraubglas: Inhalt fest, Etikett klar lesbar.",
+  "beispiel-code": "public class Kundenkarte {\n\n    public static void main(String[] args) {\n        String name = \"Alex\";\n        int alter = 34;\n        double groesse = 1.78;\n        boolean mitglied = true;\n        final char note = 'A';\n\n        System.out.println(\"Name: \" + name);\n        System.out.println(\"Alter: \" + alter);\n        System.out.println(\"Größe: \" + groesse);\n        System.out.println(\"Mitglied: \" + mitglied);\n        System.out.println(\"Note: \" + note);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Rechnung legt an: einen String 'artikel' = 'Kaffee', ein double 'preis' = 4.99, ein int 'menge' = 2 und rechnet den Gesamtpreis in ein double 'gesamt'. Ausgabe: 'Kaffee: 2 x 4.99 = 9.98'. (Hinweis: 4.99 * 2 ergibt in Java 9.98)",
+      "start-code": "public class Rechnung {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "double gesamt = preis * menge;",
+        "Text und Werte verbindet du mit +: \"Kaffee: \" + menge + \" x \" + preis + \" = \" + gesamt",
+        "Ersetze den Text Kaffee durch die Variable artikel."
+      ],
+      "loesung": "public class Rechnung {\n\n    public static void main(String[] args) {\n        String artikel = \"Kaffee\";\n        double preis = 4.99;\n        int menge = 2;\n        double gesamt = preis * menge;\n        System.out.println(artikel + \": \" + menge + \" x \" + preis + \" = \" + gesamt);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Kaffee: 2 x 4.99 = 9.98" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Fahrkarte nutzt eine Konstante final double TICKET_PREIS = 2.90 und eine Variable int fahrten = 4. Rechne double summe aus und gib aus: '4 Fahrten kosten 11.6'.",
+      "start-code": "public class Fahrkarte {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "final double TICKET_PREIS = 2.90; – Großbuchstaben sind Konvention.",
+        "double summe = TICKET_PREIS * fahrten;",
+        "Achtung: 2.90 * 4 ergibt in Java 11.6 – genau das sollen wir ausgeben."
+      ],
+      "loesung": "public class Fahrkarte {\n\n    public static void main(String[] args) {\n        final double TICKET_PREIS = 2.90;\n        int fahrten = 4;\n        double summe = TICKET_PREIS * fahrten;\n        System.out.println(fahrten + \" Fahrten kosten \" + summe);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "4 Fahrten kosten 11.6" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Welcher Typ passt für die Anzahl deiner Geschwister?",
+      "optionen": ["double", "boolean", "int", "char"],
+      "richtig": 2,
+      "erklaerung": "Eine Anzahl ist eine ganze Zahl – int."
+    },
+    {
+      "frage": "Welche Zeile ist korrekt?",
+      "optionen": ["double preis = 3,50;", "char buchstabe = 'A';", "String name = 'Alex';", "boolean ok = 'true';"],
+      "richtig": 1,
+      "erklaerung": "double braucht einen Punkt, String doppelte Anführungszeichen, boolean true ohne Anführungszeichen."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Komma statt Punkt bei double",
+      "erklaerung": "double preis = 3,50; – Java liest das als zwei Werte und meckert. Richtig: 3.50."
+    },
+    {
+      "fehler": "String mit einfachen Anführungszeichen",
+      "erklaerung": "String name = 'Alex'; geht nicht. Einfache Anführungszeichen sind für char: 'A'. String braucht \"Alex\"."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "m2-l02",
+  "typ": "lektion",
+  "titel": "If und Else",
+  "lernziele": [
+    "Entscheidungen mit if treffen",
+    "Alternativen mit else abdecken",
+    "Bedingungsblöcke korrekt klammern"
+  ],
+  "erklaerung": "## Das Programm entscheidet selbst\n`if` heißt: *Wenn die Bedingung stimmt, führe den Block aus.*\n```java\nint punkte = 85;\n\nif (punkte >= 50) {\n    System.out.println(\"Bestanden!\");\n}\n\nif (punkte >= 90) {\n    System.out.println(\"Super!\");\n} else {\n    System.out.println(\"Weiter üben!\");\n}\n```\n- Hinter `if (...)` steht eine Bedingung (boolean).\n- Der `{ }`-Block läuft nur, wenn sie stimmt.\n- `else` fängt **alle übrigen Fälle** auf.\n- Nur EINE der beiden Varianten läuft – nie beide.\n## Wichtig\n- Kein Semikolon hinter `if (...)` – sonst ist der Block immer dran!\n- Mehrere Anweisungen brauchen immer die Klammern `{ }`, auch bei einer einzigen ist Klammerpflicht guter Stil.",
+  "beispiel-code": "public class Badewannendruck {\n\n    public static void main(String[] args) {\n        int wasserstand = 62;\n\n        if (wasserstand >= 60) {\n            System.out.println(\"Badewanne ist voll genug\");\n        } else {\n            System.out.println(\"Noch Wasser zulaufen lassen\");\n        }\n\n        System.out.println(\"Prüfung beendet\");   // läuft immer\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Ampel: boolean gruen = true. Wenn gruen true ist, gib 'Losfahren' aus, sonst 'Warten'. Die Prüfung testet mit gruen = false.",
+      "start-code": "public class Ampel {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Struktur: if (gruen) { ... } else { ... }",
+        "boolean-Variable ohne Vergleich: if (gruen) ist dasselbe wie if (gruen == true).",
+        "Im else-Block steht die Warten-Ausgabe."
+      ],
+      "loesung": "public class Ampel {\n\n    public static void main(String[] args) {\n        boolean gruen = false;\n\n        if (gruen) {\n            System.out.println(\"Losfahren\");\n        } else {\n            System.out.println(\"Warten\");\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Warten" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Gutschein: Ein Kunde hat 25.50 Euro (double). Wenn das Guthaben mindestens 20 Euro ist, gib 'Gutschein freigeschaltet' aus, sonst 'Noch X Euro bis zum Gutschein' – wobei X die Differenz 20 - guthaben ist. (Bei unserem Testwert wird der Gutschein freigeschaltet.)",
+      "start-code": "public class Gutschein {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "double guthaben = 25.50; if (guthaben >= 20) { ... } else { ... }",
+        "Im else-Fall: 20 - guthaben rechnen – Ergebnis wäre 0.0 oder kleiner.",
+        "Da 25.50 >= 20 stimmt, läuft nur der if-Block."
+      ],
+      "loesung": "public class Gutschein {\n\n    public static void main(String[] args) {\n        double guthaben = 25.50;\n\n        if (guthaben >= 20) {\n            System.out.println(\"Gutschein freigeschaltet\");\n        } else {\n            double fehlt = 20 - guthaben;\n            System.out.println(\"Noch \" + fehlt + \" Euro bis zum Gutschein\");\n        }\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Gutschein freigeschaltet" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wie oft läuft der else-Block maximal bei einem if-else-Paar?",
+      "optionen": ["Immer genau einmal", "Höchstens einmal – nur wenn if nicht zutrifft", "Gar nicht", "Solange die Bedingung stimmt"],
+      "richtig": 1,
+      "erklaerung": "if und else schließen sich aus: Genau einer der beiden Blöcke läuft – oder bei fehlendem else eventuell keiner."
+    },
+    {
+      "frage": "Was ist hier falsch?\nif (punkte > 100);\n    System.out.println(\"Super\");",
+      "optionen": ["Nichts", "Das Semikolon hinter if macht den Block leer – println läuft immer", "Der Punkt vor println", "Der Vergleichsoperator"],
+      "richtig": 1,
+      "erklaerung": "Das Semikolon beendet if sofort. System.out.println hängt dann nicht mehr an der Bedingung."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Semikolon hinter der if-Zeile",
+      "erklaerung": "if (x > 5); – das Semikolon beendet if sofort. Der Block danach läuft immer."
+    },
+    {
+      "fehler": "Vergleich mit Zuweisung verwechselt",
+      "erklaerung": "if (gruen = true) weist zu statt zu vergleichen. Korrekt: if (gruen == true) oder einfach if (gruen)."
+    }
+  ]
+}

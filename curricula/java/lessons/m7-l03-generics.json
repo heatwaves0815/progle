@@ -1,0 +1,49 @@
+{
+  "id": "m7-l03",
+  "typ": "lektion",
+  "titel": "Generics - Typen in spitzen Klammern",
+  "lernziele": [
+    "Verstehen, wofür <T> steht",
+    "Eine generische Methode/Klasse lesen",
+    "Vorteile der Typsicherheit erklären"
+  ],
+  "erklaerung": "## Schachteln für jeden Typ\n**Generics** sind Platzhalter für Typen: `<T>` steht für 'irgendein Typ, der beim Einsatz festgelegt wird'.\n```java\nclass Box<T> {\n    private T inhalt;\n\n    public void setzen(T inhalt) {\n        this.inhalt = inhalt;\n    }\n\n    public T holen() {\n        return inhalt;\n    }\n}\n\nBox<String> textBox = new Box<>();\ntextBox.setzen(\"Hallo\");\nString text = textBox.holen();      // kein Cast nötig!\n\nBox<Integer> zahlenBox = new Box<>();\nzahlenBox.setzen(42);\n```\n## Warum überhaupt?\n- **Typsicherheit**: In eine Box<String> passt nur ein String - der Compiler wehrt sich sofort.\n- **Kein Casten**: holen() liefert direkt den richtigen Typ.\n- **Wiederverwendbar**: EINE Klasse für alle Typen.\nDu benutzt Generics ständig: `ArrayList<String>`, `HashMap<String, Integer>` - jetzt weißt du, wie sie innen aussehen.",
+  "beispiel-code": "public class Paardemo {\n\n    public static void main(String[] args) {\n        Paar<String, Integer> alter = new Paar<>(\"Alex\", 34);\n        Paar<String, Double> preis = new Paar<>(\"Tasse\", 9.99);\n\n        System.out.println(alter.erster() + \": \" + alter.zweiter());\n        System.out.println(preis.erster() + \": \" + preis.zweiter());\n    }\n}\n\nclass Paar<A, B> {\n    A erster;\n    B zweiter;\n\n    Paar(A erster, B zweiter) {\n        this.erster = erster;\n        this.zweiter = zweiter;\n    }\n\n    A erster() {\n        return erster;\n    }\n\n    B zweiter() {\n        return zweiter;\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Boxendemo: Generische Klasse Box<T> mit Attribut inhalt, Methoden setzen(T) und holen(). main: Box<String> mit 'Geheim', Ausgabe 'Inhalt: Geheim'.",
+      "start-code": "public class Boxendemo {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "class Box<T> { private T inhalt; void setzen(T inhalt) {...} T holen() { return inhalt; } }",
+        "Box<String> box = new Box<>();",
+        "box.setzen(\"Geheim\"); dann System.out.println(\"Inhalt: \" + box.holen());"
+      ],
+      "loesung": "public class Boxendemo {\n\n    public static void main(String[] args) {\n        Box<String> box = new Box<>();\n        box.setzen(\"Geheim\");\n        System.out.println(\"Inhalt: \" + box.holen());\n    }\n}\n\nclass Box<T> {\n    private T inhalt;\n\n    void setzen(T inhalt) {\n        this.inhalt = inhalt;\n    }\n\n    T holen() {\n        return inhalt;\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Inhalt: Geheim" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was bedeutet <T>?",
+      "optionen": ["Text", "Ein Platzhalter für einen Typ", "Tabelle", "Test"],
+      "richtig": 1,
+      "erklaerung": "T ist Konvention für 'Type' - ein Platzhalter, der beim Einsatz konkret wird."
+    },
+    {
+      "frage": "Was ist der Vorteil von Generics?",
+      "optionen": ["Schnellere Programme", "Typsicherheit ohne Casten", "Kürzerer Code", "Weniger Speicher"],
+      "richtig": 1,
+      "erklaerung": "Falsche Typen fallen schon beim Kompilieren auf, und man spart sich Casts."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Roh-Typ nutzen",
+      "erklaerung": "ArrayList liste = new ArrayList(); ohne <> - funktioniert, aber unsicher und mit Casts. Immer <Typ> angeben."
+    },
+    {
+      "fehler": "Primitive Typen in Generics",
+      "erklaerung": "Box<int> geht nicht - Generics brauchen Objekt-Typen: Box<Integer> (Wrapper-Klassen)."
+    }
+  ]
+}

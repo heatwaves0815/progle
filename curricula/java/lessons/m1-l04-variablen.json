@@ -1,0 +1,60 @@
+{
+  "id": "m1-l04",
+  "typ": "lektion",
+  "titel": "Variablen",
+  "lernziele": [
+    "Variablen anlegen und Werte zuweisen",
+    "Werte im Programmverlauf ändern können",
+    "Die Regeln für Namen kennen"
+  ],
+  "erklaerung": "## Variablen sind beschriftete Boxen\nEine Variable ist eine **Box im Speicher mit einem Namen**. Du legst sie an, legst einen Wert hinein und kannst ihn später lesen oder austauschen.\n```java\nint punkte;          // Box anlegen (Deklaration)\npunkte = 50;         // Wert hineinlegen (Zuweisung)\npunkte = 75;         // Neuer Wert – der alte ist weg!\nSystem.out.println(punkte);   // liest die Box aus: 75\n```\nAlles in einem Schritt geht auch: `int punkte = 50;`\n## Regeln für Namen\n- Erlaubt: Buchstaben, Ziffern, `_` und `$` – aber **keine Ziffer am Anfang**.\n- Groß-/Kleinschreibung zählt: `punkte` und `Punkte` sind zwei verschiedene Boxen.\n- Keine reservierten Wörter wie `int`, `class` oder `public`.\n- Konvention: **camelCase** – erstes Wort klein, weitere Wörter groß: `highscoreListe`.\nGute Namen beschreiben den Inhalt: `alter` statt `x`.",
+  "beispiel-code": "public class Punktekonto {\n\n    public static void main(String[] args) {\n        int punkte = 50;\n        System.out.println(\"Start: \" + punkte);\n\n        punkte = 75;\n        System.out.println(\"Nach Runde 1: \" + punkte);\n\n        punkte = 100;\n        System.out.println(\"Nach Runde 2: \" + punkte);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Guthaben soll eine int-Variable 'guthaben' mit dem Wert 100 anlegen, sie ausgeben, dann auf 250 ändern und erneut ausgeben. Ausgabezeilen: 'Guthaben: 100' und 'Guthaben: 250'.",
+      "start-code": "public class Guthaben {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Anlegen: int guthaben = 100;",
+        "Text und Variable verbindest du mit +: \"Guthaben: \" + guthaben",
+        "Ändern ohne neu anlegen: guthaben = 250; (ohne int!)"
+      ],
+      "loesung": "public class Guthaben {\n\n    public static void main(String[] args) {\n        int guthaben = 100;\n        System.out.println(\"Guthaben: \" + guthaben);\n\n        guthaben = 250;\n        System.out.println(\"Guthaben: \" + guthaben);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Guthaben: 100\nGuthaben: 250" }
+    },
+    {
+      "aufgabenstellung": "In der Klasse Tausch werden zwei Variablen 'a' (= 5) und 'b' (= 9) angelegt. Gib zuerst a, dann b aus – danach tausche die Werte (a = 9, b = 5) und gib beide erneut aus. Die Werte müssen wirklich in den Variablen getauscht werden, nicht nur neu zugewiesen werden!",
+      "start-code": "public class Tausch {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Für den Tausch brauchst du eine dritte Hilfsvariable: int temp = a;",
+        "Reihenfolge: temp = a; dann a = b; dann b = temp;",
+        "Ausgabe mit println(a) bzw. println(b)."
+      ],
+      "loesung": "public class Tausch {\n\n    public static void main(String[] args) {\n        int a = 5;\n        int b = 9;\n        System.out.println(a);\n        System.out.println(b);\n\n        int temp = a;\n        a = b;\n        b = temp;\n        System.out.println(a);\n        System.out.println(b);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "5\n9\n9\n5" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was gibt dieser Code aus?\nint x = 3;\nx = 8;\nSystem.out.println(x);",
+      "optionen": ["3", "8", "11", "Eine Fehlermeldung"],
+      "richtig": 1,
+      "erklaerung": "Die zweite Zuweisung überschreibt den alten Wert. Es bleibt 8."
+    },
+    {
+      "frage": "Welcher Variablenname ist erlaubt und guter Stil?",
+      "optionen": ["2spieler", "mein-punkte-stand", "punkteStand", "public"],
+      "richtig": 2,
+      "erklaerung": "Keine Ziffer am Anfang, kein Bindestrich, kein reserviertes Wort – und camelCase ist Konvention."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Variable ohne Wert benutzen",
+      "erklaerung": "int x; System.out.println(x); geht nicht: 'variable x might not have been initialized'. Erst zuweisen, dann lesen."
+    },
+    {
+      "fehler": "Typ doppelt angegeben",
+      "erklaerung": "int zahl = 5; int zahl = 7; geht nicht – die Box existiert schon. Nur zahl = 7; schreiben."
+    }
+  ]
+}

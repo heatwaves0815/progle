@@ -1,0 +1,68 @@
+/* Theme: Hell (Helles Design) */
+.root {
+    -pr-bg-0: #e4e7f0;
+    -pr-bg-1: #f2f4f9;
+    -pr-card: #ffffff;
+    -pr-card-2: #eaeef6;
+    -pr-border: #d4dae4;
+    -pr-sidebar: #fbfcfe;
+    -pr-lesson-card: #ffffff;
+    -pr-feedback: #f2f5fb;
+    -pr-editor: #fafafa;
+
+    -pr-text: #232936;
+    -pr-text-dim: #626b7d;
+    -pr-title: #10141f;
+    -pr-desc: #4a5265;
+    -pr-prompt: #9aa1ae;
+    -pr-disabled-text: #a2a9b8;
+
+    -pr-accent: #6d5ae0;
+    -pr-accent-2: #2f7fe8;
+    -pr-success: #1a9e5c;
+    -pr-success-bg: #a7f3d0;
+    -pr-success-text: #065f46;
+    -pr-warn: #b45309;
+    -pr-error: #d13c3c;
+    -pr-link: #5a48d6;
+    -pr-link-hover: #7a68ee;
+    -pr-disabled-bg: #e4e7ee;
+
+    -pr-logo-1: #6d5ae0;
+    -pr-logo-2: #2f7fe8;
+    -pr-bubble-1: #6d5ae0;
+    -pr-bubble-2: #3f7fe8;
+
+    -pr-chip-bg: #6d5ae014;
+    -pr-chip-text: #5a48d6;
+    -pr-listhover: #6d5ae012;
+    -pr-listsel: #6d5ae024;
+    -pr-glow: #6d5ae024;
+    -pr-hint-bg: #6d5ae010;
+    -pr-hint-text: #4a3ec4;
+    -pr-thumb: #c9cfdc;
+    -pr-selection: #cfe0f7;
+    -pr-lineno: #9aa1ae;
+
+    -pr-code-text: #383a42;
+    -pr-code-decl: #a626a4;
+    -pr-code-ctrl: #a626a4;
+    -pr-code-method: #4078f2;
+    -pr-code-literal: #0184bc;
+    -pr-code-type: #c18401;
+    -pr-code-string: #50a14f;
+    -pr-code-comment: #a0a1a7;
+    -pr-code-number: #986801;
+    -pr-code-anno: #c18401;
+    -pr-code-inline: #4078f2;
+
+    -pr-md-h2: #333a4c;
+    -pr-md-p: #3c4354;
+    -pr-md-bold: #10141f;
+
+    -pr-notice-bg: #fdf3d7;
+    -pr-notice-border: #e5cf8a;
+    -pr-notice-text: #8a6d1a;
+
+    -pr-avatar-user: #dfe3ec;
+}

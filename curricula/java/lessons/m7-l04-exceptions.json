@@ -1,0 +1,49 @@
+﻿{
+  "id": "m7-l04",
+  "typ": "lektion",
+  "titel": "Exceptions - try und catch",
+  "lernziele": [
+    "Programmabstürze mit try/catch abfangen",
+    "Häufige Exception-Typen kennen",
+    "finally für Aufräumarbeiten verstehen"
+  ],
+  "erklaerung": "## Wenn etwas unerwartet passiert\nEine **Exception** ist ein Vorfall zur Laufzeit - z. B. Teilen durch 0 oder Zugriff auf einen nicht existierenden Array-Platz. Ohne Behandlung stürzt das Programm ab.\n```java\ntry {\n    int[] zahlen = {1, 2, 3};\n    System.out.println(zahlen[5]);   // Fatal!\n} catch (ArrayIndexOutOfBoundsException e) {\n    System.out.println(\"Index existiert nicht: \" + e.getMessage());\n}\nSystem.out.println(\"Das Programm läuft weiter\");\n```\n## Ablauf\n1. `try { }` - riskanter Code wird versucht.\n2. `catch (Typ e) { }` - läuft NUR bei einem Vorfall dieses Typs.\n3. `finally { }` - läuft IMMER (optional), z. B. zum Aufräumen.\n## Häufige Typen\n- `ArithmeticException` (z. B. int / 0)\n- `ArrayIndexOutOfBoundsException`\n- `NumberFormatException` (Integer.parseInt(\"abc\"))\n- `NullPointerException` (Zugriff auf null)\nFür eine Variable kannst du mehrere catch-Blöcke untereinander schreiben - der erste passende greift.",
+  "beispiel-code": "public class Rechnersicher {\n\n    public static void main(String[] args) {\n        int a = 10;\n        int b = 0;\n\n        try {\n            System.out.println(\"Quotient: \" + (a / b));\n        } catch (ArithmeticException e) {\n            System.out.println(\"Rechnung ging schief: \" + e.getMessage());\n        } finally {\n            System.out.println(\"Rechner startklar\");\n        }\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse SicheresParsen: Der Text '42x' soll mit Integer.parseInt in eine Zahl umgewandelt werden. Fange die NumberFormatException ab. Ausgabe: 'Keine gültige Zahl' und danach 'Fertig'.",
+      "start-code": "public class SicheresParsen {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "try { int zahl = Integer.parseInt(\"42x\"); System.out.println(zahl); } catch (...) { ... }",
+        "Der catch-Typ heißt NumberFormatException.",
+        "Nach dem catch-Block geht es normal weiter: System.out.println(\"Fertig\");"
+      ],
+      "loesung": "public class SicheresParsen {\n\n    public static void main(String[] args) {\n        try {\n            int zahl = Integer.parseInt(\"42x\");\n            System.out.println(\"Zahl: \" + zahl);\n        } catch (NumberFormatException e) {\n            System.out.println(\"Keine gültige Zahl\");\n        }\n        System.out.println(\"Fertig\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Keine gültige Zahl\nFertig" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Wann läuft der catch-Block?",
+      "optionen": ["Immer", "Nur wenn im try eine passende Exception auftritt", "Nur bei Fehlern im catch", "Vor dem try"],
+      "richtig": 1,
+      "erklaerung": "catch reagiert nur auf Vorfälle des passenden Typs im try-Block."
+    },
+    {
+      "frage": "Wozu dient finally?",
+      "optionen": ["Für die Erfolgsausgabe", "Für Code, der immer läuft - auch nach einem Fehler", "Für Schleifen", "Für imports"],
+      "richtig": 1,
+      "erklaerung": "finally garantiert Aufräumarbeiten, egal was passiert ist."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "catch-Typ passt nicht",
+      "erklaerung": "catch (ArithmeticException e) fängt keine NumberFormatException. Mehrere catch-Blöcke oder den Ober-Typ Exception verwenden."
+    },
+    {
+      "fehler": "Exceptions als Programmfluss missbrauchen",
+      "erklaerung": "Exceptions sind für AUSSERGEWÖHNLICHE Fälle - normale Prüfungen (z. B. if (index < liste.size())) sind besser."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "m1-l07",
+  "typ": "lektion",
+  "titel": "Operatoren und Berechnungen",
+  "lernziele": [
+    "Mit +, -, *, / und % rechnen",
+    "Punkt-vor-Strich und Klammern verstehen",
+    "Integer-Division und Ganzzahl-Rest erklären können"
+  ],
+  "erklaerung": "## Rechnen wie mit dem Taschenrechner – nur anders\n| Operator | Bedeutung | Beispiel | Ergebnis |\n|---|---|---|---|\n| `+` | Plus | 7 + 2 | 9 |\n| `-` | Minus | 7 - 2 | 5 |\n| `*` | Mal | 7 * 2 | 14 |\n| `/` | Geteilt | 7 / 2 | **3** (int!) |\n| `%` | Rest (Modulo) | 7 % 2 | 1 |\n## Zwei Stolperfallen\n1. **Ganze Zahlen teilen ganzzahlig:** `7 / 2` ergibt bei `int` den Wert **3** – der Rest wird abgeschnitten! Mit `double` (7.0 / 2) kommt 3.5 heraus.\n2. **Punkt vor Strich:** `2 + 3 * 4` = 14. Unsicher? Klammern: `(2 + 3) * 4` = 20.\nDer Rest-Operator `%` ist praktisch: `x % 2 == 0` heißt *x ist gerade*.\n## Kurzformen\n```java\nint punkte = 10;\npunkte += 5;    // wie punkte = punkte + 5;  -> 15\npunkte++;       // eins hoch                 -> 16\npunkte--;       // eins runter               -> 15\n```",
+  "beispiel-code": "public class Pizzarechner {\n\n    public static void main(String[] args) {\n        int gaeste = 7;\n        int pizzaStuecke = 16;\n\n        int stueckeProGast = pizzaStuecke / gaeste;   // ganzzahlig!\n        int rest = pizzaStuecke % gaeste;             // was übrig bleibt\n\n        System.out.println(\"Jeder Gast bekommt \" + stueckeProGast + \" Stücke\");\n        System.out.println(\"Übrig bleiben \" + rest + \" Stücke\");\n\n        double anteil = (double) pizzaStuecke / gaeste;\n        System.out.println(\"Exakt wären es \" + anteil + \" Stücke pro Gast\");\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Sitzplan verteilt 25 Schüler auf 4 Reihen: Gib aus 'Pro Reihe: 6' und 'Übrig: 1' – berechnet mit / und %, nicht fest eingegeben!",
+      "start-code": "public class Sitzplan {\n\n    public static void main(String[] args) {\n        int schueler = 25;\n        int reihen = 4;\n\n    }\n}\n",
+      "hinweise": [
+        "Ganze Division: schueler / reihen",
+        "Der Restoperator % liefert die Übrigen: schueler % reihen",
+        "Ergebnisse in Variablen speichern und mit Text ausgeben."
+      ],
+      "loesung": "public class Sitzplan {\n\n    public static void main(String[] args) {\n        int schueler = 25;\n        int reihen = 4;\n\n        int proReihe = schueler / reihen;\n        int uebrig = schueler % reihen;\n        System.out.println(\"Pro Reihe: \" + proReihe);\n        System.out.println(\"Übrig: \" + uebrig);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Pro Reihe: 6\nÜbrig: 1" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Stromrechnung: Ein Haushalt verbraucht 250 kWh, eine kWh kostet 0.34 Euro. Berechne die Summe als double und gib aus: 'Kosten: 85.0'. Achtung: 250 * 0.34 ergibt in Java 85.0.",
+      "start-code": "public class Stromrechnung {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "int kwh = 250; double preisProKwh = 0.34;",
+        "Die Multiplikation int * double ergibt double.",
+        "Ausgabe: \"Kosten: \" + kosten"
+      ],
+      "loesung": "public class Stromrechnung {\n\n    public static void main(String[] args) {\n        int kwh = 250;\n        double preisProKwh = 0.34;\n        double kosten = kwh * preisProKwh;\n        System.out.println(\"Kosten: \" + kosten);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Kosten: 85.0" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was ergibt int ergebnis = 9 / 4;",
+      "optionen": ["2.25", "2", "3", "1"],
+      "richtig": 1,
+      "erklaerung": "int / int = int: 9 / 4 = 2, der Rest (1) wird abgeschnitten."
+    },
+    {
+      "frage": "Was macht der Operator % bei 10 % 3?",
+      "optionen": ["Prozent ausrechnen", "Den Rest der Division: 1", "3.33", "Einen Fehler"],
+      "richtig": 1,
+      "erklaerung": "% ist der Rest-Operator: 10 geteilt durch 3 = 3 Rest 1."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Integer-Division nicht bemerkt",
+      "erklaerung": "double durchschnitt = summe / anzahl; mit zwei ints rechnet ganzzahlig! Ein Operand muss double sein: summe / (double) anzahl."
+    },
+    {
+      "fehler": "Punkt-vor-Strich vergessen",
+      "erklaerung": "2 + 3 * 4 ist 14, nicht 20. Mit Klammern erzwingst du deine Reihenfolge."
+    }
+  ]
+}

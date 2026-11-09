@@ -1,0 +1,60 @@
+﻿{
+  "id": "m7-l02",
+  "typ": "lektion",
+  "titel": "HashMap und HashSet",
+  "lernziele": [
+    "Schlüssel-Wert-Paare mit HashMap verwalten",
+    "Duplikate mit HashSet verhindern",
+    "Wissen, wann welche Sammlung passt"
+  ],
+  "erklaerung": "## Das Wörterbuch: HashMap\nEine **HashMap** speichert Schlüssel → Wert Paare, wie ein Wörterbuch: Wort → Bedeutung.\n```java\nimport java.util.HashMap;\n\nHashMap<String, Integer> noten = new HashMap<>();\nnoten.put(\"Anna\", 1);\nnoten.put(\"Ben\", 2);\nSystem.out.println(noten.get(\"Anna\"));   // 1\nSystem.out.println(noten.containsKey(\"Cem\"));   // false\nnoten.remove(\"Ben\");\n```\n- `put(schlüssel, wert)` – eintragen oder überschreiben\n- `get(schlüssel)` – Wert holen (null, wenn nicht vorhanden)\n- `containsKey`, `keySet()` (alle Schlüssel), `values()`\n## Das Kontrollpersonal: HashSet\nEin **HashSet** sammelt jedes Element nur EINMAL:\n```java\nHashSet<String> lotto = new HashSet<>();\nlotto.add(\"7\");\nlotto.add(\"7\");      // wird ignoriert - schon drin\nSystem.out.println(lotto.size());   // 1\n```\nMerkregel: Reihenfolge wichtig → List. Schlüssel-Lookup → Map. Keine Duplikate → Set.",
+  "beispiel-code": "import java.util.HashMap;\n\npublic class Telefonbuch {\n\n    public static void main(String[] args) {\n        HashMap<String, String> buch = new HashMap<>();\n        buch.put(\"Notruf\", \"112\");\n        buch.put(\"Feuerwehr\", \"112\");\n        buch.put(\"Polizei\", \"110\");\n\n        System.out.println(\"Notruf: \" + buch.get(\"Notruf\"));\n        System.out.println(\"Hat Polizei? \" + buch.containsKey(\"Polizei\"));\n        System.out.println(\"Einträge: \" + buch.size());\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Vokabelkartei: HashMap<String, String> mit 'Hund' → 'dog' und 'Katze' → 'cat'. Gib 'Hund = dog' aus (get), dann 'Katze bekannt: true' (containsKey).",
+      "start-code": "import java.util.HashMap;\n\npublic class Vokabelkartei {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "put(\"Hund\", \"dog\"); put(\"Katze\", \"cat\");",
+        "Ausgabe: buch.get(\"Hund\") liefert dog.",
+        "containsKey(\"Katze\") liefert true."
+      ],
+      "loesung": "import java.util.HashMap;\n\npublic class Vokabelkartei {\n\n    public static void main(String[] args) {\n        HashMap<String, String> kartei = new HashMap<>();\n        kartei.put(\"Hund\", \"dog\");\n        kartei.put(\"Katze\", \"cat\");\n        System.out.println(\"Hund = \" + kartei.get(\"Hund\"));\n        System.out.println(\"Katze bekannt: \" + kartei.containsKey(\"Katze\"));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Hund = dog\nKatze bekannt: true" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Loskasten: Ein HashSet<String> mit Zahlen '3', '7', '3', '12'. Gib die Größe aus ('Kugeln: 3') und ob '7' drin ist ('7 drin: true').",
+      "start-code": "import java.util.HashSet;\n\npublic class Loskasten {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "add() mit '3' zweimal - das zweite Mal passiert nichts.",
+        "Größe: kasten.size()",
+        "contains(\"7\") liefert true."
+      ],
+      "loesung": "import java.util.HashSet;\n\npublic class Loskasten {\n\n    public static void main(String[] args) {\n        HashSet<String> kasten = new HashSet<>();\n        kasten.add(\"3\");\n        kasten.add(\"7\");\n        kasten.add(\"3\");\n        kasten.add(\"12\");\n        System.out.println(\"Kugeln: \" + kasten.size());\n        System.out.println(\"7 drin: \" + kasten.contains(\"7\"));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Kugeln: 3\n7 drin: true" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was passiert bei noten.put(\"Anna\", 1); noten.put(\"Anna\", 2);?",
+      "optionen": ["Zwei Einträge", "Der Wert wird auf 2 überschrieben", "Ein Fehler", "Beide bleiben, letzter zählt beim get zufällig"],
+      "richtig": 1,
+      "erklaerung": "Ein Schlüssel existiert nur einmal - put überschreibt."
+    },
+    {
+      "frage": "Wann nimmst du ein HashSet?",
+      "optionen": ["Wenn Reihenfolge zählt", "Wenn Duplikate verhindert werden sollen", "Für Schlüssel-Wert-Paare", "Für sortierte Zahlen"],
+      "richtig": 1,
+      "erklaerung": "Set = jedes Element nur einmal."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "get() auf fehlenden Schlüssel",
+      "erklaerung": "map.get(\"Nix\") liefert null - nicht null wie eine Ausnahme behandeln, vorher containsKey() prüfen."
+    },
+    {
+      "fehler": "get statt put",
+      "erklaerung": "map.get(\"X\", wert) gibt es nicht - einfügen geht nur mit put()."
+    }
+  ]
+}

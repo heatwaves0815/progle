@@ -1,0 +1,49 @@
+{
+  "id": "m8-l03",
+  "typ": "lektion",
+  "titel": "Optional - null mit Stil vermeiden",
+  "lernziele": [
+    "Optional als Verpackung für 'vielleicht vorhanden' verstehen",
+    "isPresent, orElse und ifPresent nutzen",
+    "NullPointerExceptions von vornherein vermeiden"
+  ],
+  "erklaerung": "## Die Sicherheitshülle\n`null` bedeutet 'kein Wert' - und verursacht die berüchtigte NullPointerException. **Optional** ist eine Verpackung, die sagt: Hier KÖNNTE ein Wert drin sein.\n```java\nimport java.util.Optional;\n\nOptional<String> gefunden = Optional.of(\"Treffer\");\nOptional<String> leer = Optional.empty();\n\nSystem.out.println(gefunden.get());          // Treffer (Vorsicht: nur wenn vorhanden!)\nSystem.out.println(leer.orElse(\"nichts\"));   // nichts\n```\n## Elegante Methoden\n- `isPresent()` – ist etwas drin?\n- `ifPresent(wert -> ...)` – nur ausführen, wenn vorhanden\n- `orElse(fallback)` – Wert oder Ersatzwert\n- `orElseThrow()` – Fehler, wenn leer (mit eigener Exception möglich)\n```java\nleer.ifPresent(w -> System.out.println(w));   // passiert nicht\nString ergebnis = leer.orElse(\"Standard\");     // \"Standard\"\n```\nMethoden, die 'vielleicht nichts' liefern, geben Optional<T> zurück - so ist es im Typ sichtbar.",
+  "beispiel-code": "import java.util.HashMap;\nimport java.util.Optional;\n\npublic class Nachschlagewerk {\n\n    public static void main(String[] args) {\n        HashMap<String, String> buch = new HashMap<>();\n        buch.put(\"Hund\", \"dog\");\n\n        Optional<String> ergebnis = Optional.ofNullable(buch.get(\"Katze\"));\n        System.out.println(ergebnis.orElse(\"Unbekannt\"));\n\n        Optional.ofNullable(buch.get(\"Hund\"))\n                .ifPresent(w -> System.out.println(\"Hund = \" + w));\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse Schatzsuche: Ein HashMap<String, String> enthält 'Schatz' → 'Gold'. Hole per Optional.ofNullable(map.get('Schatz')) und gib mit orElse 'Nichts gefunden' aus → 'Gold'. Danach dasselbe mit 'Truhe' → 'Nichts gefunden'.",
+      "start-code": "import java.util.HashMap;\nimport java.util.Optional;\n\npublic class Schatzsuche {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Optional<String> o1 = Optional.ofNullable(map.get(\"Schatz\"));",
+        "Ausgabe: System.out.println(o1.orElse(\"Nichts gefunden\"));",
+        "Für 'Truhe' existiert kein Eintrag - orElse greift also."
+      ],
+      "loesung": "import java.util.HashMap;\nimport java.util.Optional;\n\npublic class Schatzsuche {\n\n    public static void main(String[] args) {\n        HashMap<String, String> karte = new HashMap<>();\n        karte.put(\"Schatz\", \"Gold\");\n\n        Optional<String> treffer = Optional.ofNullable(karte.get(\"Schatz\"));\n        System.out.println(treffer.orElse(\"Nichts gefunden\"));\n\n        Optional<String> daneben = Optional.ofNullable(karte.get(\"Truhe\"));\n        System.out.println(daneben.orElse(\"Nichts gefunden\"));\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Gold\nNichts gefunden" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was liefert optional.orElse(\"x\"), wenn Optional leer ist?",
+      "optionen": ["null", "\"x\"", "Einen Fehler", "Optional.empty()"],
+      "richtig": 1,
+      "erklaerung": "orElse liefert den Ersatzwert, wenn die Verpackung leer ist."
+    },
+    {
+      "frage": "Wann sollte eine Methode Optional<T> zurückgeben?",
+      "optionen": ["Immer", "Wenn das Ergebnis fehlen kann", "Wenn sie nichts ausgibt", "Nur bei Strings"],
+      "richtig": 1,
+      "erklaerung": "Optional macht 'kann fehlen' im Typ sichtbar und erzwingt bewusstes Behandeln."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "get() ohne Prüfung",
+      "erklaerung": "optional.get() auf leerer Verpackung wirft NoSuchElementException. Besser: orElse oder ifPresent."
+    },
+    {
+      "fehler": "Optional in Attributen",
+      "erklaerung": "Optional ist für Rückgabewerte gedacht - nicht als Feld-Typ in Klassen."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "m4-l02",
+  "typ": "lektion",
+  "titel": "Parameter",
+  "lernziele": [
+    "Methoden mit Parametern flexibel machen",
+    "Mehrere Parameter übergeben",
+    "Unterschied zwischen Parameter und Argument kennen"
+  ],
+  "erklaerung": "## Methoden mit Zutaten\nParameter sind die **Zutaten**, die du der Methode beim Aufruf übergibst:\n```java\npublic static void gruesse(String name) {\n    System.out.println(\"Hallo, \" + name + \"!\");\n}\n\npublic static void main(String[] args) {\n    gruesse(\"Alex\");   // Hallo, Alex!\n    gruesse(\"Samira\"); // Hallo, Samira!\n}\n```\n- In der Definition stehen **Parameter**: `String name`\n- Beim Aufruf übergibst du **Argumente**: `\"Alex\"`\n- Der Typ muss passen: `gruesse(42);` geht nicht, weil name ein String ist.\n## Mehrere Parameter\nMit Komma getrennt – Reihenfolge und Typen müssen zum Aufruf passen:\n```java\npublic static void begruessung(String name, int alter) {\n    System.out.println(name + \" ist \" + alter + \" Jahre alt\");\n}\n// Aufruf: begruessung(\"Ben\", 12);\n```",
+  "beispiel-code": "public class Pizzabestellung {\n\n    public static void bestellungDrucken(String geschmack, int stueck) {\n        System.out.println(\"Bestellung: \" + stueck + \" x \" + geschmack);\n        double gesamt = stueck * 4.50;\n        System.out.println(\"Summe: \" + gesamt + \" Euro\");\n    }\n\n    public static void main(String[] args) {\n        bestellungDrucken(\"Margherita\", 2);\n        bestellungDrucken(\"Salami\", 1);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Die Klasse NamensschildDruck hat eine Methode 'schild(String vorname, String nachname)', die 'Name: <vorname> <nachname>' ausgibt. main ruft sie mit Alex und Weber auf.",
+      "start-code": "public class NamensschildDruck {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Zwei String-Parameter mit Komma trennen: schild(String vorname, String nachname)",
+        "Im Körper: System.out.println(\"Name: \" + vorname + \" \" + nachname);",
+        "Aufruf: schild(\"Alex\", \"Weber\");"
+      ],
+      "loesung": "public class NamensschildDruck {\n\n    public static void schild(String vorname, String nachname) {\n        System.out.println(\"Name: \" + vorname + \" \" + nachname);\n    }\n\n    public static void main(String[] args) {\n        schild(\"Alex\", \"Weber\");\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "Name: Alex Weber" }
+    },
+    {
+      "aufgabenstellung": "Die Klasse Konzertkarten hat eine Methode 'kasse(String kategorie, int anzahl, double einzelpreis)', die 'anzahl x kategorie = gesamt' ausgibt. Beispiel-Zeile: '2 x Stehplatz = 45.0'. main ruft: kasse(\"Stehplatz\", 2, 22.5).",
+      "start-code": "public class Konzertkarten {\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Drei Parameter in der gewünschten Reihenfolge definieren.",
+        "double gesamt = anzahl * einzelpreis;",
+        "Ausgabe: System.out.println(anzahl + \" x \" + kategorie + \" = \" + gesamt);"
+      ],
+      "loesung": "public class Konzertkarten {\n\n    public static void kasse(String kategorie, int anzahl, double einzelpreis) {\n        double gesamt = anzahl * einzelpreis;\n        System.out.println(anzahl + \" x \" + kategorie + \" = \" + gesamt);\n    }\n\n    public static void main(String[] args) {\n        kasse(\"Stehplatz\", 2, 22.5);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "2 x Stehplatz = 45.0" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was steht in der Methoden-DEFINITION?",
+      "optionen": ["Argumente", "Parameter", "Rückgabewerte", "Imports"],
+      "richtig": 1,
+      "erklaerung": "Definition hat Parameter, der Aufruf übergibt Argumente."
+    },
+    {
+      "frage": "gruess(String name) – was ist falsch am Aufruf gruess(7);?",
+      "optionen": ["Zahlen dürfen nie übergeben werden", "Der Typ passt nicht: 7 ist int, name ist String", "Klammern fehlen", "Nichts - das geht"],
+      "richtig": 1,
+      "erklaerung": "Argument-Typ muss zum Parameter-Typ passen."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Parameter-Typen vertauscht",
+      "erklaerung": "begruessung(12, \"Ben\") bei (String name, int alter) → 'incompatible types'. Reihenfolge einhalten."
+    },
+    {
+      "fehler": "Parameter ohne Typ beim Aufruf",
+      "erklaerung": "Im AUFRUF keine Typen angeben: gruesse(String name); ist falsch - nur gruesse(\"Ben\");"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "id": "m8-q",
+  "typ": "modul-quiz",
+  "titel": "Modul-Quiz: Modern Java",
+  "lernziele": [
+    "Lambdas, Streams, Optional und Records prüfen",
+    "Einen Statistik-Bericht als Abschluss bauen"
+  ],
+  "erklaerung": "## Modern-Java-Check\nFünf Fragen zu den modernen Werkzeugen. In der **Abschlussaufgabe** kombinierst du Streams mit einem Record.",
+  "beispiel-code": "import java.util.List;\n\npublic class MusterModern {\n\n    record Stadt(String name, int einwohner) { }\n\n    public static void main(String[] args) {\n        List<Stadt> staedte = List.of(new Stadt(\"Bonn\", 330000));\n        staedte.stream().map(s -> s.name()).forEach(System.out::println);\n    }\n}\n",
+  "uebungen": [
+    {
+      "aufgabenstellung": "Abschlussaufgabe 'Statistik': record Buch(String titel, int seiten) {}. Liste mit: 'Java' (500), 'Kurzgeschichten' (120), 'OOP' (300). Mit Streams gib aus:\n- OOP\n- Java\n(Das sind alle Bücher mit mehr als 200 Seiten, sortiert alphabetisch, mit '- ' davor.) Danach: 'Gesamtseiten: 920'.",
+      "start-code": "import java.util.List;\n\npublic class Statistik {\n\n    record Buch(String titel, int seiten) { }\n\n    public static void main(String[] args) {\n\n    }\n}\n",
+      "hinweise": [
+        "Filtern: .filter(b -> b.seiten() > 200)",
+        "Sortieren: .sorted((a, b) -> a.titel().compareTo(b.titel()))",
+        "Summe: .mapToInt(b -> b.seiten()).sum()"
+      ],
+      "loesung": "import java.util.List;\n\npublic class Statistik {\n\n    record Buch(String titel, int seiten) { }\n\n    public static void main(String[] args) {\n        List<Buch> buecher = List.of(\n                new Buch(\"Java\", 500),\n                new Buch(\"Kurzgeschichten\", 120),\n                new Buch(\"OOP\", 300));\n\n        buecher.stream()\n               .filter(b -> b.seiten() > 200)\n               .sorted((a, b) -> a.titel().compareTo(b.titel()))\n               .forEach(b -> System.out.println(\"- \" + b.titel()));\n\n        int gesamt = buecher.stream().mapToInt(b -> b.seiten()).sum();\n        System.out.println(\"Gesamtseiten: \" + gesamt);\n    }\n}\n",
+      "pruefung": { "art": "ausgabe", "erwartet": "- Java\n- OOP\nGesamtseiten: 920" }
+    }
+  ],
+  "quiz": [
+    {
+      "frage": "Was ist ein Lambda?",
+      "optionen": ["Ein Schleifentyp", "Eine kurze anonyme Funktion", "Ein Datentyp", "Ein Modul"],
+      "richtig": 1,
+      "erklaerung": "Parameter -> Körper: Code als Wert übergebbar."
+    },
+    {
+      "frage": "Welche Stream-Operation verwandelt Elemente?",
+      "optionen": ["filter", "map", "forEach", "count"],
+      "richtig": 1,
+      "erklaerung": "map wendet eine Funktion auf jedes Element an."
+    },
+    {
+      "frage": "Was liefert Optional.orElse(fallback)?",
+      "optionen": ["Immer null", "Den Wert oder den Fallback", "Einen Stream", "Eine Liste"],
+      "richtig": 1,
+      "erklaerung": "Wenn leer, greift der Fallback - keine NullPointerException."
+    },
+    {
+      "frage": "Was generiert ein Record automatisch?",
+      "optionen": ["Nichts", "Konstruktor, Zugriffsmethoden, toString, equals", "Nur Getter mit get-Präfix", "Nur Setter"],
+      "richtig": 1,
+      "erklaerung": "Der Record-Body bleibt meist leer - Java liefert den Rest."
+    },
+    {
+      "frage": "Welche Endstation sammelt einen Stream wieder in eine Liste?",
+      "optionen": ["forEach", "count", "collect(Collectors.toList())", "sorted"],
+      "richtig": 2,
+      "erklaerung": "collect schließt den Stream ab und baut die Liste."
+    }
+  ],
+  "typische-fehler": [
+    {
+      "fehler": "Stream zweimal benutzen",
+      "erklaerung": "Jeder Stream ist Einweg - bei Bedarf liste.stream() erneut aufrufen."
+    },
+    {
+      "fehler": "Record-Werte ändern wollen",
+      "erklaerung": "Records sind unveränderlich - es gibt keine Setter. Neues Record mit neuen Werten bauen."
+    }
+  ]
+}
